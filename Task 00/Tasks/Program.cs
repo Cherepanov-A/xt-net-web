@@ -31,10 +31,13 @@ namespace Tasks
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer length of Sequence");
                         Console.WriteLine();
-                        string temp = Console.ReadLine(); 
-                        double seqLen =
-
-
+                        string temp1 = Console.ReadLine();
+                        if (temp1=="")
+                        {
+                            Console.WriteLine("Value can't be whitespace");
+                            break;
+                        }
+                        double seqLen = Convert.ToInt32(temp1, CultureInfo.InvariantCulture);
                         if (seqLen <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -54,7 +57,13 @@ namespace Tasks
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer length of Sequence");
                         Console.WriteLine();
-                        double number = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
+                        string temp2 = Console.ReadLine();
+                        if (temp2 == "")
+                        {
+                            Console.WriteLine("Value can't be whitespace");
+                            break;
+                        }
+                        double number = Convert.ToDouble(temp2, CultureInfo.InvariantCulture);
                         if (number <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -72,7 +81,13 @@ namespace Tasks
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive, integer and odd length of Sequence");
                         Console.WriteLine();
-                        double squareSide = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
+                        string temp3 = Console.ReadLine();
+                        if (temp3 == "")
+                        {
+                            Console.WriteLine("Value can't be whitespace");
+                            break;
+                        }
+                        double squareSide = Convert.ToDouble(temp3, CultureInfo.InvariantCulture);
                         if (squareSide <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -94,7 +109,13 @@ namespace Tasks
                     case '4':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer number of dimentions");
-                        double numOfDim = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
+                        string temp4 = Console.ReadLine();
+                        if (temp4 == "")
+                        {
+                            Console.WriteLine("Value can't be whitespace");
+                            break;
+                        }
+                        double numOfDim = Convert.ToDouble(temp4, CultureInfo.InvariantCulture);
                         if (numOfDim <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -144,10 +165,9 @@ namespace Tasks
 
                         Console.WriteLine();
 
-                        Array.ConvertAll(arr, Converter<int[][], int[]>);
+                        MyArraySort(arr);
                         for (int i = 0; i < arr.Length; i++)
-                        {
-                            // Console.Write("{");
+                        {                            
                             for (int j = 0; j < arr[i].Length; j++)
                             {
                                 Console.Write("{" + arr[i][j] + "},");
@@ -165,11 +185,29 @@ namespace Tasks
             }
         }
 
-        private static void MyArray()
+        private static void MyArraySort(int[][] arr)
         {
-            int[,,,,] a = new int[2, 2, 2, 2, 2];
-            Console.WriteLine(a.ToString());
-            Console.WriteLine();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int[] tmp = arr[i];
+                Array.Sort(tmp);
+                arr[i] = tmp;
+            }
+            bool sorted = true;
+            while(sorted)
+            {
+                for (int i = 1; i < arr.Length; i++)
+                {
+                    sorted = false;
+                    if (arr[i].Length < arr[i - 1].Length)
+                    {
+                        int[] tmp = arr[i];
+                        arr[i] = arr[i - 1];
+                        arr[i - 1] = tmp;
+                        sorted = true;
+                    }
+                }
+            }
         }
 
         private static void Square(double squareSide)
