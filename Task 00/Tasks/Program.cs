@@ -32,7 +32,7 @@ namespace Tasks
                         Console.WriteLine("Enter the positive and integer length of Sequence");
                         Console.WriteLine();
                         string temp1 = Console.ReadLine();
-                        if (temp1=="")
+                        if (temp1 == "")
                         {
                             Console.WriteLine("Value can't be whitespace");
                             break;
@@ -53,6 +53,7 @@ namespace Tasks
                         Console.WriteLine();
                         Console.WriteLine();
                         break;
+
                     case '2':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer length of Sequence");
@@ -77,6 +78,7 @@ namespace Tasks
                         Console.WriteLine();
                         Simple(number);
                         break;
+
                     case '3':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive, integer and odd length of Sequence");
@@ -106,9 +108,11 @@ namespace Tasks
                         Console.WriteLine();
                         Square(squareSide);
                         break;
+
                     case '4':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer number of dimentions");
+
                         string temp4 = Console.ReadLine();
                         if (temp4 == "")
                         {
@@ -127,10 +131,19 @@ namespace Tasks
                             break;
                         }
                         int[] sizesOfDim = new int[(int)numOfDim];
+
                         for (int i = 0; i < numOfDim; i++)
                         {
+                            Console.WriteLine();
                             Console.WriteLine($"Enter size of {i + 1} dimention");
-                            double temp = Convert.ToDouble(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+                            string temp5 = Console.ReadLine();
+                            if (temp5 == "")
+                            {
+                                Console.WriteLine("Value can't be whitespace");
+                                break;
+                            }
+                            double temp = Convert.ToDouble(temp5, CultureInfo.InvariantCulture);
                             if (numOfDim <= 0)
                             {
                                 Console.WriteLine("Not positive value");
@@ -143,6 +156,7 @@ namespace Tasks
                             }
                             sizesOfDim[i] = (int)temp;
                         }
+                        Console.WriteLine();
                         Random rnd = new Random();
                         int[][] arr = new int[(int)numOfDim][];
                         for (int i = 0; i < arr.Length; i++)
@@ -155,28 +169,24 @@ namespace Tasks
                         }
                         for (int i = 0; i < arr.Length; i++)
                         {
-                            // Console.Write("{");
                             for (int j = 0; j < arr[i].Length; j++)
                             {
                                 Console.Write("{" + arr[i][j] + "},");
                             }
                             Console.WriteLine();
                         }
-
                         Console.WriteLine();
-
                         MyArraySort(arr);
                         for (int i = 0; i < arr.Length; i++)
-                        {                            
+                        {
                             for (int j = 0; j < arr[i].Length; j++)
                             {
                                 Console.Write("{" + arr[i][j] + "},");
                             }
                             Console.WriteLine();
                         }
-
-                        //MyArray();
                         break;
+
                     case 'q':
                         quit = false;
                         break;
@@ -194,12 +204,20 @@ namespace Tasks
                 arr[i] = tmp;
             }
             bool sorted = true;
-            while(sorted)
+            while (sorted)
             {
+                sorted = false;
                 for (int i = 1; i < arr.Length; i++)
                 {
-                    sorted = false;
+
                     if (arr[i].Length < arr[i - 1].Length)
+                    {
+                        int[] tmp = arr[i];
+                        arr[i] = arr[i - 1];
+                        arr[i - 1] = tmp;
+                        sorted = true;
+                    }
+                    if (arr[i].Length == arr[i - 1].Length && arr[i][0] < arr[i - 1][0])
                     {
                         int[] tmp = arr[i];
                         arr[i] = arr[i - 1];
