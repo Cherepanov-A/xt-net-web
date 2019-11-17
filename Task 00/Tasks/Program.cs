@@ -37,7 +37,17 @@ namespace Tasks
                             Console.WriteLine("Value can't be whitespace");
                             break;
                         }
-                        double seqLen = Convert.ToInt32(temp1, CultureInfo.InvariantCulture);
+                        double seqLen;
+                        try
+                        {
+                            seqLen = Convert.ToInt32(temp1, CultureInfo.InvariantCulture);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Incorrect value");
+                            break;
+                        }
                         if (seqLen <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -64,7 +74,17 @@ namespace Tasks
                             Console.WriteLine("Value can't be whitespace");
                             break;
                         }
-                        double number = Convert.ToDouble(temp2, CultureInfo.InvariantCulture);
+                        double number;
+                        try
+                        {
+                            number = Convert.ToDouble(temp2, CultureInfo.InvariantCulture);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Incorrect value");
+                            break;
+                        }
                         if (number <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -77,6 +97,7 @@ namespace Tasks
                         }
                         Console.WriteLine();
                         Simple(number);
+
                         break;
 
                     case '3':
@@ -89,7 +110,17 @@ namespace Tasks
                             Console.WriteLine("Value can't be whitespace");
                             break;
                         }
-                        double squareSide = Convert.ToDouble(temp3, CultureInfo.InvariantCulture);
+                        double squareSide;
+                        try
+                        {
+                            squareSide = Convert.ToDouble(temp3, CultureInfo.InvariantCulture);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Incorrect value");
+                            break;
+                        }
                         if (squareSide <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -112,14 +143,23 @@ namespace Tasks
                     case '4':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer number of dimentions");
-
                         string temp4 = Console.ReadLine();
                         if (temp4 == "")
                         {
                             Console.WriteLine("Value can't be whitespace");
                             break;
                         }
-                        double numOfDim = Convert.ToDouble(temp4, CultureInfo.InvariantCulture);
+                        double numOfDim;
+                        try
+                        {
+                            numOfDim = Convert.ToDouble(temp4, CultureInfo.InvariantCulture);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Incorrect value");
+                            break;
+                        }
                         if (numOfDim <= 0)
                         {
                             Console.WriteLine("Not positive value");
@@ -190,7 +230,6 @@ namespace Tasks
                     case 'q':
                         quit = false;
                         break;
-
                 }
             }
         }
