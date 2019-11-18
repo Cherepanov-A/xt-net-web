@@ -28,36 +28,30 @@ namespace Tasks
                 switch (btn.KeyChar)
                 {
                     case '1':
+                        bool check1 = true;
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer length of Sequence");
                         Console.WriteLine();
-                        string temp1 = Console.ReadLine();
-                        if (temp1 == "")
+                        int seqLen = 0;
+                        do
                         {
-                            Console.WriteLine("Value can't be whitespace");
-                            break;
-                        }
-                        double seqLen;
-                        try
-                        {
-                            seqLen = Convert.ToInt32(temp1, CultureInfo.InvariantCulture);
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Incorrect value");
-                            break;
-                        }
-                        if (seqLen <= 0)
-                        {
-                            Console.WriteLine("Not positive value");
-                            break;
-                        }
-                        if (seqLen % 1 != 0)
-                        {
-                            Console.WriteLine("Not integer value");
-                            break;
-                        }
+                            if (int.TryParse(Console.ReadLine(), out seqLen))
+                            {
+                                Console.WriteLine();
+                                check1 = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Enter correct integer value");
+                            }
+                            if (seqLen <= 0 && check1 == false)
+                            {
+                                Console.WriteLine("Not positive value");
+                                check1 = true;
+                            }
+                            
+                        } while (check1);
                         Console.WriteLine();
                         Sequince(seqLen);
                         Console.WriteLine();
@@ -65,77 +59,68 @@ namespace Tasks
                         break;
 
                     case '2':
+                        bool check2 = true;
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer length of Sequence");
                         Console.WriteLine();
-                        string temp2 = Console.ReadLine();
-                        if (temp2 == "")
+                        
+                        int number=0;
+                        do
                         {
-                            Console.WriteLine("Value can't be whitespace");
-                            break;
-                        }
-                        double number;
-                        try
-                        {
-                            number = Convert.ToDouble(temp2, CultureInfo.InvariantCulture);
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Incorrect value");
-                            break;
-                        }
-                        if (number <= 0)
-                        {
-                            Console.WriteLine("Not positive value");
-                            break;
-                        }
-                        if (number % 1 != 0)
-                        {
-                            Console.WriteLine("Not integer value");
-                            break;
-                        }
+                            if (int.TryParse(Console.ReadLine(), out number))
+                            {
+                                Console.WriteLine();
+                                check1 = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Enter correct integer value");
+                            }
+                            if (number <= 0 && check2 == false)
+                            {
+                                Console.WriteLine("Not positive value");
+                                check2 = true;
+                            }
+                           
+                        } while (check2);
                         Console.WriteLine();
                         Simple(number);
 
                         break;
 
                     case '3':
+                        bool check3 = true;
+                        int squareSide = 0;
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive, integer and odd length of Sequence");
-                        Console.WriteLine();
-                        string temp3 = Console.ReadLine();
-                        if (temp3 == "")
-                        {
-                            Console.WriteLine("Value can't be whitespace");
-                            break;
-                        }
-                        double squareSide;
-                        try
-                        {
-                            squareSide = Convert.ToDouble(temp3, CultureInfo.InvariantCulture);
-                        }
-                        catch (FormatException e)
+                        do
                         {
                             Console.WriteLine();
-                            Console.WriteLine("Incorrect value");
-                            break;
-                        }
-                        if (squareSide <= 0)
-                        {
-                            Console.WriteLine("Not positive value");
-                            break;
-                        }
-                        if (squareSide % 1 != 0)
-                        {
-                            Console.WriteLine("Not integer value");
-                            break;
-                        }
-                        if (squareSide % 2 == 0)
-                        {
-                            Console.WriteLine("Even value");
-                            break;
-                        }
+                            if (int.TryParse(Console.ReadLine(), out squareSide))
+                            {
+                                Console.WriteLine();
+                                check3 = false;
+
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Enter correct value");
+
+                            }
+                            if (squareSide <= 0 && check3 == false)
+                            {
+                                Console.WriteLine("Enter positive value");
+                                check3 = true;
+
+                            }
+                            if (squareSide % 2 == 0 && check3 == false)
+                            {
+                                Console.WriteLine("Enter odd value");
+                                check3 = true;
+                            }
+                        } while (check3);
                         Console.WriteLine();
                         Square(squareSide);
                         break;
@@ -143,58 +128,54 @@ namespace Tasks
                     case '4':
                         Console.WriteLine();
                         Console.WriteLine("Enter the positive and integer number of dimentions");
-                        string temp4 = Console.ReadLine();
-                        if (temp4 == "")
+                        bool check4 = true;
+                        int numOfDim=0;
+                        do
                         {
-                            Console.WriteLine("Value can't be whitespace");
-                            break;
-                        }
-                        double numOfDim;
-                        try
-                        {
-                            numOfDim = Convert.ToDouble(temp4, CultureInfo.InvariantCulture);
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Incorrect value");
-                            break;
-                        }
-                        if (numOfDim <= 0)
-                        {
-                            Console.WriteLine("Not positive value");
-                            break;
-                        }
-                        if (numOfDim % 1 != 0)
-                        {
-                            Console.WriteLine("Not integer value");
-                            break;
-                        }
-                        int[] sizesOfDim = new int[(int)numOfDim];
+                            if (int.TryParse(Console.ReadLine(), out numOfDim))
+                            {
+                                Console.WriteLine();
+                                check4 = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Enter correct integer value");
+                            }
+                            if (numOfDim <= 0 && check4 == false)
+                            {
+                                Console.WriteLine("Not positive value");
+                                check4 = true;
+                            }
+                        } while (check4);
+
+                        int[] sizesOfDim = new int[numOfDim];
 
                         for (int i = 0; i < numOfDim; i++)
                         {
+                            bool check5 = true;
                             Console.WriteLine();
                             Console.WriteLine($"Enter size of {i + 1} dimention");
-
-                            string temp5 = Console.ReadLine();
-                            if (temp5 == "")
+                            int dimSize = 0;
+                            do
                             {
-                                Console.WriteLine("Value can't be whitespace");
-                                break;
-                            }
-                            double temp = Convert.ToDouble(temp5, CultureInfo.InvariantCulture);
-                            if (numOfDim <= 0)
-                            {
-                                Console.WriteLine("Not positive value");
-                                break;
-                            }
-                            if (numOfDim % 1 != 0)
-                            {
-                                Console.WriteLine("Not integer value");
-                                break;
-                            }
-                            sizesOfDim[i] = (int)temp;
+                                if (int.TryParse(Console.ReadLine(), out dimSize))
+                                {
+                                    Console.WriteLine();
+                                    check5 = false;
+                                }
+                                else
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Enter correct integer value");
+                                }
+                                if (dimSize <= 0 && check5 == false)
+                                {
+                                    Console.WriteLine("Not positive value");
+                                    check5 = true;
+                                }
+                            } while (check5);
+                            sizesOfDim[i] = dimSize;
                         }
                         Console.WriteLine();
                         Random rnd = new Random();
@@ -267,7 +248,7 @@ namespace Tasks
             }
         }
 
-        private static void Square(double squareSide)
+        private static void Square(int squareSide)
         {
             int half = (int)squareSide / 2;
             for (int i = 1; i <= half; i++)
@@ -283,7 +264,7 @@ namespace Tasks
             }
         }
 
-        private static void Simple(double number)
+        private static void Simple(int number)
         {
             if (number % 2 == 0)
             {
@@ -309,7 +290,7 @@ namespace Tasks
             }
         }
 
-        private static void Sequince(double seqLen)
+        private static void Sequince(int seqLen)
         {
 
             Console.Write("1");
