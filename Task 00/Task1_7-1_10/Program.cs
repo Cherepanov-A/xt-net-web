@@ -10,22 +10,22 @@ namespace Task1_7_1_10
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Task 1.7", Console.ForegroundColor=ConsoleColor.Magenta);
+            Console.WriteLine("ARRAY PROCESSING", Console.ForegroundColor=ConsoleColor.Magenta);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
             ArrayProcessing();
             Console.WriteLine();
-            Console.WriteLine("Task 1.8", Console.ForegroundColor = ConsoleColor.Magenta);
+            Console.Write("NO POSITIVE", Console.ForegroundColor = ConsoleColor.Magenta);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
+            
             NoPositive();
             Console.WriteLine();
-            Console.WriteLine("Task 1.9", Console.ForegroundColor = ConsoleColor.Magenta);
+            Console.WriteLine("NON-NEGATIVE SUM", Console.ForegroundColor = ConsoleColor.Magenta);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
             NonNegativeSum();
             Console.WriteLine();
-            Console.WriteLine("Task 1.10", Console.ForegroundColor = ConsoleColor.Magenta);
+            Console.WriteLine("2D ARRAY", Console.ForegroundColor = ConsoleColor.Magenta);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
             TwoDimArr();
@@ -83,8 +83,10 @@ namespace Task1_7_1_10
             Random rnd = new Random();
             for (int i = 0; i < arr.GetLength(0); i++)
             {
+                Console.WriteLine();
                 for (int j = 0; j < arr.GetLength(1); j++)
                 {
+                    Console.WriteLine();
                     for (int k = 0; k < arr.GetLength(2); k++)
                     {
                         arr[i, j, k] = (rnd.Next(100) - rnd.Next(50));
@@ -97,11 +99,19 @@ namespace Task1_7_1_10
                 }
             }
             Console.WriteLine();
-            Console.WriteLine();
-            foreach (var item in arr)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                Console.Write($"{item} ");
+                Console.WriteLine();
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    Console.WriteLine();
+                    for (int k = 0; k < arr.GetLength(2); k++)
+                    {                        
+                        Console.Write($"{arr[i, j, k]} ");                        
+                    }
+                }
             }
+            
             Console.WriteLine();
         }
 
