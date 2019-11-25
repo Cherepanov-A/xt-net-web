@@ -18,9 +18,9 @@ namespace Task2_1_2_4
             get => radius;
             set
             {
-                if (Radius > 0)
+                if (value > 0)
                 {
-                    radius = Radius;
+                    radius = value;
                 }
                 else
                 {
