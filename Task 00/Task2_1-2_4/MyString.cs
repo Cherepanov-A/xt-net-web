@@ -1,61 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Task2_1_2_4
 {
-    class MyString
+    internal class MyString
     {
-        private char[] inner;
-
+        private char[] _inner;
         public MyString(string s)
         {
-            inner = s.ToCharArray();
+            _inner = s.ToCharArray();
         }
-
         public MyString()
         {
 
         }
-
         public char this[int index]
         {
-            get => inner[index];
-            set => inner[index] = value;
+            get => _inner[index];
+            set => _inner[index] = value;
         }
-
         public void Add(string s)
         {
-            if (inner == null)
+            if (_inner == null)
             {
-                inner = new char[s.Length];
-                s.ToCharArray().CopyTo(inner, 0);
+                _inner = new char[s.Length];
+                s.ToCharArray().CopyTo(_inner, 0);
             }
             else
             {
-                char[] temp = inner;
-                inner = new char[s.Length + temp.Length];
-                temp.CopyTo(inner, 0);
-                s.ToCharArray().CopyTo(inner, temp.Length);
+                char[] temp = _inner;
+                _inner = new char[s.Length + temp.Length];
+                temp.CopyTo(_inner, 0);
+                s.ToCharArray().CopyTo(_inner, temp.Length);
             }
         }
         public void Add(char c)
         {
-            if (inner == null)
+            if (_inner == null)
             {
-                inner = new char[1]{c};
+                _inner = new char[1] { c };
             }
             else
             {
-                char[] temp = inner;
-                inner = new char[temp.Length+1];
-                temp.CopyTo(inner, 0);
-                inner[inner.Length-1]=c;
+                char[] temp = _inner;
+                _inner = new char[temp.Length + 1];
+                temp.CopyTo(_inner, 0);
+                _inner[_inner.Length - 1] = c;
             }
         }
-
         public static MyString operator +(MyString s1, MyString s2)
         {
             MyString temp = new MyString();
@@ -63,39 +54,35 @@ namespace Task2_1_2_4
             temp.Add(s2.ToString());
             return temp;
         }
-
         public override string ToString()
         {
             StringBuilder s = new StringBuilder();
-            foreach (var item in inner)
+            foreach (var item in _inner)
             {
                 s.Append(item);
             }
             return s.ToString();
         }
-
         public int Length()
         {
-            return inner.Length;
+            return _inner.Length;
         }
         public override bool Equals(object obj)
         {
-            MyString str = new MyString();
             bool eql = false;
             if (obj is MyString)
             {
-                str = (MyString)obj;
-                if (inner.Length == str.Length())
+                var str = (MyString)obj;
+                if (_inner.Length == str.Length())
                 {
-                    for (int i = 0; i < inner.Length; i++)
+                    for (int i = 0; i < _inner.Length; i++)
                     {
-                        eql = inner[i] == str[i];
+                        eql = _inner[i] == str[i];
                     }
                 }
             }
             return eql;
         }
-
         public static bool operator ==(MyString s1, MyString s2)
         {
             return s1.Equals(s2);
@@ -112,13 +99,12 @@ namespace Task2_1_2_4
         {
             return s1.Length() < s2.Length();
         }
-
         public int IndexOf(char c)
         {
             int tmp = -1;
-            for (int i = 0; i < inner.Length; i++)
+            for (int i = 0; i < _inner.Length; i++)
             {
-                if (inner[i] == c)
+                if (_inner[i] == c)
                 {
                     tmp = i;
                     break;
@@ -126,15 +112,19 @@ namespace Task2_1_2_4
             }
             return tmp;
         }
-
         public MyString Substring(int start, int end)
         {
             MyString tmp = new MyString();
             for (int i = start; i < end; i++)
             {
-                tmp.Add(inner[i]);
+                tmp.Add(_inner[i]);
             }
             return tmp;
+        }
+
+        public override int GetHashCode()
+        {
+            return _inner.ToString().GetHashCode();
         }
     }
 }

@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_1_2_4
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Round r = new Round(3,5,12);
+            Round r = new Round(3, 5, 12);
             Console.WriteLine($"Round X = {r.X}");
             Console.WriteLine($"Round Y = {r.Y}");
             Console.WriteLine($"Round Radius = {r.Radius}");
@@ -39,12 +35,12 @@ namespace Task2_1_2_4
             Console.WriteLine("Registering new user Marry");
             Console.WriteLine();
             DateTime dateOfBirth = Convert.ToDateTime("20.02.1989");
-            User user = new User("Marry","May","Ann",dateOfBirth);
-            Console.Write(user.Name+" ");
-            Console.Write(user.SecondName+" ");
+            User user = new User("Marry", "May", "Ann", dateOfBirth);
+            Console.Write(user.Name + " ");
+            Console.Write(user.SecondName + " ");
             Console.WriteLine(user.LastName);
-            Console.WriteLine("was born "+user.DateOfBirth.ToShortDateString());
-            Console.WriteLine(user.Age+" years old");
+            Console.WriteLine("was born " + user.DateOfBirth.ToShortDateString());
+            Console.WriteLine(user.Age + " years old");
             Console.WriteLine();
             Console.WriteLine("Marry and Manie married");
             user.LastName = "Smith";
@@ -56,15 +52,12 @@ namespace Task2_1_2_4
             Console.WriteLine("was born " + user.DateOfBirth.ToShortDateString());
             Console.WriteLine(user.Age + " years old");
             Console.WriteLine();
-            MyString ms = new MyString();
-            ms.Add("sksks");
-            Console.WriteLine(ms[2]);
-            MyString ms1 = new MyString("skasks");
-            MyString sum = ms + ms1;
-            Console.WriteLine(sum);
-            Console.WriteLine(ms!=ms1);
-            sum[3] = 'r';
-            Console.WriteLine(ms1.IndexOf('a'));
+            var rng = new Ring(0,0,3,6);
+            Console.WriteLine(rng.LengthOfCircle());
+            Console.WriteLine(rng.Area());
+            var rnd = new Round(0,0,3);
+            Console.WriteLine(rnd.LengthOfCircle());
+            Console.WriteLine(rnd.Area());
             Console.ReadLine();
         }
     }

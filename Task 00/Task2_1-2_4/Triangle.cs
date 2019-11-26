@@ -1,80 +1,82 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_1_2_4
 {
-    class Triangle
+    internal class Triangle
     {
-        private int a;
-        private int b;
-        private int c;
+        private int _a;
+        private int _b;
+        private int _c;
         public int A
         {
-            get => a;
+            get => _a;
             set
             {
-                if (value > 0 && value < b + c)
+                if (value > 0 && value < _b + _c)
                 {
-                    a = value;
+                    _a = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides");
+                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(A));
                 }
             }
         }
-
         public int B
         {
-            get => b;
+            get => _b;
             set
             {
-                if (value > 0 && value < a + c)
+                if (value > 0 && value < _a + _c)
                 {
-                    b = value;
+                    _b = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides");
+                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(B));
                 }
             }
         }
-
         public int C
         {
-            get => c;
+            get => _c;
             set
             {
-                if (value > 0 && value < a + b)
+                if (value > 0 && value < _a + _b)
                 {
-                    c = value;
+                    _c = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides");
+                    throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(C));
                 }
             }
         }
-
         public Triangle(int a, int b, int c)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            if (a < 1 && a > b + c || b < 1 && b > a + c || c < 1 && c > a + b)
+            this._a = a;
+            this._b = b;
+            this._c = c;
+            if (a < 1 && a > b + c )
             {
-                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides");
+                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides",nameof(a));
             }
+            if (b < 1 && b > a + c )
+            {
+                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(b));
+            }
+            if (c < 1 && c > a + b)
+            {
+                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(c));
+            }
+
         }
-        public int Perimeter() => a + b + c;
+        public int Perimeter() => _a + _b + _c;
 
         public double Area()
         {
-            double halfP = (a + b + c) / 2;
-            return Math.Sqrt(halfP * (halfP - a) * (halfP - b) * (halfP - c));
+            double halfP = (_a + _b + _c) / 2.0;
+            return Math.Sqrt(halfP * (halfP - _a) * (halfP - _b) * (halfP - _c));
         }
 
     }

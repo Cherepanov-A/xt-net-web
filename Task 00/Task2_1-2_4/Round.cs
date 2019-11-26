@@ -1,41 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_1_2_4
 {
-    class Round
+    public class Round
     {
-        private int x;
-        private int y;
-        private int radius;
-        public int X { get; set; }
-        public int Y { get; set; }
+        private int _radius;
+        public Point Point { get; set; }
         public int Radius
         {
-            get => radius;
+            get => _radius;
             set
             {
                 if (value > 0)
                 {
-                    radius = value;
+                    _radius = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Radius can't be zero or less");
+                    throw new ArgumentException("Radius can't be zero or less", nameof(Radius));
                 }
             }
         }
         public Round(int x, int y, int radius)
         {
-            X = x;
-            Y = y;
+            Point.X = x;
+            Point.Y = y;
             Radius = radius;
         }
-        public double Area() => Math.PI * radius * radius;
 
-        public double LengthOfCircle() => 2 * Math.PI * radius;
+        public double Area()
+        {
+            var area = Math.PI * _radius * _radius;
+            return area;
+        }
+
+        public double LengthOfCircle()
+        {
+            var len = 2 * Math.PI * _radius;
+            return len;
+        }
     }
 }
