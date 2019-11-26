@@ -4,8 +4,20 @@ namespace Task2_1_2_4
 {
     public class Round
     {
+        private Point _point;
         private int _radius;
-        public Point Point { get; set; }
+
+        public int X
+        {
+            get => _point.X;
+            set => _point.X = value;
+        }
+
+        public int Y
+        {
+            get => _point.Y;
+            set => _point.Y = value;
+        }
         public int Radius
         {
             get => _radius;
@@ -23,8 +35,8 @@ namespace Task2_1_2_4
         }
         public Round(int x, int y, int radius)
         {
-            Point.X = x;
-            Point.Y = y;
+            X = x;
+            Y = y;
             Radius = radius;
         }
 

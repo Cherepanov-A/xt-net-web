@@ -9,8 +9,39 @@ namespace Task2_7
 {
     class Rectangle
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
+        private int _width;
+        private int _height;
+        public int Width
+        {
+            get => _width;
+            set
+            {
+                if (value>0)
+                {
+                    _width = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Width can't be zero or less", nameof(Width));
+                }
+            }
+        }
+
+        public int Height
+        {
+            get => _height;
+            set
+            {
+                if (value > 0)
+                {
+                    _height = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Height can't be zero or less", nameof(Height));
+                }
+            }
+        }
         public Point Point { get; set; }
 
         public Rectangle(int x, int y, int height, int width)
