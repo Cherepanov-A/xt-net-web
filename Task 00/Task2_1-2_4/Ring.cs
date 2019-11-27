@@ -2,7 +2,7 @@
 
 namespace Task2_1_2_4
 {
-    internal class Ring : Round
+    public class Ring : Round
     {
         private int _outerRadius;
         public int OuterRadius

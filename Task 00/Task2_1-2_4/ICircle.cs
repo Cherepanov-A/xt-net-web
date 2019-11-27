@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Task2_1_2_4;
 
-namespace Task2_7
+
+namespace Task2_1_2_4
 {
-    interface ISimpleRound
+    public interface ICircle
     {
-        Point Point { get; set; }
+        int X { get; set; }
+        int Y { get; set; }
         int Radius { get; set; }
 
         double LengthOfCircle();

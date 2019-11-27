@@ -16,5 +16,11 @@ namespace Task2_1_2_4
             X = x;
             Y = y;
         }
+
+        public Point()
+        {
+            X = 0;
+            Y = 0;
+        }
     }
 }

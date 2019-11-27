@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Task2_1_2_4
+
 {
     internal class User
     {

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee.cs" />
+    <Compile Include="ICircle.cs" />
     <Compile Include="MyString.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />

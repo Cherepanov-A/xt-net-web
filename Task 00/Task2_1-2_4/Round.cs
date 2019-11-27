@@ -2,7 +2,7 @@
 
 namespace Task2_1_2_4
 {
-    public class Round
+    public class Round:ICircle
     {
         private Point _point;
         private int _radius;
@@ -35,6 +35,7 @@ namespace Task2_1_2_4
         }
         public Round(int x, int y, int radius)
         {
+            _point = new Point();
             X = x;
             Y = y;
             Radius = radius;

@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Task2_1_2_4;
 
 namespace Task2_7
 {
-    class Rectangle
+    internal class Rectangle
     {
         private int _width;
         private int _height;
+        private Point _point;
         public int Width
         {
             get => _width;
             set
             {
-                if (value>0)
+                if (value > 0)
                 {
                     _width = value;
                 }
@@ -42,12 +39,24 @@ namespace Task2_7
                 }
             }
         }
-        public Point Point { get; set; }
+
+        public int X
+        {
+            get => _point.X;
+            set => _point.X = value;
+        }
+
+        public int Y
+        {
+            get => _point.Y;
+            set => _point.Y = value;
+        }
 
         public Rectangle(int x, int y, int height, int width)
         {
-            Point.X = x;
-            Point.Y = y;
+            _point = new Point();
+            X = x;
+            Y = y;
             Height = height;
             Width = width;
         }
