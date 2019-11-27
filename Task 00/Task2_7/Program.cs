@@ -33,7 +33,7 @@ namespace Task2_7
                     Console.WriteLine("Enter second Y");
                     int y2 = ValidateWhithNegative();
                     var line = new Line(x1,y1,x2,y2);
-                    Console.WriteLine($"{line.GetType()}   {x1} {y1}   {x2} {y2}");
+                    Console.WriteLine($"{line.GetType()}   {line.Point1.X} {line.Point1.Y}   {line.Point2.X} {line.Point2.Y}");
                     break;
                 }
                 case 2: break;
