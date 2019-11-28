@@ -3,11 +3,11 @@ using Task2_1_2_4;
 
 namespace Task2_7
 {
-    internal class Rectangle
+    internal class Rectangle: IDrawable
     {
         private int _width;
         private int _height;
-        private Point _point;
+        private readonly Point _point;
         public int Width
         {
             get => _width;
@@ -71,6 +71,11 @@ namespace Task2_7
         {
             int perimeter = (Height + Width) * 2;
             return perimeter;
+        }
+
+        public void Draw()
+        {
+            Console.WriteLine($"Type={GetType()}   X={X} Y={Y}   {Height} {Width}  Perimeter={Perimeter()}  Area={Area()}");
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Task2_7
                 Console.WriteLine("6: Quit");
                 Console.WriteLine();
                 choise = Validate(false);
-
+                IDrawable figure;
                 switch (choise)
                 {
                     case 1:
@@ -34,19 +34,17 @@ namespace Task2_7
                             int xLn2 = Validate(true);
                             Console.WriteLine("Enter second Y");
                             int yLn2 = Validate(true);
-                            Line line;
                             try
                             {
-                                line = new Line(xLn1, yLn1, xLn2, yLn2);
+                                figure = new Line(xLn1, yLn1, xLn2, yLn2);
                             }
-                            catch (Exception e)
+                            catch (ArgumentException e)
                             {
                                 Console.WriteLine(e.Message);
                                 break;
                             }
                             Console.WriteLine();
-                            Console.WriteLine(
-                                $"Type={typeof(Line)}   X1={line.X1} Y1={line.Y1}   X2={line.X2} Y2={line.Y2}");
+                            figure.Draw();
                             Console.WriteLine();
                             break;
                         }
@@ -58,10 +56,9 @@ namespace Task2_7
                         int yCir = Validate(true);
                         Console.WriteLine("Enter radius");
                         int rCir = Validate(false);
-                        ICircle circle = new Round(xCir, yCir, rCir);
+                        figure = new Circle(xCir, yCir, rCir);
                         Console.WriteLine();
-                        Console.WriteLine(
-                            $"Type={typeof(ICircle)}   X={circle.X} Y={circle.Y}   Radius={circle.Radius}   Length={circle.LengthOfCircle()}");
+                        figure.Draw();
                         Console.WriteLine();
                         break;
                     case 3:
@@ -72,10 +69,9 @@ namespace Task2_7
                         int yRnd = Validate(true);
                         Console.WriteLine("Enter radius");
                         int rRnd = Validate(false);
-                        var round = new Round(xRnd, yRnd, rRnd);
+                        figure = new Round(xRnd, yRnd, rRnd);
                         Console.WriteLine();
-                        Console.WriteLine(
-                            $"Type={typeof(Round)}   X={round.X} Y={round.Y}   Radius={round.Radius}   Length={round.LengthOfCircle()}  Area={round.Area()}");
+                        figure.Draw();
                         Console.WriteLine();
                         break;
                     case 4:
@@ -88,10 +84,17 @@ namespace Task2_7
                         int rInRng = Validate(false);
                         Console.WriteLine("Enter second radius");
                         int rOutRng = Validate(false);
-                        var ring = new Ring(xRng, yRng, rInRng, rOutRng);
+                        try
+                        {
+                            figure = new Ring(xRng, yRng, rInRng, rOutRng);
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            break;
+                        }
                         Console.WriteLine();
-                        Console.WriteLine(
-                            $"Type={typeof(Ring)}   X={ring.X} Y={ring.Y}   Inner radius={ring.Radius} Outer radius={ring.OuterRadius}  Length={ring.LengthOfCircle()}  Area={ring.Area()}");
+                        figure.Draw();
                         Console.WriteLine();
                         break;
                     case 5:
@@ -104,10 +107,9 @@ namespace Task2_7
                         int height = Validate(false);
                         Console.WriteLine("Enter width");
                         int width = Validate(false);
-                        var rectangle = new Rectangle(xRec, yRec, height, width);
+                        figure = new Rectangle(xRec, yRec, height, width);
                         Console.WriteLine();
-                        Console.WriteLine(
-                            $"Type={typeof(Rectangle)}   X={rectangle.X} Y={rectangle.Y}   {rectangle.Height} {rectangle.Width}  Perimeter={rectangle.Perimeter()}  Area={rectangle.Area()}");
+                        figure.Draw();
                         Console.WriteLine();
                         break;
                     case 6:
@@ -116,9 +118,9 @@ namespace Task2_7
                         break;
                 }
             }
-            
+
         }
-        
+
         private static int Validate(bool negative)
         {
             bool check = true;

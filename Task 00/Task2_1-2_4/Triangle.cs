@@ -2,7 +2,7 @@
 
 namespace Task2_1_2_4
 {
-    internal class Triangle
+    internal class Triangle : IDrawable
     {
         private int _a;
         private int _b;
@@ -57,11 +57,11 @@ namespace Task2_1_2_4
             this._a = a;
             this._b = b;
             this._c = c;
-            if (a < 1 && a > b + c )
+            if (a < 1 && a > b + c)
             {
-                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides",nameof(a));
+                throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(a));
             }
-            if (b < 1 && b > a + c )
+            if (b < 1 && b > a + c)
             {
                 throw new ArgumentException("Side can't be less than 1 or more than sum of other sides", nameof(b));
             }
@@ -76,8 +76,13 @@ namespace Task2_1_2_4
         public double Area()
         {
             double halfP = (_a + _b + _c) / 2.0;
-            return Math.Sqrt(halfP * (halfP - _a) * (halfP - _b) * (halfP - _c));
+            double result = Math.Sqrt(halfP * (halfP - _a) * (halfP - _b) * (halfP - _c));
+            return result;
         }
 
+        public void Draw()
+        {
+            Console.WriteLine($"Type={GetType()}   A={A} B={B} C={C}   Perimeter={Perimeter()}  Area={Area()}");
+        }
     }
 }

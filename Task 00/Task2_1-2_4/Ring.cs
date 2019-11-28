@@ -21,7 +21,7 @@ namespace Task2_1_2_4
             }
         }
 
-        public int Radius
+        public override int Radius
         {
             get => base.Radius;
             set
@@ -41,18 +41,23 @@ namespace Task2_1_2_4
         {
             OuterRadius = outerRadius;
         }
-        public double Area()
+        public override double Area()
         {
             var inArea = base.Area();
             var outArea = Math.PI * OuterRadius * OuterRadius;
             return outArea - inArea;
         }
 
-        public double LengthOfCircle()
+        public override double LengthOfCircle()
         {
             var inLen = base.LengthOfCircle();
             var outLen = 2 * Math.PI * OuterRadius;
             return inLen + outLen;
+        }
+
+        public override void Draw()
+        {
+            Console.WriteLine($"Type={GetType()}   X={X} Y={Y}   Inner radius={Radius} Outer radius={OuterRadius}  Length={LengthOfCircle()}  Area={Area()}");
         }
     }
 }

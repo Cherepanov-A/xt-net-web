@@ -3,10 +3,10 @@ using Task2_1_2_4;
 
 namespace Task2_7
 {
-    internal class Line
+    internal class Line: IDrawable
     {
-        private Point _point1;
-        private Point _point2;
+        private readonly Point _point1;
+        private readonly Point _point2;
         public int X1 { get=>_point1.X; set=>_point1.X=value; }
         public int X2 { get => _point1.Y; set => _point1.Y = value; }
         public int Y1 { get => _point2.X; set => _point2.X = value; }
@@ -24,6 +24,11 @@ namespace Task2_7
             {
                 throw new ArgumentException("Points can'be equal",$"{nameof(X1)}, {nameof(Y1)}, {nameof(X2)}, {nameof(Y2)}");
             }
+        }
+
+        public void Draw()
+        {
+            Console.WriteLine($"Type={GetType()}   X1={X1} Y1={Y1}   X2={X2} Y2={Y2}");
         }
     }
 }
