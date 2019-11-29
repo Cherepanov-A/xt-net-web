@@ -16,8 +16,7 @@ namespace Task1_7_1_10
             ArrayProcessing();
             Console.WriteLine();
             Console.Write("NO POSITIVE", Console.ForegroundColor = ConsoleColor.Magenta);
-            Console.ForegroundColor = ConsoleColor.Gray;
-            
+            Console.ForegroundColor = ConsoleColor.Gray;            
             NoPositive();
             Console.WriteLine();
             Console.WriteLine("NON-NEGATIVE SUM", Console.ForegroundColor = ConsoleColor.Magenta);
@@ -29,7 +28,6 @@ namespace Task1_7_1_10
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
             TwoDimArr();
-
             Console.ReadLine();
         }
 
@@ -78,7 +76,6 @@ namespace Task1_7_1_10
 
         private static void NoPositive()
         {
-
             int[,,] arr = new int[3, 4, 3];
             Random rnd = new Random();
             for (int i = 0; i < arr.GetLength(0); i++)
@@ -110,8 +107,7 @@ namespace Task1_7_1_10
                         Console.Write($"{arr[i, j, k]} ");                        
                     }
                 }
-            }
-            
+            }            
             Console.WriteLine();
         }
 
