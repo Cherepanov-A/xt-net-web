@@ -5,14 +5,11 @@ using System.Text;
 
 namespace Task2_8
 {
-    public abstract class Monster : Character
+    internal abstract class Monster : Character
     {
-        public void Resolve(GameItem gi)
+        public override void Move()
         {
-            if (gi is Obstacle)
-            {
-                throw new NotImplementedException();
-            }
+            base.Move();
         }
     }
 }

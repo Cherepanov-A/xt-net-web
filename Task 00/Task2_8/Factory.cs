@@ -8,15 +8,7 @@ namespace Task2_8
     internal class Factory
     {
         
-        internal Character[] GetCharacters()
-        {
-            return new Character[]{new Hero(), new Bear(), new Wolf()};
-        }
-
-        internal GameItem[] GetItems()
-        {
-            return new GameItem[]{new Obstacle(), new Apple(), new Cherry()};
-        }
+        //Creates game stuff(hero, monsters, items, field)
 
     }
 }

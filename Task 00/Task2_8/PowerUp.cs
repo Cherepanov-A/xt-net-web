@@ -8,5 +8,6 @@ namespace Task2_8
 {
     class PowerUp:GameItem
     {
+        public int Power { get; set; }
     }
 }

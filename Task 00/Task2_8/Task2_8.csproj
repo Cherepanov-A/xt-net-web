@@ -49,7 +49,6 @@
     <Compile Include="Factory.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Monster.cs" />
-    <Compile Include="PowerCountEventArgs.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Wolf.cs" />

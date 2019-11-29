@@ -8,6 +8,8 @@ namespace Task2_8
 {
     internal abstract class Character
     {
-        public virtual void Move() { }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public virtual void Move(/*game fiel borders*/) { }
     }
 }

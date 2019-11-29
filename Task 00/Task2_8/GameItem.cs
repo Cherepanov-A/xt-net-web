@@ -8,5 +8,7 @@ namespace Task2_8
 {
     public class GameItem
     {
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }
