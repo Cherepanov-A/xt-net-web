@@ -1,41 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_1_2_4
 {
-    class Round
+    public class Round : Circle
     {
-        private int x;
-        private int y;
-        private int radius;
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Radius
-        {
-            get => radius;
-            set
-            {
-                if (value > 0)
-                {
-                    radius = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Radius can't be zero or less");
-                }
-            }
-        }
-        public Round(int x, int y, int radius)
-        {
-            X = x;
-            Y = y;
-            Radius = radius;
-        }
-        public double Area() => Math.PI * radius * radius;
+        public Round(int x, int y, int radius) : base(x, y, radius) { }
 
-        public double LengthOfCircle() => 2 * Math.PI * radius;
+        public virtual double Area()
+        {
+            var area = Math.PI * Radius * Radius;
+            return area;
+        }
+
+        public override void Draw()
+        {
+            Console.WriteLine($"Type={GetType()}   X={X} Y={Y}   Radius={Radius}   Length={LengthOfCircle()}  Area={Area()}");
+        }
     }
 }

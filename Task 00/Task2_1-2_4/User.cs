@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_1_2_4
-{
-    class User
-    {
-        //private string name;
-        //private string lastName;
-        //private string secondName;
-        private DateTime dateOfBirth;
-        private int age;
 
-        public string Name { get; set;}
+{
+    internal class User
+    {
+        public string Name { get; set; }
         public string LastName { get; set; }
         public string SecondName { get; }
-        public DateTime DateOfBirth => dateOfBirth;
+        public DateTime DateOfBirth { get; }
+        public int Age
+        {
+            get
+            {
+                DateTime tmp = DateTime.Now;
+                return (tmp - DateOfBirth).Days / 365;
+            }
+        }
 
-        public int Age => (DateTime.Now - dateOfBirth).Days/365;
-        
         public User(string name, string lastName, string secondName, DateTime dateOfBirth)
         {
             Name = name;
             LastName = lastName;
             SecondName = secondName;
-            if ((DateTime.Now-dateOfBirth).Days/365<16)
+            if ((DateTime.Now - dateOfBirth).Days / 365 < 16)
             {
-                throw new ArgumentException("User is too yong");
+                throw new ArgumentException("User is too yong", nameof(dateOfBirth));
             }
-            else if ((DateTime.Now - dateOfBirth).Days / 365>85)
+            else if ((DateTime.Now - dateOfBirth).Days / 365 > 85)
             {
-                throw new ArgumentException("User is too old");
+                throw new ArgumentException("User is too old", nameof(dateOfBirth));
             }
             else
             {
-                this.dateOfBirth = dateOfBirth;
+                DateOfBirth = dateOfBirth;
             }
         }
     }
