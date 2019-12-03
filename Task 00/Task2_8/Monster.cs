@@ -9,7 +9,7 @@ namespace Task2_8
     {
         public override void Move()
         {
-            base.Move();
+            base.Move();//move algorithm
         }
     }
 }

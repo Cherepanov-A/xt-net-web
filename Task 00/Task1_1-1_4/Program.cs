@@ -94,38 +94,17 @@ namespace Task1_1_1_4
                 switch (styl)
                 {
                     case 1:
-                        if (fntStl.HasFlag(styles.bold))
-                        {
-                            fntStl ^= styles.bold;
-                        }
-                        else
-                        {
-                            fntStl |= styles.bold;
-                        }
+                        fntStl = StileCheck(fntStl, styles.bold);
                         Console.WriteLine("Text style is: " + fntStl);
                         Console.WriteLine();
                         break;
                     case 2:
-                        if (fntStl.HasFlag(styles.italic))
-                        {
-                            fntStl ^= styles.italic;
-                        }
-                        else
-                        {
-                            fntStl |= styles.italic;
-                        }
+                        fntStl = StileCheck(fntStl, styles.italic);
                         Console.WriteLine("Text style is: " + fntStl);
                         Console.WriteLine();
                         break;
                     case 3:
-                        if (fntStl.HasFlag(styles.bold))
-                        {
-                            fntStl ^= styles.underline;
-                        }
-                        else
-                        {
-                            fntStl |= styles.underline;
-                        }
+                        fntStl = StileCheck(fntStl, styles.underline);
                         Console.WriteLine("Text style is: " + fntStl);
                         Console.WriteLine();
                         break;
@@ -136,6 +115,20 @@ namespace Task1_1_1_4
             } while (exit);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
+        }
+
+        private static styles StileCheck(styles fntStl, styles style)
+        {
+            if (fntStl.HasFlag(style))
+            {
+                fntStl ^= style;
+            }
+            else
+            {
+                fntStl |= style;
+            }
+
+            return fntStl;
         }
 
         private static int Sum()
