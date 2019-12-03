@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2_8
 {
-    class PowerUp:GameItem
+    internal class Factory
     {
-        public int Power { get; set; }
+        
+        //Creates game stuff(hero, monsters, items, field)
+
     }
 }
