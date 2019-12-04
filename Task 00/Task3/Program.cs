@@ -18,12 +18,23 @@ namespace Task3
             //WordFrequency.FCount(s);
             //Console.ReadLine();
 
-            CycledDynamicArray<int> da = new CycledDynamicArray<int>(10);
+            DynamicArray<int> da = new DynamicArray<int>(10);
             for (int i = 0; i < 10; i++)
             {
                 da.Add(i);
             }
-            Console.WriteLine(da[-3]);
+            Console.WriteLine(da[-33]);
+            foreach (var i in da)
+            {
+                Console.WriteLine(i);
+                if (i==100)
+                {
+                    return;
+                }
+            }
+            
+
+            //Console.WriteLine(-3%10);
             Console.ReadLine();
         }
     }

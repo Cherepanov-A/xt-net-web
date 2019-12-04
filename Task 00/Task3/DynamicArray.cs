@@ -40,9 +40,17 @@ namespace Task3
         {
             get
             {
-                if (index < Length && index >= 0)
+                if (index<Length)
                 {
-                    return _innerArray[index];
+                    if (index < 0)
+                    {
+                        int newIndex = index % Length;
+                        return _innerArray[Length + newIndex];
+                    }
+                    else
+                    {
+                        return _innerArray[index];
+                    }
                 }
                 else
                 {
@@ -51,9 +59,17 @@ namespace Task3
             }
             set
             {
-                if (index < Length && index >= 0)
+                if (index < Length)
                 {
-                    _innerArray[index] = value;
+                    if (index < 0)
+                    {
+                        int newIndex = index % Length;
+                        _innerArray[Length + newIndex] = value;
+                    }
+                    else
+                    {
+                        _innerArray[index] = value;
+                    }
                 }
                 else
                 {
