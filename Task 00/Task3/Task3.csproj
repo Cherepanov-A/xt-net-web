@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CycledDynamicArray.cs" />
+    <Compile Include="CycledDynamicArrayEnum.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="DynamicArrayEnum.cs" />
-    <Compile Include="HardcoreArray.cs" />
     <Compile Include="Lost.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

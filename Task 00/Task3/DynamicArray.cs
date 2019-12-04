@@ -10,6 +10,7 @@ namespace Task3
         private int _capasity;
         private T[] _innerArray;
         public int Length { get; private set; }
+        protected T[] InnerArray => _innerArray;
 
         public DynamicArray()
         {
@@ -17,14 +18,12 @@ namespace Task3
             Length = 0;
             _innerArray = new T[_capasity];
         }
-
         public DynamicArray(int capasity)
         {
             _capasity = capasity;
             Length = 0;
             _innerArray = new T[capasity];
         }
-
         public DynamicArray(IEnumerable<T> col)
         {
             _capasity = col.Count() * 2;
@@ -35,8 +34,7 @@ namespace Task3
                 Add(item);
             }
         }
-
-        public virtual T this[int index]
+        public  T this[int index]
         {
             get
             {
@@ -77,7 +75,6 @@ namespace Task3
                 }
             }
         }
-
         public int Capasity
         {
             get => _capasity;
@@ -200,7 +197,7 @@ namespace Task3
             }
             return newArr;
         }
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             return new DynamicArrayEnum<T>(_innerArray, Length);
         }

@@ -8,6 +8,15 @@ namespace Task3
         private readonly T[] _innerArray;
         private readonly int _length;
         private int _position = -1;
+        protected T[] InnerArray => _innerArray;
+        protected int Length => _length;
+
+        protected int Position
+        {
+            get => _position;
+            set => _position = value;
+        }
+
         public DynamicArrayEnum(T[] da, int length)
         {
             _innerArray = new T[length];
@@ -18,7 +27,7 @@ namespace Task3
             }
         }
 
-        public object Current
+        public  object Current
         {
             get
             {
@@ -27,34 +36,26 @@ namespace Task3
                 return _innerArray[_position];
             }
         }
-        T IEnumerator<T>.Current
+         T IEnumerator<T>.Current
         {
             get
             {
-                if (_position >= _length)
-                    _position = 0;
-                if (_position < -1)
-                {
+                if (_position < 0 || _position >= _length)
                     throw new InvalidOperationException();
-                }
                 return _innerArray[_position];
             }
         }
         public void Dispose()
         {
         }
-        public bool MoveNext()
+        public virtual bool MoveNext()
         {
             if (_position < _length - 1)
             {
                 _position++;
                 return true;
             }
-            else
-            {
-                _position = 0;
-                return true;
-            }
+            return false;
         }
         public void Reset()
         {
