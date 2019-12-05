@@ -30,7 +30,6 @@ namespace Task3
                 }
                Print(arr);
             }
-            Console.ReadKey();
         }
         private static void Print(List<int> arr)
         {

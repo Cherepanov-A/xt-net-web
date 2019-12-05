@@ -8,52 +8,44 @@ namespace Task3
     internal class DynamicArray<T> : IEnumerable<T>, ICloneable
     {
         private int _capasity;
-        private T[] _innerArray;
         public int Length { get; private set; }
-        protected T[] InnerArray => _innerArray;
-
+        protected T[] InnerArray { get; private set; }
         public DynamicArray()
         {
             _capasity = 8;
             Length = 0;
-            _innerArray = new T[_capasity];
+            InnerArray = new T[_capasity];
         }
         public DynamicArray(int capasity)
         {
             _capasity = capasity;
             Length = 0;
-            _innerArray = new T[capasity];
+            InnerArray = new T[capasity];
         }
         public DynamicArray(IEnumerable<T> col)
         {
             _capasity = col.Count() * 2;
             Length = 0;
-            _innerArray = new T[_capasity];
+            InnerArray = new T[_capasity];
             foreach (var item in col)
             {
                 Add(item);
             }
         }
-        public  T this[int index]
+        public T this[int index]
         {
             get
             {
-                if (index<Length)
+                if (index < Length)
                 {
                     if (index < 0)
                     {
                         int newIndex = index % Length;
-                        return _innerArray[Length + newIndex];
+                        return InnerArray[Length + newIndex];
                     }
-                    else
-                    {
-                        return _innerArray[index];
-                    }
+                    return InnerArray[index];
                 }
-                else
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                throw new ArgumentOutOfRangeException();
             }
             set
             {
@@ -62,11 +54,11 @@ namespace Task3
                     if (index < 0)
                     {
                         int newIndex = index % Length;
-                        _innerArray[Length + newIndex] = value;
+                        InnerArray[Length + newIndex] = value;
                     }
                     else
                     {
-                        _innerArray[index] = value;
+                        InnerArray[index] = value;
                     }
                 }
                 else
@@ -83,12 +75,12 @@ namespace Task3
                 _capasity = value;
                 if (_capasity < Length)
                 {
-                    T[] tempArr = new T[_innerArray.Length];
-                    for (int i = 0; i < _innerArray.Length; i++)
+                    T[] tempArr = new T[InnerArray.Length];
+                    for (int i = 0; i < InnerArray.Length; i++)
                     {
-                        tempArr[i] = _innerArray[i];
+                        tempArr[i] = InnerArray[i];
                     }
-                    _innerArray = new T[_capasity];
+                    InnerArray = new T[_capasity];
                     Length = 0;
                     for (int i = 0; i < _capasity; i++)
                     {
@@ -101,23 +93,23 @@ namespace Task3
         {
             if (Length < _capasity)
             {
-                _innerArray[Length] = ell;
+                InnerArray[Length] = ell;
                 Length++;
             }
             else
             {
                 _capasity *= 2;
-                T[] tempArr = new T[_innerArray.Length];
-                for (int i = 0; i < _innerArray.Length; i++)
+                T[] tempArr = new T[InnerArray.Length];
+                for (int i = 0; i < InnerArray.Length; i++)
                 {
-                    tempArr[i] = _innerArray[i];
+                    tempArr[i] = InnerArray[i];
                 }
-                _innerArray = new T[_capasity];
+                InnerArray = new T[_capasity];
                 for (int i = 0; i < tempArr.Length; i++)
                 {
-                    _innerArray[i] = tempArr[i];
+                    InnerArray[i] = tempArr[i];
                 }
-                _innerArray[Length] = ell;
+                InnerArray[Length] = ell;
                 Length++;
             }
         }
@@ -127,9 +119,9 @@ namespace Task3
             bool result = true;
             for (int i = index; i < Length - 1; i++)
             {
-                _innerArray[i] = _innerArray[i + 1];
+                InnerArray[i] = InnerArray[i + 1];
             }
-            _innerArray[Length] = default(T);
+            InnerArray[Length] = default(T);
             Length--;
             if (Length == temp)
             {
@@ -148,9 +140,9 @@ namespace Task3
             Length++;
             for (int i = Length - 1; i > index; i--)
             {
-                _innerArray[i] = _innerArray[i - 1];
+                InnerArray[i] = InnerArray[i - 1];
             }
-            _innerArray[index] = ell;
+            InnerArray[index] = ell;
             if (Length == temp)
             {
                 result = false;
@@ -162,16 +154,16 @@ namespace Task3
             var cnt = col.Count();
             if ((Length + cnt) >= _capasity)
             {
-                _capasity = (_innerArray.Count() + cnt) * 2;
-                T[] tempArr = new T[_innerArray.Length];
-                for (int i = 0; i < _innerArray.Length; i++)
+                _capasity = (InnerArray.Count() + cnt) * 2;
+                T[] tempArr = new T[InnerArray.Length];
+                for (int i = 0; i < InnerArray.Length; i++)
                 {
-                    tempArr[i] = _innerArray[i];
+                    tempArr[i] = InnerArray[i];
                 }
-                _innerArray = new T[_capasity];
+                InnerArray = new T[_capasity];
                 for (int i = 0; i < tempArr.Length; i++)
                 {
-                    _innerArray[i] = tempArr[i];
+                    InnerArray[i] = tempArr[i];
                 }
             }
             foreach (var item in col)
@@ -184,7 +176,7 @@ namespace Task3
             T[] arr = new T[Length];
             for (int i = 0; i < Length; i++)
             {
-                arr[i] = _innerArray[i];
+                arr[i] = InnerArray[i];
             }
             return arr;
         }
@@ -193,13 +185,13 @@ namespace Task3
             DynamicArray<T> newArr = new DynamicArray<T>(_capasity);
             for (int i = 0; i < Length; i++)
             {
-                newArr.Add(_innerArray[i]);
+                newArr.Add(InnerArray[i]);
             }
             return newArr;
         }
         public virtual IEnumerator<T> GetEnumerator()
         {
-            return new DynamicArrayEnum<T>(_innerArray, Length);
+            return new DynamicArrayEnum<T>(InnerArray, Length);
         }
         IEnumerator IEnumerable.GetEnumerator()
         {

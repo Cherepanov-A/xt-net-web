@@ -21,6 +21,7 @@ namespace Task1_1_1_4
             bool quit = true;
             do
             {
+                
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1. Rectangle");
                 Console.WriteLine("2. Triangle");
@@ -62,8 +63,9 @@ namespace Task1_1_1_4
                         Console.WriteLine();
                         break;
                     case 5:
-                        Console.WriteLine("Sum of numbers is " + Sum());
+                       Sum();
                         Console.WriteLine();
+                        CleanUp();
                         break;
                     case 6:
                         Adjust();
@@ -83,6 +85,7 @@ namespace Task1_1_1_4
             Console.ForegroundColor = ConsoleColor.Green;
             do
             {
+                
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1. Bold");
                 Console.WriteLine("2. Italic");
@@ -109,6 +112,7 @@ namespace Task1_1_1_4
                         Console.WriteLine();
                         break;
                     case 4:
+                        Console.Clear();
                         exit = false;
                         break;
                 }
@@ -131,7 +135,7 @@ namespace Task1_1_1_4
             return fntStl;
         }
 
-        private static int Sum()
+        private static void Sum()
         {
             int[] arr = new int[1000];
             for (int i = 0; i < 1000; i++)
@@ -139,7 +143,8 @@ namespace Task1_1_1_4
                 arr[i] = i + 1;
             }
             var result = arr.Where(num => (num % 5 == 0 || num % 3 == 0));//from num in arr where num % 5 == 0 || num % 3 == 0 select num;
-            return result.Sum();
+            Console.WriteLine("Sum of numbers is " +result.Sum());
+
         }
 
         private static void ChristmasTree(int ctNum)
@@ -156,6 +161,7 @@ namespace Task1_1_1_4
                 }
             }
             Console.ForegroundColor = ConsoleColor.Gray;
+            CleanUp();
         }
 
 
@@ -170,6 +176,7 @@ namespace Task1_1_1_4
                 j += 2;
             }
             Console.ForegroundColor = ConsoleColor.Gray;
+            CleanUp();
         }
 
         private static void Triangle(int n)
@@ -180,11 +187,20 @@ namespace Task1_1_1_4
                 Console.WriteLine(new string('*', i));
             }
             Console.ForegroundColor = ConsoleColor.Gray;
+            CleanUp();
+        }
+
+        private static void CleanUp()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private static void Rectangle(int a, int b)
         {
             Console.WriteLine(a * b);
+            CleanUp();
         }
 
         private static int Validate()
@@ -200,6 +216,7 @@ namespace Task1_1_1_4
                 else
                 {
                     Console.WriteLine("Enter positive, integer value");
+                    
                 }
             }
             return val;
