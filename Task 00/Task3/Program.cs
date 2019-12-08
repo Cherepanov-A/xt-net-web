@@ -17,7 +17,8 @@ namespace Task3
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1. Lost");
                 Console.WriteLine("2. Word Frequency");
-                Console.WriteLine("3. Quit");
+                Console.WriteLine("3. Dynamic array demo");
+                Console.WriteLine("4. Quit");
                 Console.WriteLine();
                 int sw = Validate();
                 Console.WriteLine();
@@ -26,7 +27,7 @@ namespace Task3
                 {
                     case 1:
                         Console.WriteLine("Enter a number of humans");
-                        int.TryParse(Console.ReadLine(), out var n);
+                        int n = Validate();
                         Lost.LastManStanding(n);
                         CleanUp();
                         break;
@@ -39,38 +40,46 @@ namespace Task3
                         break;
                    
                     case 3:
+                        Console.WriteLine("Dynamic array demo.");
+                        DynamicArray<int> da = new DynamicArray<int>();
+                        CycledDynamicArray<int> cda = new CycledDynamicArray<int>(10);
+                        for (int i = 0; i < 10; i++)
+                        {
+                            cda.Add(i);
+                            da.Add(i);
+                        }
+
+                        Console.WriteLine();
+                        Console.WriteLine("Foreach iteration on 10 items dynamic array.");
+                        foreach (var i in da)
+                        {
+                            Console.Write(i + " ");
+                        }
+                        Console.WriteLine(Environment.NewLine);
+                        int c = 0;
+                        Console.WriteLine("Foreach iteration on 10 items cycled array, with 100 iterations limit.");
+                        foreach (var i in cda)
+                        {
+                            Console.Write(i + " ");
+                            c++;
+                            if (c == 100)
+                            {
+                                break;
+                            }
+                        }
+                        Console.WriteLine(Environment.NewLine);
+                        Console.WriteLine($"Access by index = -33: {cda[-33]}");
+                        
+                        CleanUp();
+                        break;
+                    case 4:
                         quit = false;
                         break;
                 }
 
             } while (quit);
 
-            #region DinamicArray
-            //DynamicArray<int> da = new DynamicArray<int>();
-            //CycledDynamicArray<int> cda = new CycledDynamicArray<int>(10);
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    cda.Add(i);
-            //    da.Add(i);
-            //}
-            //Console.WriteLine(cda[-33]);
-            //int c = 0;
-            //foreach (var i in cda)
-            //{
-            //    Console.WriteLine(i);
-            //    c++;
-            //    if (c==100)
-            //    {
-            //        break;
-            //    }
-            //}
-            //Console.WriteLine();
-            //Console.WriteLine();
-            //foreach (var i in da)
-            //{
-            //    Console.WriteLine(i);
-            //}
-            #endregion
+            
         }
         private static int Validate()
         {

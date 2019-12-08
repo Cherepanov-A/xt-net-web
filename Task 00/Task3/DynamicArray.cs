@@ -45,7 +45,7 @@ namespace Task3
                     }
                     return InnerArray[index];
                 }
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(index), "Index can't be more than Length");
             }
             set
             {
@@ -63,7 +63,7 @@ namespace Task3
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(index), "Index can't be more than Length");
                 }
             }
         }

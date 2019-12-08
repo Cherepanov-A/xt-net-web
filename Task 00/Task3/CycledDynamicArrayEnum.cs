@@ -17,7 +17,7 @@ namespace Task3
                     Position = 0;
                 if (Position < -1)
                 {
-                    throw new InvalidOperationException();
+                    throw new ArgumentOutOfRangeException(nameof(Position));
                 }
                 return InnerArray[Position];
             }

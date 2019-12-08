@@ -7,10 +7,9 @@ namespace Task3
     {
         private readonly T[] _innerArray;
         private readonly int _length;
-        private int _position = -1;
+        private int _position;
         protected T[] InnerArray => _innerArray;
         protected int Length => _length;
-
         protected int Position
         {
             get => _position;
@@ -21,6 +20,7 @@ namespace Task3
         {
             _innerArray = new T[length];
             _length = length;
+            Position=-1;
             for (int i = 0; i < length; i++)
             {
                 _innerArray[i] = da[i];
@@ -31,35 +31,39 @@ namespace Task3
         {
             get
             {
-                if (_position < 0 || _position >= _length)
-                    throw new InvalidOperationException();
-                return _innerArray[_position];
+                if (Position < 0 || Position >= _length)
+                    throw new ArgumentOutOfRangeException(nameof(Position));
+                return _innerArray[Position];
             }
         }
+
          T IEnumerator<T>.Current
         {
             get
             {
-                if (_position < 0 || _position >= _length)
-                    throw new InvalidOperationException();
-                return _innerArray[_position];
+                if (Position < 0 || Position >= _length)
+                    throw new ArgumentOutOfRangeException(nameof(Position));
+                return _innerArray[Position];
             }
         }
+
         public void Dispose()
         {
         }
+
         public virtual bool MoveNext()
         {
-            if (_position < _length - 1)
+            if (Position < _length - 1)
             {
-                _position++;
+                Position++;
                 return true;
             }
             return false;
         }
+
         public void Reset()
         {
-            _position = -1;
+            Position = -1;
         }
     }
 }

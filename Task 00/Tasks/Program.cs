@@ -266,6 +266,16 @@ namespace Tasks
 
         private static void Simple(int number)
         {
+            if (number == 1)
+            {
+                Console.WriteLine($"{number} is prime");
+                return;
+            }
+            if (number==2)
+            {
+                Console.WriteLine($"{number} is prime");
+                return;
+            }
             if (number % 2 == 0)
             {
                 Console.WriteLine($"{number} is not prime");
