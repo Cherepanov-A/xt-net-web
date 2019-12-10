@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task4
 {
@@ -14,10 +11,10 @@ namespace Task4
         {
             var stopWatch = new Stopwatch();
             stopWatch.Restart();
+            int[] result = source.Where(item => item > 0).ToArray();
             stopWatch.Stop();
             Storage = stopWatch.Elapsed;
-            //Print(ts);
-            return source.Where(item => item > 0).ToArray();
+            return result;            
         }
     }
 }

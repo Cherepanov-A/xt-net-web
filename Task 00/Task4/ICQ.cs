@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task4
 {
@@ -11,7 +9,6 @@ namespace Task4
     {
         private static int numberOfCycles = 10;
         internal  delegate int[] GetPositiveDel(int[] src);
-
         internal static void Run()
         {
             List<double> defaultMethod = new List<double>();
@@ -29,14 +26,11 @@ namespace Task4
             {
                 int[] a = PositiveGetter.GetPositive(source);
                 defaultMethod.Add(PositiveGetter.Storage.TotalMilliseconds);
-
                 Console.Write("-");
-
                 GetPositiveDel gpd = PositiveGetter.GetPositive;
                 int[] b = GetPosDel(source, gpd);
                 delegatetMethod.Add(PositiveGetter.Storage.TotalMilliseconds);
                 Console.Write("-");
-
                 GetPositiveDel searcher = delegate
                 {
                     int[] local = PositiveGetter.GetPositive(source);
@@ -45,11 +39,9 @@ namespace Task4
                 int[] c = GetPosAnonDel(source, searcher);
                 anonMethod.Add(PositiveGetter.Storage.TotalMilliseconds);
                 Console.Write("-");
-
                 int[] d = GetPosLamDel(source, ((src) => PositiveGetter.GetPositive(source)));
                 lamMethod.Add(PositiveGetter.Storage.TotalMilliseconds);
                 Console.Write("-");
-
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Restart();
                 int[] e = GetPosLinDel(source);
@@ -92,14 +84,7 @@ namespace Task4
                 where item > 0
                 select item;
             return a.ToArray();
-        }
-        //private static void Print(TimeSpan ts)
-        //{
-        //    string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-        //        ts.Hours, ts.Minutes, ts.Seconds,
-        //        ts.Milliseconds / 10);
-        //    Console.WriteLine(elapsedTime);
-        //}
+        }        
         private static double Mid(List<double> ts)
         {
             double[] unsorted = ts.ToArray();

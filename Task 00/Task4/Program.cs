@@ -30,24 +30,14 @@ namespace Task4
         {
             int[] arr = { 6, 5, 47, 8, 2, 4, 6, 2, 58, 5 };
             string[] s = { "asd", "hsdfgf", "asg", "ueot", "hello", "asd" };
-            Sort<int> iSort = CustomSort.CustomEqual;
-            var sortedInt = CustomSort.Sort(arr, iSort);
-            Console.WriteLine("Int sorting:" + Environment.NewLine);
-            foreach (var item in sortedInt)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine(Environment.NewLine);
-            Sort<string> sSort = CustomSort.CustomEqual;
-            var sortedStr = CustomSort.Sort(s, sSort);
-            Console.WriteLine("String sorting:" + Environment.NewLine);
-            foreach (var item in sortedStr)
-            {
-
-                Console.Write($"{item} ");
-
-            }
-            Console.WriteLine(Environment.NewLine);
+            Sort<int> intSort = CustomSort.CustomEqual;
+            var sortedInt = CustomSort.Sort(arr, intSort);
+            Console.WriteLine("Int sorting in thread 1:" + Environment.NewLine);
+            SortingThreat.Print(sortedInt);            
+            Sort<string> strSort = CustomSort.CustomEqual;
+            var sortedStr = CustomSort.Sort(s, strSort);
+            Console.WriteLine("String sorting in thread 1:" + Environment.NewLine);
+            SortingThreat.Print(sortedStr);            
             return arr;
         }
 
@@ -73,9 +63,7 @@ namespace Task4
 
         private static void ShowMessage(object sender, Thr2EventArgs e)
         {
-
             Console.WriteLine(e.Message);
-
         }
     }
 }
