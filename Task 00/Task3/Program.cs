@@ -13,7 +13,6 @@ namespace Task3
             bool quit = true;
             do
             {
-
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1. Lost");
                 Console.WriteLine("2. Word Frequency");
@@ -22,7 +21,6 @@ namespace Task3
                 Console.WriteLine();
                 int sw = Validate();
                 Console.WriteLine();
-
                 switch (sw)
                 {
                     case 1:
@@ -38,7 +36,6 @@ namespace Task3
                         WordFrequency.FCount(text);
                         CleanUp();
                         break;
-                   
                     case 3:
                         Console.WriteLine("Dynamic array demo.");
                         DynamicArray<int> da = new DynamicArray<int>();
@@ -48,7 +45,6 @@ namespace Task3
                             cda.Add(i);
                             da.Add(i);
                         }
-
                         Console.WriteLine();
                         Console.WriteLine("Foreach iteration on 10 items dynamic array.");
                         foreach (var i in da)
@@ -69,17 +65,13 @@ namespace Task3
                         }
                         Console.WriteLine(Environment.NewLine);
                         Console.WriteLine($"Access by index = -33: {cda[-33]}");
-                        
                         CleanUp();
                         break;
                     case 4:
                         quit = false;
                         break;
                 }
-
             } while (quit);
-
-            
         }
         private static int Validate()
         {
