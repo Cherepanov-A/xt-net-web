@@ -13,6 +13,7 @@ namespace Task5
         public int TName { get; set; }
         public DateTime DateOfEvent { get; set; }
         public string TypeOfEvent { get; set; }
+        public string Name { get; set; }
         //public Data(string path, int name, DateTime date, string tOfEvent)
         //{
         //    Path = path;

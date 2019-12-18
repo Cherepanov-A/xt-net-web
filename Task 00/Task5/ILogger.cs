@@ -8,6 +8,6 @@ namespace Task5
 {
     interface ILogger
     {
-        void LogIt(string FullPath, string ChTyp);
+        void LogIt(string fullPath, string chTyp, string name);
     }
 }

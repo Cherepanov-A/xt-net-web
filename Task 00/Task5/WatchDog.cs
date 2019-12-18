@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Permissions;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Task5
 {
     class WatchDog
     {
-        private static readonly string watchDir = @"D:\watcher";
-        private static readonly ConcurrentQueue<FileSystemEventArgs> changeList = new ConcurrentQueue<FileSystemEventArgs>();
-        private static readonly ConcurrentQueue<RenamedEventArgs> renameList = new ConcurrentQueue<RenamedEventArgs>();
-        private static ILogger Lg = new SerialLog();
+        private  readonly string watchDir = Directory.GetCurrentDirectory();
+        private  readonly string backupDir;
+        private  readonly ConcurrentQueue<FileSystemEventArgs> changeList = new ConcurrentQueue<FileSystemEventArgs>();
+        private  readonly ConcurrentQueue<RenamedEventArgs> renameList = new ConcurrentQueue<RenamedEventArgs>();
+        private  ILogger Lg = new SerialLog();
+        internal WatchDog(string backupDir = @"C:\Backup")
+        {
+            this.backupDir = backupDir;
+        }
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void Watch()
         {
@@ -26,7 +27,6 @@ namespace Task5
             watcher.Created += OnChange;
             watcher.Deleted += OnChange;
             watcher.Changed += OnChange;
-            Directory.SetCurrentDirectory("D:\\Backup");
             watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
         }
@@ -55,7 +55,7 @@ namespace Task5
                             }
                         case "Deleted":
                             {
-                                Lg.LogIt(e.FullPath, e.ChangeType.ToString());
+                                Lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
                                 Console.WriteLine(e.FullPath + " is " + e.ChangeType);
                                 break;
                             }
@@ -79,7 +79,7 @@ namespace Task5
         {
             if (File.Exists(e.FullPath))
             {
-                Lg.LogIt(e.FullPath, e.ChangeType.ToString());
+                Lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
                 int counter = SerialLog.Counter;
                 FileCopy(e, $"D:\\Backup\\{counter}");
                 Thread.Sleep(5);

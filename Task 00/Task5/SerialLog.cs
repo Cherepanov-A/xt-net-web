@@ -14,10 +14,8 @@ namespace Task5
         private static int counter;
         private static List<Data> log;
         private static string logPath = @"D:\Backup\sLog.xml";
-        public static int Counter
-        {
-            get { return counter; }
-        }
+        public static int Counter => counter;
+
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public SerialLog()
         {
@@ -34,17 +32,20 @@ namespace Task5
                 var saveLogStream = File.Create(logPath);
                 XmlSerializer writer = new XmlSerializer(typeof(List<Data>));
                 log = new List<Data>();
-                Data first = new Data();
-                first.Path = "null";
-                first.TName = 0;
-                first.DateOfEvent = DateTime.Now;
-                first.TypeOfEvent = "first start";
+                Data first = new Data
+                {
+                    Path = "null",
+                    TName = 0,
+                    DateOfEvent = DateTime.Now,
+                    TypeOfEvent = "first start",
+                    Name = "starter"
+                };
                 log.Add(first);
                 writer.Serialize(saveLogStream, log);
                 saveLogStream.Close();
             }
         }
-        public void LogIt(string FullPath, string ChTyp)
+        public void LogIt(string fullPath, string chTyp, string name)
         {
             var openLogStream = File.OpenRead(logPath);
             XmlSerializer reader = new XmlSerializer(typeof(List<Data>));
@@ -52,10 +53,11 @@ namespace Task5
             counter = log.Last().TName;
             Data dt = new Data();
             counter++;
-            dt.Path = FullPath;
+            dt.Path = fullPath;
             dt.TName = counter;
             dt.DateOfEvent = DateTime.Now;
-            dt.TypeOfEvent = ChTyp;
+            dt.TypeOfEvent = chTyp;
+            dt.Name = name;
             log.Add(dt);
             openLogStream.Close();
             var saveLogStream = File.Create(logPath);

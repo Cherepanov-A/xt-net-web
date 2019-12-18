@@ -5,9 +5,9 @@ using System.Threading;
 
 namespace Task5
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Mode selection:");
             Console.WriteLine("1: Backup");
@@ -25,9 +25,19 @@ namespace Task5
         }
         private static void Restore()
         {
-            //Console.WriteLine("Enter restore date");
-            string date = "17.12.2019 19:05:00";//Console.ReadLine();
-            Restorer.Restore(date);
+            bool endOfCycle = true;
+            while (endOfCycle)
+            {
+                Console.WriteLine("Enter restore date in dd.MM.yyyy hh:mm format");
+                string date = Console.ReadLine();
+                bool success = DateTime.TryParse(date, out var rsDate);
+                if (success & rsDate <= DateTime.Now)
+                {
+                    Restorer.Restore(rsDate);
+                    endOfCycle = false;
+                }
+                Console.WriteLine("Check restore date");
+            }
         }
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         private static void Backup()
@@ -35,7 +45,7 @@ namespace Task5
             if (!File.Exists(@"D:\Backup\log"))
             {
                 File.Create(@"D:\Backup\log");
-            }           
+            }
             WatchDog watcher = new WatchDog();
             Thread TList = new Thread(watcher.Watch);
             Thread FWork = new Thread(watcher.FileChangeWork);
