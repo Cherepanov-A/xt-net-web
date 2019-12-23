@@ -9,21 +9,18 @@ namespace Task5
     class WatchDog
     {
         private  readonly string _watchDir = Directory.GetCurrentDirectory();
-        private  static string _backupDir;
-        private static string _lgPath;
-        internal string LogPath
-        {
-            set => _lgPath = value;
-        }
-        internal string BackupDir
-        {
-            set => _backupDir = value;
-        }
-
+        private  static string _backupDir;  
         private  readonly ConcurrentQueue<FileSystemEventArgs> changeList = new ConcurrentQueue<FileSystemEventArgs>();
         private  readonly ConcurrentQueue<RenamedEventArgs> renameList = new ConcurrentQueue<RenamedEventArgs>();
-        private static readonly ILogger _lg = new SerialLog(_lgPath);
-        
+        private static readonly ILogger _lg = new SerialLog();
+        public WatchDog()
+        {
+            _backupDir = SerialLog.BackupDir;            
+            if (!Directory.Exists(_backupDir))
+            {
+                Directory.CreateDirectory(_backupDir);
+            }
+        }        
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void Watch()
         {
@@ -90,8 +87,7 @@ namespace Task5
                 int counter = SerialLog.Counter;
                 FileCopy(e, $"{_backupDir}\\{counter}");
                 Thread.Sleep(5);
-                Thread.Sleep(5);
-                
+                Thread.Sleep(5);                
             }
         }
         private static void FileCopy(FileSystemEventArgs e, string filePath)
@@ -99,6 +95,7 @@ namespace Task5
             if (!Directory.Exists(_backupDir))
             {
                 Directory.CreateDirectory(_backupDir);
+                //File.Create
                 if (File.Exists(e.FullPath))
                 {
                     File.Copy(e.FullPath, filePath, true);

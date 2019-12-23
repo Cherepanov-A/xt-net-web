@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task5
 {
-    class Path
+    [Serializable]
+    public class Path
     {
-        internal string LogPath { get; set; }
-        internal string BackupPath { get; set; }
+        public string LogPath { get; set; }
+        public string BackupPath { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace Task5
 {
     internal class Program
     {
+        
         private static void Main(string[] args)
         {
             Console.WriteLine("Mode selection:");
@@ -44,23 +45,10 @@ namespace Task5
         private static void Backup()
         {
             Console.WriteLine();
+            
+            //Directory.CreateDirectory(backupDir);
+            
             WatchDog watcher = new WatchDog();
-            if ((File.Exists(Directory.GetCurrentDirectory() + "\\config.xml")))
-            {
-                var cfgStream = File.OpenRead(Directory.GetCurrentDirectory() + "\\config.xml");
-                XmlSerializer cfgReader = new XmlSerializer(typeof(Path));
-                Path pathes = (Path)cfgReader.Deserialize(cfgStream);
-                watcher.BackupDir = pathes.BackupPath;
-                watcher.LogPath = pathes.LogPath;
-            }
-            else
-            {
-                var cfgStream = File.Create(Directory.GetCurrentDirectory() + "\\config.xml");
-                XmlSerializer cfgWriter = new XmlSerializer(typeof(string));
-                cfgWriter.Serialize(cfgStream, @"C:\Backup\sLog.xml");
-            }
-            
-            
             Thread TList = new Thread(watcher.Watch);
             Thread FWork = new Thread(watcher.FileChangeWork);
             TList.Start();

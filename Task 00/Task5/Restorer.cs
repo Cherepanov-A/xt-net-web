@@ -8,8 +8,27 @@ namespace Task5
 {
     internal class Restorer
     {
+        
         public static List<Data> Log = new List<Data>();
-        private static readonly string logPath = @"D:\Backup\sLog.xml";
+        private static  string logPath;
+        internal Restorer()
+        {            
+            if ((File.Exists(Directory.GetCurrentDirectory() + "\\config.xml")))
+            {
+                Path pathes = new Path();
+                using (var cfgStream = File.OpenRead(Directory.GetCurrentDirectory() + "\\config.xml"))
+                {
+                    XmlSerializer cfgReader = new XmlSerializer(typeof(Path));
+                    Path tmpPathes = (Path)cfgReader.Deserialize(cfgStream);
+                    pathes = tmpPathes;
+                }                
+                logPath = pathes.LogPath;
+            }
+            else
+            {
+                throw new FileNotFoundException("Config not found", Directory.GetCurrentDirectory() + "\\config.xml");
+            }
+        }
         public static void Restore(DateTime rsDate)
         {
             var openLogStream = File.OpenRead(logPath);
@@ -44,12 +63,7 @@ namespace Task5
                 Directory.CreateDirectory(rstPath);
                 foreach (var el in restoreListFiltered)
                 {
-                    File.Copy(@"D:\backup\" + el.TName, rstPath + "\\" + el.Name, true);
-                    //Console.WriteLine(el.TName);
-                    //Console.WriteLine(el.DateOfEvent);
-                    //Console.WriteLine(el.Path);
-                    //Console.WriteLine(el.TypeOfEvent);
-                    //Console.WriteLine();
+                    File.Copy(@"D:\backup\" + el.TName, rstPath + "\\" + el.Name, true);                    
                 }
             }
             else
