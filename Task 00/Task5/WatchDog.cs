@@ -8,20 +8,27 @@ namespace Task5
 {
     class WatchDog
     {
-        private  readonly string watchDir = Directory.GetCurrentDirectory();
-        private  readonly string backupDir;
+        private  readonly string _watchDir = Directory.GetCurrentDirectory();
+        private  static string _backupDir;
+        private static string _lgPath;
+        internal string LogPath
+        {
+            set => _lgPath = value;
+        }
+        internal string BackupDir
+        {
+            set => _backupDir = value;
+        }
+
         private  readonly ConcurrentQueue<FileSystemEventArgs> changeList = new ConcurrentQueue<FileSystemEventArgs>();
         private  readonly ConcurrentQueue<RenamedEventArgs> renameList = new ConcurrentQueue<RenamedEventArgs>();
-        private  ILogger Lg = new SerialLog();
-        internal WatchDog(string backupDir = @"C:\Backup")
-        {
-            this.backupDir = backupDir;
-        }
+        private static readonly ILogger _lg = new SerialLog(_lgPath);
+        
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void Watch()
         {
             FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = watchDir;
+            watcher.Path = _watchDir;
             watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Attributes | NotifyFilters.DirectoryName;
             watcher.Renamed += OnRename;
             watcher.Created += OnChange;
@@ -55,7 +62,7 @@ namespace Task5
                             }
                         case "Deleted":
                             {
-                                Lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
+                                _lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
                                 Console.WriteLine(e.FullPath + " is " + e.ChangeType);
                                 break;
                             }
@@ -79,18 +86,19 @@ namespace Task5
         {
             if (File.Exists(e.FullPath))
             {
-                Lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
+                _lg.LogIt(e.FullPath, e.ChangeType.ToString(), e.Name);
                 int counter = SerialLog.Counter;
-                FileCopy(e, $"D:\\Backup\\{counter}");
+                FileCopy(e, $"{_backupDir}\\{counter}");
                 Thread.Sleep(5);
                 Thread.Sleep(5);
+                
             }
         }
         private static void FileCopy(FileSystemEventArgs e, string filePath)
         {
-            if (!Directory.Exists(@"D:\Backup"))
+            if (!Directory.Exists(_backupDir))
             {
-                Directory.CreateDirectory(@"D:\Backup");
+                Directory.CreateDirectory(_backupDir);
                 if (File.Exists(e.FullPath))
                 {
                     File.Copy(e.FullPath, filePath, true);

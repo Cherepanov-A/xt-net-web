@@ -11,27 +11,27 @@ namespace Task5
 {
     class SerialLog : ILogger
     {
-        private static int counter;
-        private static List<Data> log;
-        private static string logPath = @"D:\Backup\sLog.xml";
-        public static int Counter => counter;
+        private static List<Data> _log;
+        private static string _logPath = @"C:\Backup\sLog.xml";
+        public static int Counter { get; private set; }
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public SerialLog()
+        public SerialLog(string lgPath = @"C:\Backup\sLog.xml")
         {
-            if (File.Exists(logPath))
+            _logPath = lgPath;
+            if (File.Exists(_logPath))
             {
-                var openLogStream = File.OpenRead(logPath);
+                var openLogStream = File.OpenRead(_logPath);
                 XmlSerializer reader = new XmlSerializer(typeof(List<Data>));
-                log = (List<Data>)reader.Deserialize(openLogStream);
-                counter = log.Last().TName;
+                _log = (List<Data>)reader.Deserialize(openLogStream);
+                Counter = _log.Last().TName;
                 openLogStream.Close();
             }
             else
             {
-                var saveLogStream = File.Create(logPath);
+                var saveLogStream = File.Create(_logPath);
                 XmlSerializer writer = new XmlSerializer(typeof(List<Data>));
-                log = new List<Data>();
+                _log = new List<Data>();
                 Data first = new Data
                 {
                     Path = "null",
@@ -40,29 +40,29 @@ namespace Task5
                     TypeOfEvent = "first start",
                     Name = "starter"
                 };
-                log.Add(first);
-                writer.Serialize(saveLogStream, log);
+                _log.Add(first);
+                writer.Serialize(saveLogStream, _log);
                 saveLogStream.Close();
             }
         }
         public void LogIt(string fullPath, string chTyp, string name)
         {
-            var openLogStream = File.OpenRead(logPath);
+            var openLogStream = File.OpenRead(_logPath);
             XmlSerializer reader = new XmlSerializer(typeof(List<Data>));
-            log = (List<Data>)reader.Deserialize(openLogStream);
-            counter = log.Last().TName;
+            _log = (List<Data>)reader.Deserialize(openLogStream);
+            Counter = _log.Last().TName;
             Data dt = new Data();
-            counter++;
+            Counter++;
             dt.Path = fullPath;
-            dt.TName = counter;
+            dt.TName = Counter;
             dt.DateOfEvent = DateTime.Now;
             dt.TypeOfEvent = chTyp;
             dt.Name = name;
-            log.Add(dt);
+            _log.Add(dt);
             openLogStream.Close();
-            var saveLogStream = File.Create(logPath);
+            var saveLogStream = File.Create(_logPath);
             XmlSerializer writer = new XmlSerializer(typeof(List<Data>));
-            writer.Serialize(saveLogStream, log);
+            writer.Serialize(saveLogStream, _log);
             saveLogStream.Close();
         }
     }
