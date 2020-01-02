@@ -11,6 +11,7 @@ namespace Task5
         
         private static void Main(string[] args)
         {
+            Console.WriteLine("See settings in config.xml in exe file directory");
             Console.WriteLine("Mode selection:");
             Console.WriteLine("1: Backup");
             Console.WriteLine("2: Restoration");

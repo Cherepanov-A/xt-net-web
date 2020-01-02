@@ -23,6 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task4", "Task4\Task4.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task5", "Task5\Task5.csproj", "{ED0570EA-9F53-456D-82ED-D0636C5E995E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task7", "Task7\Task7.csproj", "{2323E384-28E3-4BDA-A93E-7D942A3C4DD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{A338C5FD-1E49-4235-A7FF-05FFD4C22920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Other", "Tools\Other.csproj", "{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,9 +75,20 @@ Global
 		{ED0570EA-9F53-456D-82ED-D0636C5E995E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED0570EA-9F53-456D-82ED-D0636C5E995E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED0570EA-9F53-456D-82ED-D0636C5E995E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2323E384-28E3-4BDA-A93E-7D942A3C4DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2323E384-28E3-4BDA-A93E-7D942A3C4DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2323E384-28E3-4BDA-A93E-7D942A3C4DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2323E384-28E3-4BDA-A93E-7D942A3C4DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1E8C75F-D0AC-46F1-8C2D-6BD7E3D77B5C} = {A338C5FD-1E49-4235-A7FF-05FFD4C22920}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2BD1DE1-BB55-459F-A804-0FDEAEC8B08A}

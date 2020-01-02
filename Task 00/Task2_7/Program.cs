@@ -1,9 +1,11 @@
 ﻿using System;
 using Task2_1_2_4;
+using Other;
+
 
 namespace Task2_7
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
@@ -19,7 +21,7 @@ namespace Task2_7
                 Console.WriteLine("5: Rectangle");
                 Console.WriteLine("6: Quit");
                 Console.WriteLine();
-                choise = Validate(false);
+                choise = Tools.Validate(false);
                 IDrawable figure;
                 switch (choise)
                 {
@@ -27,13 +29,13 @@ namespace Task2_7
                         {
                             Console.WriteLine();
                             Console.WriteLine("Enter first X");
-                            int xLn1 = Validate(true);
+                            int xLn1 = Tools.Validate(true);
                             Console.WriteLine("Enter first Y");
-                            int yLn1 = Validate(true);
+                            int yLn1 = Tools.Validate(true);
                             Console.WriteLine("Enter second X");
-                            int xLn2 = Validate(true);
+                            int xLn2 = Tools.Validate(true);
                             Console.WriteLine("Enter second Y");
-                            int yLn2 = Validate(true);
+                            int yLn2 = Tools.Validate(true);
                             try
                             {
                                 figure = new Line(xLn1, yLn1, xLn2, yLn2);
@@ -51,11 +53,11 @@ namespace Task2_7
                     case 2:
                         Console.WriteLine();
                         Console.WriteLine("Enter X");
-                        int xCir = Validate(true);
+                        int xCir = Tools.Validate(true);
                         Console.WriteLine("Enter Y");
-                        int yCir = Validate(true);
+                        int yCir = Tools.Validate(true);
                         Console.WriteLine("Enter radius");
-                        int rCir = Validate(false);
+                        int rCir = Tools.Validate(false);
                         figure = new Circle(xCir, yCir, rCir);
                         Console.WriteLine();
                         figure.Draw();
@@ -64,11 +66,11 @@ namespace Task2_7
                     case 3:
                         Console.WriteLine();
                         Console.WriteLine("Enter X");
-                        int xRnd = Validate(true);
+                        int xRnd = Tools.Validate(true);
                         Console.WriteLine("Enter Y");
-                        int yRnd = Validate(true);
+                        int yRnd = Tools.Validate(true);
                         Console.WriteLine("Enter radius");
-                        int rRnd = Validate(false);
+                        int rRnd = Tools.Validate(false);
                         figure = new Round(xRnd, yRnd, rRnd);
                         Console.WriteLine();
                         figure.Draw();
@@ -77,13 +79,13 @@ namespace Task2_7
                     case 4:
                         Console.WriteLine();
                         Console.WriteLine("Enter X");
-                        int xRng = Validate(true);
+                        int xRng = Tools.Validate(true);
                         Console.WriteLine("Enter Y");
-                        int yRng = Validate(true);
+                        int yRng = Tools.Validate(true);
                         Console.WriteLine("Enter radius");
-                        int rInRng = Validate(false);
+                        int rInRng = Tools.Validate(false);
                         Console.WriteLine("Enter second radius");
-                        int rOutRng = Validate(false);
+                        int rOutRng = Tools.Validate(false);
                         try
                         {
                             figure = new Ring(xRng, yRng, rInRng, rOutRng);
@@ -100,13 +102,13 @@ namespace Task2_7
                     case 5:
                         Console.WriteLine();
                         Console.WriteLine("Enter X");
-                        int xRec = Validate(true);
+                        int xRec = Tools.Validate(true);
                         Console.WriteLine("Enter Y");
-                        int yRec = Validate(true);
+                        int yRec = Tools.Validate(true);
                         Console.WriteLine("Enter hight");
-                        int height = Validate(false);
+                        int height = Tools.Validate(false);
                         Console.WriteLine("Enter width");
-                        int width = Validate(false);
+                        int width = Tools.Validate(false);
                         figure = new Rectangle(xRec, yRec, height, width);
                         Console.WriteLine();
                         figure.Draw();
@@ -118,40 +120,6 @@ namespace Task2_7
                         break;
                 }
             }
-
         }
-
-        private static int Validate(bool negative)
-        {
-            bool check = true;
-            int val = 0;
-            while (check)
-            {
-                if (negative)
-                {
-                    if (int.TryParse(Console.ReadLine(), out val))
-                    {
-                        check = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Enter integer value");
-                    }
-                }
-                else
-                {
-                    if (int.TryParse(Console.ReadLine(), out val) && val > 0)
-                    {
-                        check = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Enter positive, integer value");
-                    }
-                }
-            }
-            return val;
-        }
-
     }
 }
