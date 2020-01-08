@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.XT2019.Task6.BLL\Epam.XT2019.Task6.BLL.csproj" />
+    <ProjectReference Include="..\Epam.XT2019.Task6.LogicContracts\Epam.XT2019.Task6.LogicContracts.csproj" />
+  </ItemGroup>
+
+</Project>
