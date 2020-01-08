@@ -27,7 +27,9 @@ namespace Epam.XT2019.Task6.BLL
             user.Age = (int)temp.TotalDays / 365;
             try
             {
-                _userDao.SaveToFile(user);
+                List<User> users = _userDao.GetAll();
+                users.Add(user);
+                _userDao.SaveToFile(users);
                 return true;
             }
             catch (Exception e)
@@ -39,15 +41,20 @@ namespace Epam.XT2019.Task6.BLL
 
         private void logIt(string message)
         {
-            //File.Open(Directory.GetCurrentDirectory() + "\\log.txt", FileMode.OpenOrCreate);
-            File.AppendAllText(Directory.GetCurrentDirectory() + "\\log.txt", message + "\n");
+            File.AppendAllText(Directory.GetCurrentDirectory() + "\\log.txt", message + Environment.NewLine);
         }
 
         public bool DeleteUser(string id)
         {
+            var users = _userDao.GetAll();
             try
             {
-                _userDao.DeleteFromFile(id);
+                if (users.Count > 0)
+                {
+                    var otherUsers = users.Where(t => t.Id != id);
+                    List<User> redusedUsers = otherUsers.ToList<User>();
+                    _userDao.SaveToFile(redusedUsers);
+                }
                 return true;
             }
             catch (Exception e)
@@ -55,6 +62,7 @@ namespace Epam.XT2019.Task6.BLL
                 logIt(e.Message);
                 return false;
             }
+
         }
 
         public List<User> DisplayUsers()
@@ -62,7 +70,7 @@ namespace Epam.XT2019.Task6.BLL
             List<User> users = new List<User>();
             try
             {
-                users = _userDao.GetAll();                
+                users = _userDao.GetAll();
             }
             catch (Exception e)
             {

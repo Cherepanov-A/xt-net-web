@@ -24,15 +24,17 @@ namespace Epam.XT2019.Task6.Ioc
         static DependencyResolver()
         {
             CfgDto config = new CfgDto();
-            var openCfgStream = File.Open(_path, FileMode.OpenOrCreate);
-            XmlSerializer xCfg = new XmlSerializer(typeof(CfgDto));
             if (File.Exists(_path))
             {
+            var openCfgStream = File.Open(_path, FileMode.Open);
+            XmlSerializer xCfg = new XmlSerializer(typeof(CfgDto));
                 config = (CfgDto)xCfg.Deserialize(openCfgStream);
             }
             else
             {
-                File.Create(_path);
+                //File.Create(_path);
+                var openCfgStream = File.Open(_path, FileMode.Create);
+                XmlSerializer xCfg = new XmlSerializer(typeof(CfgDto));
                 config.Dal = "default";
                 config.Logic = "default";
                 xCfg.Serialize(openCfgStream, config);

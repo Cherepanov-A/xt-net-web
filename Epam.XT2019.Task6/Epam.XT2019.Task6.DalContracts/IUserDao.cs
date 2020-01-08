@@ -9,8 +9,7 @@ namespace Epam.XT2019.Task6.DalContracts
 {
     public interface IUserDao
     {
-        void SaveToFile(User user);
-        void DeleteFromFile(string id);
+        void SaveToFile(List<User> users);       
         List<User> GetAll();
     }
 }
