@@ -7,7 +7,9 @@ namespace Epam.XT2019.Task6.Ioc
     {
         //public string Path { get; set; }
       
-        public string Dal { get; set; }
-        public string Logic { get; set; }
+        public string UserDao { get; set; }
+        public string UserLogic { get; set; }
+        public string AwardDao { get; set; }
+        public string AwardLogic { get; set; }
     }
 }

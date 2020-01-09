@@ -1,4 +1,4 @@
-﻿using Epam.XT2019.Task6.Entities;
+﻿
 using Epam.XT2019.Task6.Ioc;
 using Epam.XT2019.Task6.LogicContracts;
 using System;
