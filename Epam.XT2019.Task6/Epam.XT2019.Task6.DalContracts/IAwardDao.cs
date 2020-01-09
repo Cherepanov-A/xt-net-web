@@ -11,5 +11,7 @@ namespace Epam.XT2019.Task6.DalContracts
     {
         void SaveToFile(List<Award> awards);
         List<Award> GetAll();
+        Dictionary<string, string> GetLink();
+        void SaveLink(Dictionary<string, string> lnk);
     }
 }

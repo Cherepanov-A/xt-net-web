@@ -33,7 +33,8 @@ namespace Epam.XT2019.Task6.BLL
 
         public bool Reward(string userId, string awardId)
         {
-            throw new NotImplementedException();
+            Dictionary<string, string> link = new Dictionary<string, string>();
+            link = _awardDao.
         }
 
         public bool DeleteAward(string awardId)
