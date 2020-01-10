@@ -21,6 +21,17 @@ namespace Epam.XT2019.Task6.DAL
             }
             return awards;
         }
+
+        public List<Link> GetLink()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SaveLink(List<Link> lnk)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void SaveToFile(List<Award> awards)
         {
             XmlSerializer xAward = new XmlSerializer(typeof(List<Award>));

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace Epam.XT2019.Task6.Entities
 {
     [Serializable]
-    public class Linker
+    public class Link
     {
-        public Dictionary<string, string> Links { get; set; }
+        public string UsId { get; set; }
+        public string AwId { get; set; }
     }
 }

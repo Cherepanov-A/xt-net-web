@@ -33,8 +33,49 @@ namespace Epam.XT2019.Task6.BLL
 
         public bool Reward(string userId, string awardId)
         {
-            Dictionary<string, string> link = new Dictionary<string, string>();
-            link = _awardDao.
+
+            List<Link> links = _awardDao.GetLink();
+            Link link = new Link();
+            if (links!=null)
+            {
+                string awId = FindByTitle(awardId);
+                link.UsId = userId;
+                link.AwId = awardId;
+            }
+            else
+            {
+                links = new List<Link>();
+            }
+            links.Add(link);
+            try
+            {
+                _awardDao.SaveLink(links);
+                return true;
+            }
+            catch (Exception e)
+            {
+                logIt(e.Message);
+                return false;
+            }
+            
+        }
+
+        private string FindByTitle(string awardId)
+        {
+            //var result = from awd in _awardDao.GetAll()
+            //    where awd.Name == awardId
+            //    select awd.Id;
+            var result = _awardDao.GetAll().Where(awd => awd.Name == awardId);
+            try
+            {
+                string awId = result.First().Id;
+                return awId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public bool DeleteAward(string awardId)
