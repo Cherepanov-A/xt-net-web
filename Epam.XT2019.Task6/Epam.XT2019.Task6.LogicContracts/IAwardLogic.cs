@@ -10,8 +10,9 @@ namespace Epam.XT2019.Task6.LogicContracts
     public interface IAwardLogic
     {
         List<Award> DisplayAwards();
-        bool Reward(string userId, string awardId);
+        bool ToAward(string userId, string awardId);
         bool DeleteAward(string awardId);
         bool CreateAward(string id, string name);
+        List<Award> DisplayUserAwards(string userId);
     }
 }

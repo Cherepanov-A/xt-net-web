@@ -12,5 +12,6 @@ namespace Epam.XT2019.Task6.LogicContracts
         bool CreateUser(string id, string name, string dateOfBirth);
         bool DeleteUser(string Id);
         List<User> DisplayUsers();
+        //List<User> DisplayAwardUsers(string awardId);
     }
 }
