@@ -9,13 +9,14 @@ namespace Epam.XT2019.Task6.DAL
     public class AwardDao : IAwardDao
     {
         private readonly string _path = Path.Combine(Directory.GetCurrentDirectory(), "Awards");
-        public List<Award> GetAll()
+        private readonly string _lnkpath = Path.Combine(Directory.GetCurrentDirectory(), "Links");
+        public List<Award> GetAwards()
         {
             List<Award> awards = new List<Award>();
             if (File.Exists(_path))
             {
                 var getAwardsStream = File.OpenRead(_path);
-                XmlSerializer xAward = new XmlSerializer(typeof(List<User>));
+                XmlSerializer xAward = new XmlSerializer(typeof(List<Award>));
                 awards = (List<Award>)xAward.Deserialize(getAwardsStream);
                 getAwardsStream.Close();
             }
@@ -24,15 +25,26 @@ namespace Epam.XT2019.Task6.DAL
 
         public List<Link> GetLink()
         {
-            throw new System.NotImplementedException();
+            List<Link> links = new List<Link>();
+            if (File.Exists(_lnkpath))
+            {
+                var getLinksStream = File.OpenRead(_lnkpath);
+                XmlSerializer xLink = new XmlSerializer(typeof(List<Link>));
+                links = (List<Link>)xLink.Deserialize(getLinksStream);
+                getLinksStream.Close();
+            }
+            return links;
         }
 
-        public void SaveLink(List<Link> lnk)
+        public void SaveLink(List<Link> links)
         {
-            throw new System.NotImplementedException();
+            XmlSerializer xLink = new XmlSerializer(typeof(List<Link>));
+            var createLinksStream = File.Create(_lnkpath);
+            xLink.Serialize(createLinksStream, links);
+            createLinksStream.Close();
         }
 
-        public void SaveToFile(List<Award> awards)
+        public void SaveAward(List<Award> awards)
         {
             XmlSerializer xAward = new XmlSerializer(typeof(List<Award>));
             var createAwardsStream = File.Create(_path);

@@ -1,0 +1,66 @@
+    * {
+        box-sizing: border-box;
+    }
+    
+    .block {
+        position: relative;
+        height: 190px;
+        width: 620px;
+        background-color: white;
+        top: 20px;
+        box-shadow: 0px 10px 10px 5px rgb(38, 49, 61);
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    body {
+        background-color: rgb(78, 99, 121);
+    }
+    
+    .block div {
+        display: inline-block;
+        width: 200px;
+        height: 185px;
+        text-align: center;
+    }
+    
+    .virt .imgbox {
+        background-image: url("resourses/virt.jpg");
+    }
+    
+    .cloud .imgbox {
+        background-image: url("resourses/cloud.jpg");
+    }
+    
+    .dedicated .imgbox {
+        background-image: url("resourses/dedicated.jpg");
+    }
+    
+    .imgbox {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60px;
+        height: 45px;
+    }
+    
+    button {
+        border-radius: 3px;
+        border: none;
+        width: 82px;
+        height: 25px;
+        background-color: rgb(245, 99, 50);
+    }
+    
+    .txt {
+        color: rgb(245, 99, 50);
+    }
+    
+    .splitter {
+        position: relative;
+        display: inline-block;
+        height: 140px;
+        width: 1px;
+        background-color: gray;
+    }

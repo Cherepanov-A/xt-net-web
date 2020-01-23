@@ -1,0 +1,206 @@
+/* html, body {
+
+    margin: 0;
+    padding: 0;
+    
+    
+}
+
+body {
+    font: 13px arial;
+    text-align: center;
+}
+
+p {
+    margin: 0 10px 10px;
+}
+
+a {
+    padding: 5px;
+    text-decoration: none;
+    color: #000000;
+}
+
+div.header {
+    background-color: rgb(129, 113, 32);
+}
+
+div.header h1 {
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+div.container {
+    text-align: left;
+    
+}
+
+div.content p {
+    line-height: 1.4;
+}
+
+div.navigation {
+    background: #F6F0E0;
+}
+
+div.navigation ul {
+    margin: 15px 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+div.navigation li {
+    margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.extra {
+    background: #CCC8B3;
+}
+
+div.footer p {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+div.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+div.wrapper {
+    float: left;
+    width: 960px;
+    margin-left: 120px;
+    background-color: aqua;
+}
+
+div.content {
+    margin: 0 150px;
+}
+
+div.navigation {
+    float: left;
+    width: 157;
+    margin-left: -960px;
+}
+
+div.extra {
+    float: left;
+    width: 150px;
+    margin-left: -150px;
+}
+
+
+div.navigation> ul li span:first-of-type{
+    background: url(https://vk.com/images/icons/common.png?6;)
+     no-repeat 0px -59px;
+    width: 15px;
+    height: 15px;
+    opacity: 0.75;
+    
+}
+div.navigation>ul{
+    list-style-type: none;
+}
+div.header_back h1 {
+    width: 100%;
+    background-color: brown;
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+     padding-left: 10px; 
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.head_wrapper {
+    width: 100%;
+    height: 42px;
+    background-color: cadetblue;
+    position: fixed;
+    z-index: 10;
+}
+
+.head {
+    width: 960px;
+    margin: 0 auto;
+    height: 42px;
+    background-color: darkgreen;
+}
+
+.page_wrapper {
+    
+    width: 960px;
+    background-color: rgb(204, 190, 204);
+    margin: 0 auto;
+    position: relative;
+}
+
+.sidebar_wrapper {
+    float: left;
+    width: 150px;
+    height: 612px;
+    margin-top: 42px;
+    background-color: darkolivegreen;
+    position: relative;
+}
+
+.right_wrapper {
+    float: right;
+}
+
+div.sidebar_wrapper>ul li span:first-of-type {
+    background: url(https://vk.com/images/icons/common.png?6;) no-repeat;
+    width: 15px;
+    height: 15px;
+    opacity: 0.75;
+    content: normal;
+    position: relative;
+    margin-left: 0px;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.sidebar_wrapper ul {
+    list-style-type: none;
+    margin-left: auto;
+    width: 130px;
+    position: relative;
+    padding: 0;
+}
+.column{
+    width: 550px;
+    margin-top: 42px;
+    height: 850px;
+    float: left;
+    background-color: darkred;
+}
+.right_wrapper{
+    position: relative;
+    width: 800px;
+    height: 912px;
+    
+}
+.right_menu{
+    position: fixed;
+    text-align: left;
+    width: 230px;
+    margin-top: 42px;
+    right: 0;
+    height: 283px;
+    float: right;
+    background-color: darkred;
+}

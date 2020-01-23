@@ -1,0 +1,27 @@
+div {
+    background-color: rgb(249, 228, 151);
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgb(136, 0, 0);
+    border-style:solid;
+    border-width:1px;
+}
+
+li {
+    color: brown;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+li:hover {
+    color: blueviolet;
+}

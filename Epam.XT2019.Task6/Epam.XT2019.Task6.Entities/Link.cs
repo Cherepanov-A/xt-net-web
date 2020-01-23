@@ -9,7 +9,7 @@ namespace Epam.XT2019.Task6.Entities
     [Serializable]
     public class Link
     {
-        public string UsId { get; set; }
         public string AwId { get; set; }
+        public string UsId { get; set; }
     }
 }

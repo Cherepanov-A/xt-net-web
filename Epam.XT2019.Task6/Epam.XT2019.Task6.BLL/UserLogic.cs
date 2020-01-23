@@ -19,14 +19,14 @@ namespace Epam.XT2019.Task6.BLL
         }
         public bool CreateUser(string id, string name, string dateOfBirth)
         {
-            User user = new User();
-            user.Id = id;
-            user.Name = name;
-            user.DateOfBirth = DateTime.Parse(dateOfBirth);
-            TimeSpan temp = DateTime.Now - user.DateOfBirth;
-            user.Age = (int)temp.TotalDays / 365;
             try
             {
+                User user = new User();
+                user.Id = id;
+                user.Name = name;
+                user.DateOfBirth = DateTime.Parse(dateOfBirth);
+                TimeSpan temp = DateTime.Now - user.DateOfBirth;
+                user.Age = (int)temp.TotalDays / 365;
                 List<User> users = _userDao.GetAll();
                 users.Add(user);
                 _userDao.SaveToFile(users);
@@ -78,5 +78,10 @@ namespace Epam.XT2019.Task6.BLL
             }
             return users;
         }
+
+        //public List<User> DisplayAwardUsers(string awardId)
+        //{
+        //    IEnumerable<string> result = 
+        //}
     }
 }

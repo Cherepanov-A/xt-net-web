@@ -9,9 +9,9 @@ namespace Epam.XT2019.Task6.DalContracts
 {
     public interface IAwardDao
     {
-        void SaveToFile(List<Award> awards);
-        List<Award> GetAll();
+        void SaveAward(List<Award> awards);
+        List<Award> GetAwards();
         List<Link> GetLink();
-        void SaveLink(List<Link> lnk);
+        void SaveLink(List<Link> links);
     }
 }
