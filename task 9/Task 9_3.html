@@ -1,68 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta name="description" content="Task 9" />
-        <meta charset="utf-8">
-        <title>Task 9_3</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Cherepanov_A">
-        <link rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous">
+<head>
+    <meta name="description" content="Task 9" />
+    <meta charset="utf-8">
+    <title>Task 9_3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Cherepanov_A">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="leftWing">Avalable</label>
-                        <select multiple class="form-control"
-                            id="exampleFormControlSelect2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="leftWing">Avalable</label>
+                    <select multiple class="form-control left-wing" id="leftWing">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
                 </div>
-                <div class="col-sm-3">
-                    <div class="row justify-content-center">
-                        <button class="btn btn-info">&gt&gt</button>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btn btn-info" id="toRight">&gt</button>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btn btn-info">&lt</button>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btn btn-info">&lt&lt</button>
-                    </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="row justify-content-center">
+                    <button class="btn btn-info full-right">&gt&gt</button>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Selected</label>
-                        <select multiple class="form-control"
-                            id="rightWing">
-                        </select>
-                    </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-info to-right">&gt</button>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-info to-left">&lt</button>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-info full-left">&lt&lt</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="rightWing">Selected</label>
+                    <select multiple class="form-control right-wing" id="rightWing">
+                    </select>
                 </div>
             </div>
         </div>
-        <script> 
-            function insertEl(){
-                let opt = document.createElement('option');
-                document.getElementById('rightWing').append(opt);
+    </div>
+    <script>
+        var butterflCtrls = document.getElementsByClassName('container'),
+            i,
+            lWing = [],
+            rWing = [],
+            right = [],
+            left = [],
+            fullRight = [],
+            fullLeft = [];
+        for (i = 0; i < butterflCtrls.length; i++) {
+            lWing[i] = butterflCtrls[i].getElementsByClassName('left-wing')[0];
+            rWing[i] = butterflCtrls[i].getElementsByClassName('right-wing')[0];
+            right[i] = butterflCtrls[i].getElementsByClassName('to-right')[0];
+            left[i] = butterflCtrls[i].getElementsByClassName('to-left')[0];
+            fullRight[i] = butterflCtrls[i].getElementsByClassName('full-right')[0];
+            fullLeft[i] = butterflCtrls[i].getElementsByClassName('full-left')[0];
+        }
+        function setIndexes(i) {
+            right[i].onclick = function () {
+                if (lWing[i].selectedIndex == -1) {
+                    alert('Nothing selected');
+                    return;
+                }
+                rWing[i].options[rWing[i].options.length] = lWing[i].options[lWing[i].selectedIndex];
             }
-            document.getElementById('toRight').onclick=insertEl;
-        </script>
+            left[i].onclick = function () {
+                if (rWing[i].selectedIndex == -1) {
+                    alert('Nothing selected');
+                    return;
+                }
+                lWing[i].options[lWing[i].options.length] = rWing[i].options[rWing[i].selectedIndex];
+            }
+            fullRight[i].onclick = function () {
+                let l = lWing[i].options.length;
+                for (let j = 0; j < l; j++) {
+                    rWing[i].options[rWing[i].options.length]=lWing[i].options[lWing[i].options.length-1];                    
+                }                
+            }
+            fullLeft[i].onclick = function () {
+                let l = rWing[i].options.length;
+                for (let j = 0; j < l; j++) {
+                    lWing[i].options[lWing[i].options.length]=rWing[i].options[rWing[i].options.length-1];                    
+                }                
+            }
+        }
+        for(i=0; i<butterflCtrls.length; i++){  
+            setIndexes(i);
+        }  
 
-    </body>
+    </script>
+
+</body>
 
 </html>
