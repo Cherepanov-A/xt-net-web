@@ -12,7 +12,7 @@ idNum = document.getElementsByClassName('page-number');
 pageNum = idNum[0].textContent;
 navButtons = document.getElementsByClassName('btn-secondary');
 cnt = document.getElementById('counter');
-function run() {
+(function(){
     timer = setInterval(moveForward, 3000);
     cntTimer = setInterval(countDown, 1000);
     cntNum = 3;
@@ -23,7 +23,6 @@ function run() {
             link = 3;
         }
         document.location = links[link];
-
     }
     navButtons[3].onclick = moveForward;
     function moveForward() {
@@ -47,6 +46,6 @@ function run() {
             cntNum = 3;
         }
         cnt.textContent = cntNum;
-    }    
-}
-run();
+    }
+}())
+
