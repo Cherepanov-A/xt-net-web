@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29609.76
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.XT2019.Task6.PL", "Epam.XT2019.Task6.PL\Epam.XT2019.Task6.PL.csproj", "{8C681C55-E466-4BB8-9367-A4F5E4E6150A}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{86CB8CB7-9E1E-4862-B3D4-611548E7C845}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{352E1491-FA43-495A-8350-59C090E88B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.XT2019.Task6.WebPL", "..\..\..\Task10\WebUI\Epam.XT2019.Task6.WebPL.csproj", "{293DE8B5-25E8-47CE-B7AB-53D8CC734405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{1E4E93A6-56DF-4D31-B480-1C16BB669FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E4E93A6-56DF-4D31-B480-1C16BB669FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E4E93A6-56DF-4D31-B480-1C16BB669FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293DE8B5-25E8-47CE-B7AB-53D8CC734405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293DE8B5-25E8-47CE-B7AB-53D8CC734405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293DE8B5-25E8-47CE-B7AB-53D8CC734405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293DE8B5-25E8-47CE-B7AB-53D8CC734405}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,10 +12,10 @@ namespace Task5
         private  static string _backupDir;  
         private  readonly ConcurrentQueue<FileSystemEventArgs> changeList = new ConcurrentQueue<FileSystemEventArgs>();
         private  readonly ConcurrentQueue<RenamedEventArgs> renameList = new ConcurrentQueue<RenamedEventArgs>();
-        private static readonly ILogger _lg = new SerialLog();
+        private static readonly ILogger _lg = new JsonLog();
         public WatchDog()
         {
-            _backupDir = SerialLog.BackupDir;            
+            _backupDir = JsonLog.BackupDir;            
             if (!Directory.Exists(_backupDir))
             {
                 Directory.CreateDirectory(_backupDir);
