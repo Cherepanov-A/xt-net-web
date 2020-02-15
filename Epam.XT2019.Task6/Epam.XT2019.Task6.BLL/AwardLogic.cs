@@ -72,11 +72,11 @@ namespace Epam.XT2019.Task6.BLL
 
         public bool CreateAward(string id, string name)
         {
-            Award award = new Award();
-            award.Id = id;
-            award.Name = name;
             try
             {
+                Award award = new Award();
+                award.Id = id;
+                award.Name = name;
                 List<Award> awards = _awardDao.GetAwards();
                 awards.Add(award);
                 _awardDao.SaveAward(awards);
@@ -103,7 +103,7 @@ namespace Epam.XT2019.Task6.BLL
             {
                 for (int j = 0; j < allAwards.Count; j++)
                 {
-                    if (awsIds[i].AwId==awsIds[j].AwId)
+                    if (awsIds[i].AwId == awsIds[j].AwId)
                     {
                         userAwards.Add(allAwards[j]);
                     }

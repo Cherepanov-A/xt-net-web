@@ -77,11 +77,6 @@ namespace Epam.XT2019.Task6.BLL
                 logIt(e.Message);
             }
             return users;
-        }
-
-        //public List<User> DisplayAwardUsers(string awardId)
-        //{
-        //    IEnumerable<string> result = 
-        //}
+        }       
     }
 }
