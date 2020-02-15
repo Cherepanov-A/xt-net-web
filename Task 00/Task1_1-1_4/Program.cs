@@ -140,7 +140,7 @@ namespace Task1_1_1_4
             int[] arr = new int[1000];
             for (int i = 0; i < 1000; i++)
             {
-                arr[i] = i + 1;
+                arr[i] = i;
             }
             var result = arr.Where(num => (num % 5 == 0 || num % 3 == 0));//from num in arr where num % 5 == 0 || num % 3 == 0 select num;
             Console.WriteLine("Sum of numbers is " +result.Sum());

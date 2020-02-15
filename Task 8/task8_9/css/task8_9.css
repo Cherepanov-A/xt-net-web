@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+.steps {
+  font-size: 0;
+}
+
+.steps label {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.steps label input[type="radio"] {
+  position: relative;
+  z-index: -1;
+}
+
+.steps label span {
+  font: 20px arial;
+  vertical-align: middle;
+  margin-right: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.steps label span:before, .steps label span:after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  height: 16px;
+  background-color: lightgray;
+  z-index: -1;
+}
+
+.steps label span:before {
+  background-image: linear-gradient(rgb(191, 191, 191), rgb(222, 222, 222));
+  transform: skew(18deg, 0);
+  -webkit-transform: skew(18deg, 0);
+  -moz-transform: skew(18deg, 0);
+  -ms-transform: skew(18deg, 0);
+  -o-transform: skew(18deg, 0);
+}
+
+.steps label span:after {
+  bottom: 0;
+  background-image: linear-gradient(rgb(191, 191, 191), rgb(222, 222, 222));
+  transform: skew(-18deg, 0);
+  -webkit-transform: skew(-18deg, 0);
+  -moz-transform: skew(-18deg, 0);
+  -ms-transform: skew(-18deg, 0);
+  -o-transform: skew(-18deg, 0);
+}
+
+.steps label:first-child span:before, .steps label:first-child span:after {
+  margin-left: -5px;
+}
+
+.steps label:last-child span:before, .steps label:last-child span:after {
+  margin-right: -5px;
+}
+
+.steps label input[type="radio"]:checked+span {
+  color: white;
+}
+
+.steps label input[type="radio"]:checked+span:before, .steps label input[type="radio"]:checked+span:after {
+  background-color: green;
+}
+
+.steps label input[type="radio"]:checked+span:before {
+  background-image: linear-gradient(rgb(174, 225, 136), rgb(103, 198, 34));
+}
+
+.steps label input[type="radio"]:checked+span:after {
+  background-image: linear-gradient(rgb(103, 198, 34), rgb(174, 225, 136));
+}

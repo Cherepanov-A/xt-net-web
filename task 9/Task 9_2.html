@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Task 9" />
+    <meta charset="utf-8">
+    <title>Task 9_2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Cherepanov_A">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-group mb-3 mt-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Source</span>
+            </div>
+            <input type="text" class="form-control" id="src92">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class=" btn btn-primary" id="calculate">Calculate</button>
+            </div>
+            <input type="text" class="form-control" id="res92">
+        </div>
+
+    </div>
+
+    <script>
+        function parseExpr() {
+            var src = document.getElementById('src92').value;
+            var reg = /\s*(\d+(?:\.\d*)?)\s*/;
+            var expr = src.split(reg);
+            return expr;
+        }
+        function calculateExpr() {
+            var exprArr = [];
+            var res = 0;
+            exprArr = parseExpr();
+            if (exprArr[exprArr.length-1] !== '=') {
+                return NaN;
+            }
+            if (exprArr[0] == '') {
+                exprArr[0] = '+';
+            }
+            for (let i = 0; i < exprArr.length; i += 2) {
+                switch (exprArr[i]) {
+                    case '+':
+                        res += (+exprArr[i + 1]);
+                        break;
+                    case '-':                        
+                        res -= (+exprArr[i + 1]);
+                        break;
+                    case '*':
+                        res *= (+exprArr[i + 1]);
+                        break;
+                    case '/':
+                        res /= (+exprArr[i + 1]);
+                        break;
+                    default: 
+                        break;
+                }
+            }
+            return res;
+        }
+        function showResult() {
+            document.getElementById('res92').value = calculateExpr();
+        }
+        document.getElementById('calculate').onclick = showResult;
+    </script>
+
+</body>
+
+</html>

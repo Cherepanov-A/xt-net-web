@@ -1,0 +1,40 @@
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        background-color: rgb(51, 51, 51);
+    }    
+    .wrapper div {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        background: repeating-linear-gradient(to bottom, transparent, transparent 30px, rgb(51, 51, 51) 30px, rgb(51, 51, 51) 33px),
+        
+        linear-gradient(to bottom, rgb(255, 206, 86),rgb(255, 141, 2) 90%);        
+        margin-left: 5px;
+        vertical-align: bottom;
+        border-radius: 10px 10px 0px 0px;      
+    }    
+    .column1{
+        height: 162px;
+    }
+    .column2{
+        height: 63px;
+    }
+    .column3{
+        height: 261px;
+    } 
+    .column4{
+        height: 327px;
+    }
+    .column5{
+        height: 162px;
+    }
+     .column6{
+        height: 96px;
+    }
+    .wrapper{
+        background-color: rgb(51, 51, 51);
+        width: 420px;
+        height: 340px; 
+    }
