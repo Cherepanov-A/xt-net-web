@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@Page.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+</head>
+<body>    
+    <div class="container">
+        <div class="row align-items-end" style="height: 150px">
+            <div class="col-sm-2"></div>
+            <div class="col">
+                <h4 class="text-center text-primary ">@Page.Title</h4>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row align-items-center mt-2">
+            <div class="col-sm-2"></div>
+            <div class="col">
+                <form action="/" method="post">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl1</span>
+                        </div>
+                        <input type="text" class="form-control" name="@Page.Lbl1" aria-label="@Page.Lbl1" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl2</span>
+                        </div>
+                        <input type="text" class="form-control" name="@Page.Lbl2" aria-label="@Page.Lbl2" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl3</span>
+                        </div>
+                        <input type="text" class="form-control" name="@Page.Lbl3" aria-label="@Page.Lbl3" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">@Page.Btn</button>
+                </form>
+                <p class="mt-2">Or you can <a href="~/signup">Sign up</a></p>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div>
+    @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

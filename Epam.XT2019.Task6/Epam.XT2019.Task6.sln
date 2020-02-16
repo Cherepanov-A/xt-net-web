@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{352E1491-FA43-495A-8350-59C090E88B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.XT2019.Task6.WebPL", "..\..\..\Task10\WebUI\Epam.XT2019.Task6.WebPL.csproj", "{293DE8B5-25E8-47CE-B7AB-53D8CC734405}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.XT2019.Task6.WebPL", "Epam.XT2019.Task6.WebPL\Epam.XT2019.Task6.WebPL.csproj", "{293DE8B5-25E8-47CE-B7AB-53D8CC734405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
