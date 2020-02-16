@@ -1,47 +1,43 @@
 ﻿@using Epam.XT2019.Task6.WebPL.Model
-
+@using Epam.XT2019.Task6.LogicContracts;
+@using Epam.XT2019.Task6.Ioc;
 @{
-    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    
     Page.Title = "Create User";
     Page.Lbl1 = "UserName";
     Page.Lbl2 = "UserId";
     Page.Lbl3 = "DateOfBirth";
     Page.Btn = "Create";
-    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-     {
-         Response.Redirect("~/index");
-         return;
-     }
+    Page.Action = "CreateUser.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    // {
+    //     Response.Redirect("~/index");
+    //     return;
+    // }
 
-     if (!User.Identity.IsAuthenticated)
-     {
-         Response.Redirect("~/index");
-         return;
-     }
+    // if (!User.Identity.IsAuthenticated)
+    // {
+    //     Response.Redirect("~/index");
+    //     return;
+    // }
     string uName = Request["Username"];
     string uId = Request["UserId"];
     string dateOfBirth = Request["DateOfBirth"];
 
     if (IsPost)
-    {
-
-        Response.Redirect("~/Pages/Menu/_MenuLayout1.cshtml");
+    {        
         if (LogicProvider.CrtUsr(uId, uName, dateOfBirth))
         {
-            <div>
+            <div class="alert alert-primary" role="alert">
                 <label>Success</label>
             </div>
         }
         else
         {
-            <div>
+            <div class="alert alert-danger" role="alert">
                 <label>Fail. Please check data.</label>
             </div>
-        }
-        return;
-    }
-    <div class="alert alert-danger">
-        Login or/and password not correct
-    </div>
-}
+        }        
+    }   
 }

@@ -4,10 +4,10 @@
     name = Request["Username"];
     pass = Request["Password"];
     
-    if (IsPost && pass == "admin")
+    if (IsPost)
     {
-        FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
-        Response.Redirect("~");
+        //FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
+        Response.Redirect("~/Pages/MainMenu.cshtml");
         return;
     }
     <div class="alert alert-danger">

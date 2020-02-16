@@ -19,20 +19,20 @@
         <div class="row align-items-center mt-2">
             <div class="col-sm-2"></div>
             <div class="col">
-                <form action="/" method="post">
-                    <div class="input-group mb-3">
+                <form action="@Page.Action" method="post">
+                    <div class="input-group mb-3 @Page.Visibility1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl1</span>
                         </div>
                         <input type="text" class="form-control" name="@Page.Lbl1" aria-label="@Page.Lbl1" aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 @Page.Visibility2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl2</span>
                         </div>
                         <input type="text" class="form-control" name="@Page.Lbl2" aria-label="@Page.Lbl2" aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 @Page.Visibility3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl3</span>
                         </div>

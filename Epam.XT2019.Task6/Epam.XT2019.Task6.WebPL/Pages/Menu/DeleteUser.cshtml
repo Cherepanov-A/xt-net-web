@@ -1,1 +1,43 @@
-﻿
+﻿@using Epam.XT2019.Task6.WebPL.Model
+
+@{
+    Page.Visibility1 = "invisible";
+    Page.Visibility3 = "invisible";
+    Page.Title = "Delete User";
+    Page.Lbl1 = "UserName";
+    Page.Lbl2 = "UserId";
+    Page.Lbl3 = "DateOfBirth";
+    Page.Btn = "Delete";
+    Page.Action = "CreateUser.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    // {
+    //     Response.Redirect("~/index");
+    //     return;
+    // }
+
+    // if (!User.Identity.IsAuthenticated)
+    // {
+    //     Response.Redirect("~/index");
+    //     return;
+    // }
+
+    string uId = Request["UserId"];
+
+
+    if (IsPost)
+    {
+        if (LogicProvider.DltUsr(uId))
+        {
+            <div class="alert alert-primary" role="alert">
+                <label>Success</label>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Fail. Please check data.</label>
+            </div>
+        }
+    }
+}

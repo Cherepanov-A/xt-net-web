@@ -1,15 +1,16 @@
 ﻿ @{ 
-     if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-     {
-         Response.Redirect("~/index");
-         return;
-     }
+//if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+//{
+//    Response.Redirect("~/index");
+//    return;
+//}
 
-     if (!User.Identity.IsAuthenticated)
-     {
-         Response.Redirect("~/index");
-         return;
-     }
+//if (!User.Identity.IsAuthenticated)
+//{
+//    Response.Redirect("~/Pages/MainMenu.cshtml");
+
+//    return;
+//}
  }
 <div class="container">
     <div><a href="~/Pages/Menu/CreateUser">Create user</a></div>
