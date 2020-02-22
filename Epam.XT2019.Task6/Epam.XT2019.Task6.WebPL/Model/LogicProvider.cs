@@ -14,9 +14,9 @@ namespace Epam.XT2019.Task6.WebPL.Model
         static IAwardLogic awLogic = DependencyResolver.ALogic;
         public static bool CrtUsr(string id, string name, string dateOfBirth)
         {
-            return uLogic.CreateUser(id, name, dateOfBirth);
+            return uLogic.CreateUser(name, dateOfBirth);
         }
-        public static bool DltUsr(string id)
+        public static bool DltUsr(int id)
         {
             return uLogic.DeleteUser(id);
         }
@@ -26,7 +26,7 @@ namespace Epam.XT2019.Task6.WebPL.Model
         }
         public static bool CrtAwd(string id, string name)
         { 
-            return awLogic.CreateAward(id, name);
+            return awLogic.CreateAward(name);
         }
         //bool success = uLogic.CreateUser(id, name, dateOfBirth);
     }

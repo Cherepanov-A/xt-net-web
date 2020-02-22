@@ -1,4 +1,5 @@
 ﻿
+using Epam.XT2019.Task6.Entities;
 using Epam.XT2019.Task6.Ioc;
 using Epam.XT2019.Task6.LogicContracts;
 using System;
@@ -17,6 +18,7 @@ namespace Epam.XT2019.Task6.PL
             IUserLogic uLogic = DependencyResolver.ULogic;
             IAwardLogic awLogic = DependencyResolver.ALogic;
             bool correct = true;
+
             while (correct)
             {
                 Console.WriteLine("Choose an option");
@@ -37,15 +39,12 @@ namespace Epam.XT2019.Task6.PL
                         correct = false;
                         break;
                     case "1":
-                        //User user = new User();
+
                         Console.WriteLine("Enter name");
                         string name = Console.ReadLine();
-                        Console.WriteLine("Enter ID");
-                        string id = Console.ReadLine();
-                        //user.Id = int.Parse(id);
                         Console.WriteLine("Enter Date of birth");
                         string dateOfBirth = Console.ReadLine();
-                        bool success = uLogic.CreateUser(id, name, dateOfBirth);
+                        bool success = uLogic.CreateUser(name, dateOfBirth);
                         if (success)
                         {
                             Console.WriteLine("User saved successfuly");
@@ -57,8 +56,16 @@ namespace Epam.XT2019.Task6.PL
                         break;
                     case "2":
                         Console.WriteLine("Enter ID");
-                        id = Console.ReadLine();
-                        uLogic.DeleteUser(id);
+                        string id = Console.ReadLine();
+                        int numId;
+                        if (int.TryParse(id, out numId))
+                        {
+                            uLogic.DeleteUser(numId);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID is NaN");
+                        }
                         break;
                     case "3":
                         var users = uLogic.DisplayUsers();
@@ -74,35 +81,56 @@ namespace Epam.XT2019.Task6.PL
                     case "4":
                         Console.WriteLine("Enter award name");
                         string awName = Console.ReadLine();
-                        Console.WriteLine("Enter award ID");
-                        string awId = Console.ReadLine();
-                        awLogic.CreateAward(awName, awId);
+                        awLogic.CreateAward(awName);
                         break;
                     case "5":
                         Console.WriteLine("Enter award ID");
                         var awDelId = Console.ReadLine();
-                        awLogic.DeleteAward(awDelId);
+                        int numAwDelId;
+                        if (int.TryParse(awDelId, out numAwDelId))
+                        {
+                            awLogic.DeleteAward(numAwDelId);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID is NaN");
+                        }
+                        awLogic.DeleteAward(numAwDelId);
                         break;
                     case "6":
                         var awards = awLogic.DisplayAwards();
                         foreach (var item in awards)
                         {
                             Console.WriteLine(item.Id);
-                            Console.WriteLine(item.Name);                            
+                            Console.WriteLine(item.Name);
                             Console.WriteLine();
                         }
                         break;
                     case "7":
-                        Console.WriteLine("Enter ID");
+                        int usToAwNum;
+                        int awToAwNum;
+                        Console.WriteLine("Enter user ID");
                         string usToAw = Console.ReadLine();
                         Console.WriteLine("Enter award ID");
                         string awToAw = Console.ReadLine();
-                        awLogic.ToAward(usToAw, awToAw);
+                        if (int.TryParse(usToAw, out usToAwNum) && int.TryParse(awToAw, out awToAwNum))
+                        {
+                            awLogic.Reward(usToAwNum, awToAwNum);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID is NaN");
+                        }
                         break;
                     case "8":
                         Console.WriteLine("Enter user ID");
                         string dispAwId = Console.ReadLine();
-                        var result = awLogic.DisplayUserAwards(dispAwId);
+                        int dispAwIdNum;
+                        List<Award> result = new List<Award>();
+                        if (int.TryParse(dispAwId, out dispAwIdNum))
+                        {
+                            result = awLogic.DisplayUserAwards(dispAwIdNum);
+                        }
                         foreach (var item in result)
                         {
                             Console.WriteLine(item.Name);

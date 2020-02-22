@@ -17,19 +17,17 @@ namespace Epam.XT2019.Task6.BLL
         {
             _userDao = userDao;
         }
-        public bool CreateUser(string id, string name, string dateOfBirth)
+        public bool CreateUser(string name, string dateOfBirth)
         {
             try
             {
-                User user = new User();
-                user.Id = id;
+                User user = new User();                
                 user.Name = name;
-                user.DateOfBirth = DateTime.Parse(dateOfBirth);
-                TimeSpan temp = DateTime.Now - user.DateOfBirth;
-                user.Age = (int)temp.TotalDays / 365;
-                List<User> users = _userDao.GetAll();
-                users.Add(user);
-                _userDao.SaveToFile(users);
+                user.DateOfBirth = dateOfBirth;
+                var tmp = DateTime.Parse(dateOfBirth);
+                TimeSpan temp = DateTime.Now - tmp;
+                user.Age = (int)temp.TotalDays / 365;                
+                _userDao.SaveToFile(user);
                 return true;
             }
             catch (Exception e)
@@ -44,17 +42,12 @@ namespace Epam.XT2019.Task6.BLL
             File.AppendAllText(Directory.GetCurrentDirectory() + "\\log.txt", message + Environment.NewLine);
         }
 
-        public bool DeleteUser(string id)
-        {
-            var users = _userDao.GetAll();
+        public bool DeleteUser(int id)
+        {            
             try
             {
-                if (users.Count > 0)
-                {
-                    var otherUsers = users.Where(t => t.Id != id);
-                    List<User> redusedUsers = otherUsers.ToList<User>();
-                    _userDao.SaveToFile(redusedUsers);
-                }
+               
+                _userDao.DeleteUser(id);
                 return true;
             }
             catch (Exception e)
@@ -62,7 +55,6 @@ namespace Epam.XT2019.Task6.BLL
                 logIt(e.Message);
                 return false;
             }
-
         }
 
         public List<User> DisplayUsers()

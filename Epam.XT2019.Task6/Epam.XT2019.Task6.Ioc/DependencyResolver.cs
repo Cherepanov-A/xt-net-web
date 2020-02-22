@@ -2,6 +2,7 @@
 using Epam.XT2019.Task6.DAL;
 using Epam.XT2019.Task6.DalContracts;
 using Epam.XT2019.Task6.LogicContracts;
+using Epam.XT2019.Task6.DbDAL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,8 +47,11 @@ namespace Epam.XT2019.Task6.Ioc
             }
             switch (config.UserDao)
             {
+                case "db":
+                    _uDao = _uDao ?? (_uDao = new DbDAL.UserDao());
+                    break;
                 default:
-                    _uDao = _uDao ?? (_uDao = new UserDao());
+                    _uDao = _uDao ?? (_uDao = new DAL.UserDao());
                     break;
             }
             switch (config.UserLogic)
@@ -58,8 +62,11 @@ namespace Epam.XT2019.Task6.Ioc
             }
             switch (config.AwardDao)
             {
+                case "db":
+                    _aDao = _aDao ?? (_aDao = new DbDAL.AwardDao());
+                    break;
                 default:
-                    _aDao = _aDao ?? (_aDao = new AwardDao());
+                    _aDao = _aDao ?? (_aDao = new DAL.AwardDao());
                     break;
             }
             switch (config.AwardLogic)

@@ -6,7 +6,7 @@ namespace Epam.XT2019.Task6.Entities
     [Serializable]
     public class Award
     {       
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

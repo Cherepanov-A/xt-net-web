@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78E9A00F-A414-4F68-B02E-B28374034E66}</ProjectGuid>
+    <ProjectGuid>{181C0464-2B00-4659-80DB-456BDC312637}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epam.XT2019.Task6.Ioc</RootNamespace>
-    <AssemblyName>Epam.XT2019.Task6.Ioc</AssemblyName>
+    <RootNamespace>Epam.XT2019.Task6.DbDAL</RootNamespace>
+    <AssemblyName>Epam.XT2019.Task6.DbDAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,30 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CfgDto.cs" />
-    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="AwardDao.cs" />
+    <Compile Include="ImagesDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DbDAL\Epam.XT2019.Task6.DbDAL.csproj">
-      <Project>{181c0464-2b00-4659-80db-456bdc312637}</Project>
-      <Name>Epam.XT2019.Task6.DbDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.XT2019.Task6.BLL\Epam.XT2019.Task6.BLL.csproj">
-      <Project>{e28ddc6c-b2f7-415b-b870-039fde3ea5c3}</Project>
-      <Name>Epam.XT2019.Task6.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Epam.XT2019.Task6.DalContracts\Epam.XT2019.Task6.DaoContracts.csproj">
       <Project>{bb958d8f-0b6a-420f-8c4d-c5961d98caf1}</Project>
       <Name>Epam.XT2019.Task6.DaoContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Epam.XT2019.Task6.DAL\Epam.XT2019.Task6.DAL.csproj">
-      <Project>{1e4e93a6-56df-4d31-b480-1c16bb669fa2}</Project>
-      <Name>Epam.XT2019.Task6.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.XT2019.Task6.LogicContracts\Epam.XT2019.Task6.LogicContracts.csproj">
-      <Project>{647c19c9-0059-4f5a-816b-b3a9f41d278f}</Project>
-      <Name>Epam.XT2019.Task6.LogicContracts</Name>
+    <ProjectReference Include="..\Epam.XT2019.Task6.Entities\Epam.XT2019.Task6.Entities.csproj">
+      <Project>{b878541d-66b8-4a67-aaca-6a27a875bde5}</Project>
+      <Name>Epam.XT2019.Task6.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

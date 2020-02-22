@@ -31,16 +31,14 @@ namespace Epam.XT2019.Task6.BLL
             return awards;
         }
 
-        public bool ToAward(string userId, string awardId)
+        public bool Reward(int userId, int awardId)
         {
             try
-            {
-                var links = _awardDao.GetLink();
+            {                
                 var link = new Link();
                 link.UsId = userId;
-                link.AwId = awardId;
-                links.Add(link);
-                _awardDao.SaveLink(links);
+                link.AwId = awardId;                
+                _awardDao.SaveLink(link);
                 return true;
             }
             catch (Exception e)
@@ -50,17 +48,11 @@ namespace Epam.XT2019.Task6.BLL
             }
         }
 
-        public bool DeleteAward(string awardId)
-        {
-            var awards = _awardDao.GetAwards();
+        public bool DeleteAward(int awardId)
+        {            
             try
             {
-                if (awards.Count > 0)
-                {
-                    var otherAwards = awards.Where(t => t.Id != awardId);
-                    List<Award> redusedUsers = otherAwards.ToList<Award>();
-                    _awardDao.SaveAward(redusedUsers);
-                }
+                _awardDao.DeleteAward(awardId);
                 return true;
             }
             catch (Exception e)
@@ -70,16 +62,13 @@ namespace Epam.XT2019.Task6.BLL
             }
         }
 
-        public bool CreateAward(string id, string name)
+        public bool CreateAward(string name)
         {
             try
             {
-                Award award = new Award();
-                award.Id = id;
-                award.Name = name;
-                List<Award> awards = _awardDao.GetAwards();
-                awards.Add(award);
-                _awardDao.SaveAward(awards);
+                Award award = new Award();                
+                award.Name = name;                
+                _awardDao.SaveAward(award);
                 return true;
             }
             catch (Exception e)
@@ -93,7 +82,7 @@ namespace Epam.XT2019.Task6.BLL
             File.AppendAllText(Directory.GetCurrentDirectory() + "\\log.txt", message + Environment.NewLine);
         }
 
-        public List<Award> DisplayUserAwards(string userId)
+        public List<Award> DisplayUserAwards(int userId)
         {
             List<Link> lnk = _awardDao.GetLink();
             var awsIds = lnk.Where(link => link.UsId == userId).ToList<Link>();
@@ -109,6 +98,7 @@ namespace Epam.XT2019.Task6.BLL
                     }
                 }
             }
+            
             return userAwards;
         }
     }

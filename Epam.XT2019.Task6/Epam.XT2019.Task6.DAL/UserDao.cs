@@ -14,6 +14,19 @@ namespace Epam.XT2019.Task6.DAL
     {
         private string _path = Directory.GetCurrentDirectory() + "\\Users";
 
+        public void DeleteUser(int id)
+        {
+            List<User> users = GetAll();
+            if (users.Count > 0)
+            {
+                var otherUsers = users.Where(t => t.Id != id);
+                List<User> redusedUsers = otherUsers.ToList<User>();
+                XmlSerializer xUser = new XmlSerializer(typeof(List<User>));
+                var createUsersStream = File.Create(_path);
+                xUser.Serialize(createUsersStream, redusedUsers);
+                createUsersStream.Close();                
+            }
+        }
 
         public List<User> GetAll()
         {
@@ -28,8 +41,18 @@ namespace Epam.XT2019.Task6.DAL
             return users;
         }
 
-        public void SaveToFile(List<User> users)
+        public void SaveToFile(User user)
         {
+            List<User> users = GetAll();
+            if (users.Count > 0)
+            {
+                user.Id = users.Last<User>().Id + 1;
+            }
+            else
+            {
+                user.Id = 0;
+            }
+            users.Add(user);
             XmlSerializer xUser = new XmlSerializer(typeof(List<User>));
             var createUsersStream = File.Create(_path);
             xUser.Serialize(createUsersStream, users);
