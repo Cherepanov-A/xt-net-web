@@ -5,29 +5,29 @@
 
     Page.Title = "Create User";
     Page.Lbl1 = "UserName";
-    Page.Lbl2 = "UserId";
+    
     Page.Lbl3 = "DateOfBirth";
     Page.Btn = "Create";
     Page.Action = "CreateUser.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
-    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-    {
-        Response.Redirect("~/index");
-        return;
-    }
+    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    //{
+    //    Response.Redirect("~/index");
+    //    return;
+    //}
 
-    if (!User.Identity.IsAuthenticated)
-    {
-        Response.Redirect("~/index");
-        return;
-    }
+    //if (!User.Identity.IsAuthenticated)
+    //{
+    //    Response.Redirect("~/index");
+    //    return;
+    //}
     string uName = Request["Username"];
     string uId = Request["UserId"];
     string dateOfBirth = Request["DateOfBirth"];
 
     if (IsPost)
     {
-        if (LogicProvider.CrtUsr(uId, uName, dateOfBirth))
+        if (LogicProvider.CrtUsr(uName, dateOfBirth))
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>

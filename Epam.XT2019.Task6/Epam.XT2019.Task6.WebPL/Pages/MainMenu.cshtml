@@ -1,26 +1,39 @@
-﻿ @{ 
-//if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-//{
-//    Response.Redirect("~/index");
-//    return;
-//}
+﻿@{
+    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    //{
+    //    Response.Redirect("~/index");
+    //    return;
+    //}
 
-//if (!User.Identity.IsAuthenticated)
-//{
-//    Response.Redirect("~/Pages/MainMenu.cshtml");
+    //if (!User.Identity.IsAuthenticated)
+    //{
+    //    Response.Redirect("~/Login");
 
-//    return;
-//}
- }
+    //    return;
+    //}
+
+}
+@RenderPage("~/_HeaderPartial.cshtml")
 <div class="container">
-    <div><a href="~/Pages/Menu/CreateUser">Create user</a></div>
-    <div><a href="~/Pages/Menu/DeleteUser">Delete user</a></div>
     <div><a href="~/Pages/Menu/DisplayUser">Display users</a></div>
-    <div> <a href="~/Pages/Menu/CreateAward">Create award</a></div>
-    <div><a href="~/Pages/Menu/DeleteAward">Delete award</a></div>
-    <div><a href="~/Pages/Menu/DisplayAwards">Display awards</a></div>
-    <div><a href="~/Pages/Menu/GiveAward">Give award</a></div>
-    <div><a href="~/Pages/Menu/DisplayUserAwards">Display user awards</a></div>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admins"))
+            {
+                <div><a href="~/Pages/Menu/CreateUser">Create user</a></div>
+                <div><a href="~/Pages/Menu/DeleteUser">Delete user</a></div>
+                <div> <a href="~/Pages/Menu/CreateAward">Create award</a></div>
+                <div><a href="~/Pages/Menu/DeleteAward">Delete award</a></div>
+                <div><a href="~/Pages/Menu/DisplayAwards">Display awards</a></div>
+                <div><a href="~/Pages/Menu/GiveAward">Give award</a></div>
+            }
+            if (User.IsInRole("Users"))
+            {
+                <div><a href="~/Pages/Menu/DisplayUserAwards">Display user awards</a></div>
+            }
+        }
+    }
 </div>
 
 

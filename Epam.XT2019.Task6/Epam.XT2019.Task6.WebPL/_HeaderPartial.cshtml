@@ -1,0 +1,79 @@
+﻿<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/Pages/Menu/DisplayUser.cshtml">Show users</a></li>
+                    @if (User.IsInRole("Admins") || User.IsInRole("Users"))
+                    {
+                        <li><a href="~/Pages/Menu/DisplayAwards.cshtml">Show awards</a></li>
+                    }
+                    <li>
+                        <a href="~"><span class="glyphicon glyphicon-registration-mark"></span> Registration</a>
+                    </li>
+                    <li>
+                        <a href="~/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                    <li>
+                        <a href="~/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
+                    <li>
+                        @if (User.IsInRole("Admins"))
+                        {
+                            <a href="~"><span class="glyphicon glyphicon-font"></span> AdminPanel</a>
+                        }
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" id="backBtn"><span class="glyphicon glyphicon-chevron-left"></span> </a>
+                    </li>
+                    <li>
+                        <a href="#" id="forvardBtn"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="alert alert-info">
+        @{if (User.IsInRole("Admins"))
+            {
+                <label>
+                    User: @User.Identity.Name
+                    <a href="~/Logout">
+                        Log out
+                    </a>
+                </label>
+            }
+            else if (User.IsInRole("Users"))
+            {
+                <label>
+                    User: @User.Identity.Name
+                    <a href="~/Logout">
+                        Log out
+                    </a>
+                </label>
+            }
+            else
+            {
+                <label>
+                    User: Guest
+                    <a href="~/Login">
+                        Log in
+                    </a>
+                </label>
+            }
+        }
+    </div>
+
+</header>

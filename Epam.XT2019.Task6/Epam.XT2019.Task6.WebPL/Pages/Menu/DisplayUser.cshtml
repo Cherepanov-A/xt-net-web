@@ -1,1 +1,31 @@
-﻿
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.Entities
+@{
+    Page.Title = "Show Users";
+    Layout = "~/_Layout.cshtml";
+    List<User> users = LogicProvider.DsplUsrs();
+
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th><h5>Id</h5></th>
+            <th><h5>Name</h5></th>
+            <th><h5>Age</h5></th>
+            <th><h5>DateOfBirth</h5></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            for (int i = 0; i < users.Count; i++)
+            {
+                <tr>
+                    <td><h5>@users[i].Id</h5></td>
+                    <td><h5>@users[i].Name</h5></td>
+                    <td><h5>@users[i].Age</h5></td>
+                    <td><h5>@users[i].DateOfBirth</h5></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

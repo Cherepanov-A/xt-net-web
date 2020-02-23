@@ -56,9 +56,8 @@ namespace Epam.XT2019.Task6.PL
                         break;
                     case "2":
                         Console.WriteLine("Enter ID");
-                        string id = Console.ReadLine();
-                        int numId;
-                        if (int.TryParse(id, out numId))
+                        string id = Console.ReadLine();                       
+                        if (int.TryParse(id, out int numId))
                         {
                             uLogic.DeleteUser(numId);
                         }
@@ -71,10 +70,11 @@ namespace Epam.XT2019.Task6.PL
                         var users = uLogic.DisplayUsers();
                         foreach (var item in users)
                         {
-                            Console.WriteLine(item.Id);
-                            Console.WriteLine(item.Name);
-                            Console.WriteLine(item.DateOfBirth);
-                            Console.WriteLine(item.Age);
+                            Console.WriteLine();
+                            Console.WriteLine($"Id = {item.Id}");
+                            Console.WriteLine($"Name = {item.Name}");
+                            Console.WriteLine($"DateOfBirth = {item.DateOfBirth}");
+                            Console.WriteLine($"Age = {item.Age}");
                             Console.WriteLine();
                         }
                         break;
@@ -85,9 +85,8 @@ namespace Epam.XT2019.Task6.PL
                         break;
                     case "5":
                         Console.WriteLine("Enter award ID");
-                        var awDelId = Console.ReadLine();
-                        int numAwDelId;
-                        if (int.TryParse(awDelId, out numAwDelId))
+                        var awDelId = Console.ReadLine();                        
+                        if (int.TryParse(awDelId, out int numAwDelId))
                         {
                             awLogic.DeleteAward(numAwDelId);
                         }
@@ -106,14 +105,12 @@ namespace Epam.XT2019.Task6.PL
                             Console.WriteLine();
                         }
                         break;
-                    case "7":
-                        int usToAwNum;
-                        int awToAwNum;
+                    case "7":                        
                         Console.WriteLine("Enter user ID");
                         string usToAw = Console.ReadLine();
                         Console.WriteLine("Enter award ID");
                         string awToAw = Console.ReadLine();
-                        if (int.TryParse(usToAw, out usToAwNum) && int.TryParse(awToAw, out awToAwNum))
+                        if (int.TryParse(usToAw, out int usToAwNum) && int.TryParse(awToAw, out int awToAwNum))
                         {
                             awLogic.Reward(usToAwNum, awToAwNum);
                         }
@@ -125,9 +122,8 @@ namespace Epam.XT2019.Task6.PL
                     case "8":
                         Console.WriteLine("Enter user ID");
                         string dispAwId = Console.ReadLine();
-                        int dispAwIdNum;
                         List<Award> result = new List<Award>();
-                        if (int.TryParse(dispAwId, out dispAwIdNum))
+                        if (int.TryParse(dispAwId, out int dispAwIdNum))
                         {
                             result = awLogic.DisplayUserAwards(dispAwIdNum);
                         }

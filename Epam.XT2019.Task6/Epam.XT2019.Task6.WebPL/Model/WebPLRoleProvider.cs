@@ -10,14 +10,14 @@ namespace Epam.XT2019.Task6.WebPL.Model
     {
         public override string[] GetRolesForUser(string username)
         {
-            if (username == "Andrey") return new string[] { "Admin", "User" };
-            else return new string[] { };            
+            if (username.StartsWith("admin")) return new[] { "Admins", "Users" };
+            else return new[] {"Users"};            
         }
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            return (username == "Andrey" && roleName == "Admin") ||
-                (username == "Andrey" && roleName == "User");
+            var roles = GetRolesForUser(username);
+            return roles.Contains(roleName);            
         }
 
         #region NOT_IMPLEMENTED

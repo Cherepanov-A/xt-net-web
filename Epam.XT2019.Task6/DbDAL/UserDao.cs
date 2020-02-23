@@ -39,6 +39,8 @@ namespace Epam.XT2019.Task6.DbDAL
                     var user = new User();
                     user.Id = (int)reader["id"];
                     user.Name = (string)reader["Name"];
+                    user.Age = (int)reader["Age"];
+                    user.DateOfBirth = (string)reader["DateOfBirth"];
                     users.Add(user);
                 }
             }
@@ -56,9 +58,7 @@ namespace Epam.XT2019.Task6.DbDAL
                 cmd.Parameters.AddWithValue("@Age", user.Age);
                 con.Open();
                 cmd.ExecuteNonQuery();
-            }
-            
-
+            }  
         }
     }
 }
