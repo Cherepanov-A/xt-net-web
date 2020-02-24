@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAwardLogic.cs" />
+    <Compile Include="IImageLogic.cs" />
     <Compile Include="IUserLogic.cs" />
+    <Compile Include="IWebUserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

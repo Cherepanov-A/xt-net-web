@@ -46,6 +46,7 @@
     <Compile Include="ImagesDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDao.cs" />
+    <Compile Include="WebUserDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epam.XT2019.Task6.DalContracts\Epam.XT2019.Task6.DaoContracts.csproj">

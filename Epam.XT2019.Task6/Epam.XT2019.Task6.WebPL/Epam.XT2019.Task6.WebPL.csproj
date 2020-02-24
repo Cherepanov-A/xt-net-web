@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Logout.cshtml" />
     <Content Include="Pages\Menu\_MenuLayout2.cshtml" />
+    <Content Include="Pages\Menu\CreateWebUser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -217,7 +218,6 @@
     <Content Include="_HeaderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic.cs" />
     <Compile Include="Model\LogicProvider.cs" />
     <Compile Include="Model\WebPLRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

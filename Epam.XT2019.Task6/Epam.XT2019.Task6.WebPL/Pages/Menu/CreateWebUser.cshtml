@@ -1,0 +1,35 @@
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.LogicContracts;
+@using Epam.XT2019.Task6.Ioc;
+@{
+
+    Page.Title = "Registration";
+    Page.Lbl1 = "UserName";
+    Page.Visibility3 = "invisible";
+    Page.Lbl2 = "Password";
+    Page.Btn = "Register";
+    Page.Action = "CreateWebUser.cshtml";
+    Page.Type2 = "password";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+
+    string uName = Request["Username"];
+
+    string pass = Request["Password"];
+
+    if (IsPost)
+    {
+        if (LogicProvider.CrtWUsr(uName, pass))
+        {
+            <div class="alert alert-primary" role="alert">
+                <label>Success</label>
+            </div>
+            Response.Redirect("~/Login");
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Fail. Please check data.</label>
+            </div>
+        }
+    }
+}

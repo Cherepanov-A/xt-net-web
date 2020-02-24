@@ -13,5 +13,6 @@ namespace Epam.XT2019.Task6.LogicContracts
         bool DeleteUser(int Id);
         List<User> DisplayUsers();
         
+        
     }
 }

@@ -12,6 +12,8 @@ namespace Epam.XT2019.Task6.WebPL.Model
     {
         static IUserLogic uLogic = DependencyResolver.ULogic;
         static IAwardLogic awLogic = DependencyResolver.ALogic;
+        static IWebUserLogic wuLogic = DependencyResolver.WULogic;
+
         public static bool CrtUsr(string name, string dateOfBirth) => uLogic.CreateUser(name, dateOfBirth);
         public static bool DltUsr(string id)
         {
@@ -30,11 +32,24 @@ namespace Epam.XT2019.Task6.WebPL.Model
             {
                 return awLogic.DeleteAward(numId);
             }
-            return false;
-           
+            return false;           
         }
         public static bool Rwrd(int userId, int awardId) => awLogic.Reward(userId, awardId);
         public static List<Award> DsplUsAwds(int id) => awLogic.DisplayUserAwards(id);
 
+        public static bool CrtWUsr(string name, string password) => wuLogic.CreateUser(name, password);
+        public static bool DltWUsr(string id)
+        {
+            if (int.TryParse(id, out int numId))
+            {
+                return uLogic.DeleteUser(numId);
+            }
+            return false;
+        }
+        public static List<WebUser> DsplWUsrs() => wuLogic.DisplayUsers();
+        public static bool CanLogin(string name, string password)
+        {
+            return wuLogic.CanLogin(name, password);
+        }
     }
 }

@@ -29,19 +29,19 @@
                         <div class="input-group-prepend" >
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl1</span>
                         </div>
-                        <input type="text" class="form-control" name="@Page.Lbl1" style="width: 100%" aria-label="@Page.Lbl1" aria-describedby="basic-addon1">
+                        <input type="@Page.Type1" class="form-control" name="@Page.Lbl1" style="width: 100%" aria-label="@Page.Lbl1" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3 @Page.Visibility2" style="width: 100%">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl2</span>
                         </div>
-                        <input type="text" class="form-control" name="@Page.Lbl2" aria-label="@Page.Lbl2" aria-describedby="basic-addon1">
+                        <input type="@Page.Type2" class="form-control" name="@Page.Lbl2" aria-label="@Page.Lbl2" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3 @Page.Visibility3" style="width: 100%">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="width: 100px" id="basic-addon1">@Page.Lbl3</span>
                         </div>
-                        <input type="text" class="form-control" style="width: 100px" name="@Page.Lbl3" aria-label="@Page.Lbl3" aria-describedby="basic-addon1">
+                        <input type="@Page.Type3" class="form-control" style="width: 100px" name="@Page.Lbl3" aria-label="@Page.Lbl3" aria-describedby="basic-addon1">
                     </div>
                     <button type="submit" class="btn btn-primary">@Page.Btn</button>
                 </form>
