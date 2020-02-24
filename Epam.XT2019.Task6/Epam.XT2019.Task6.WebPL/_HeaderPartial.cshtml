@@ -12,13 +12,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="~/Pages/Menu/DisplayUser.cshtml">Show users</a></li>
-                    @if (User.IsInRole("Admins") || User.IsInRole("Users"))
-                    {
-                        <li><a href="~/Pages/Menu/DisplayAwards.cshtml">Show awards</a></li>
-                    }
                     <li>
-                        <a href="~"><span class="glyphicon glyphicon-registration-mark"></span> Registration</a>
+                        <a href="~/Pages/Menu/CreateUser.cshtml"><span class="glyphicon glyphicon-edit"></span> Registration</a>
                     </li>
                     <li>
                         <a href="~/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
@@ -27,19 +22,24 @@
                         <a href="~/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
                     </li>
                     <li>
-                        @if (User.IsInRole("Admins"))
-                        {
-                            <a href="~"><span class="glyphicon glyphicon-font"></span> AdminPanel</a>
-                        }
+                        <a href="~/Pages/Menu/DisplayUser.cshtml">Show users</a>
                     </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#" id="backBtn"><span class="glyphicon glyphicon-chevron-left"></span> </a>
-                    </li>
-                    <li>
-                        <a href="#" id="forvardBtn"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </li>
+                    @if (User.IsInRole("Admins") || User.IsInRole("Users"))
+                    {
+                        <li><a href="~/Pages/Menu/DisplayUserAwards.cshtml">Show user's awards</a></li>
+                    }
+
+                    @if (User.IsInRole("Admins"))
+                    {
+                        <li><a href="~/Pages/Menu/DisplayAwards.cshtml">Show awards</a></li>
+                        <li><a href="~/Pages/Menu/GiveAward.cshtml">Reward</a></li>
+                        <li><a href="~/Pages/Menu/DeleteAward.cshtml">Delete Award</a></li>
+                        <li><a href="~/Pages/Menu/DeleteUser.cshtml">Delete User</a></li>
+                        <li><a href="~/Pages/Menu/CreateAward.cshtml">Create Award</a></li>
+                        <li><a href="~/Pages/Menu/CreateUser.cshtml">Create User</a></li>
+                        @*<a href="~"><span class="glyphicon glyphicon-font"></span> AdminPanel</a>*@
+                    }
+
                 </ul>
             </div>
         </div>

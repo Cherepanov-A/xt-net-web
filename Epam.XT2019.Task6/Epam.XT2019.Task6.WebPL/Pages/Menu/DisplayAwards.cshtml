@@ -1,1 +1,29 @@
-﻿
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.Entities
+@{
+    Page.Title = "Show Awards";
+    Layout = "~/_Layout.cshtml";
+
+    List<Award> awards = LogicProvider.DsplAwds();
+
+}
+@RenderPage("~/_HeaderPartial.cshtml");
+<table class="table">
+    <thead>
+        <tr>
+            <th><h5>Id</h5></th>
+            <th><h5>Name</h5></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            for (int i = 0; i < awards.Count; i++)
+            {
+                <tr>
+                    <td><h5>@awards[i].Id</h5></td>
+                    <td><h5>@awards[i].Name</h5></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

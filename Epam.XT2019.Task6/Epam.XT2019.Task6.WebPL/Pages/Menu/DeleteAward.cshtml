@@ -1,1 +1,41 @@
-﻿
+﻿@using Epam.XT2019.Task6.WebPL.Model
+
+@{
+    Page.Visibility2 = "invisible";
+    Page.Visibility3 = "invisible";
+    Page.Title = "Delete Award";
+    Page.Lbl1 = "AwardId";
+    Page.Btn = "Delete";
+    Page.Action = "DeleteAward.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    {
+        Response.Redirect("~");
+        return;
+    }
+
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~");
+        return;
+    }
+
+    string awId = Request["AwardId"];
+
+
+    if (IsPost)
+    {
+        if (LogicProvider.DltAwd(awId))
+        {
+            <div class="alert alert-primary" role="alert">
+                <label>Success</label>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed. Please check data.</label>
+            </div>
+        }
+    }
+}

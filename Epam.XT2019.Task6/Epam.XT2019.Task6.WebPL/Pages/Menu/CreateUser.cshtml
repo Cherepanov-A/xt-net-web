@@ -3,26 +3,27 @@
 @using Epam.XT2019.Task6.Ioc;
 @{
 
-    Page.Title = "Create User";
+    Page.Title = "Registration";
     Page.Lbl1 = "UserName";
-    
-    Page.Lbl3 = "DateOfBirth";
+    Page.Visibility3 = "invisible";
+    Page.Lbl2 = "DateOfBirth";
     Page.Btn = "Create";
     Page.Action = "CreateUser.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+
     //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
     //{
-    //    Response.Redirect("~/index");
+    //    Response.Redirect("~");
     //    return;
     //}
 
     //if (!User.Identity.IsAuthenticated)
     //{
-    //    Response.Redirect("~/index");
+    //    Response.Redirect("~");
     //    return;
     //}
     string uName = Request["Username"];
-    string uId = Request["UserId"];
+
     string dateOfBirth = Request["DateOfBirth"];
 
     if (IsPost)
@@ -32,6 +33,7 @@
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>
             </div>
+            Response.Redirect("~/Login");
         }
         else
         {

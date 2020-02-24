@@ -1,26 +1,24 @@
 ﻿@using Epam.XT2019.Task6.WebPL.Model
 
 @{
-    Page.Visibility1 = "invisible";
+    Page.Visibility2 = "invisible";
     Page.Visibility3 = "invisible";
     Page.Title = "Delete User";
-    Page.Lbl1 = "UserName";
-    Page.Lbl2 = "UserId";
-    Page.Lbl3 = "DateOfBirth";
+    Page.Lbl1 = "UserId";
     Page.Btn = "Delete";
-    Page.Action = "CreateUser.cshtml";
+    Page.Action = "DeleteUser.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
-    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-    // {
-    //     Response.Redirect("~/index");
-    //     return;
-    // }
+    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    {
+        Response.Redirect("~");
+        return;
+    }
 
-    // if (!User.Identity.IsAuthenticated)
-    // {
-    //     Response.Redirect("~/index");
-    //     return;
-    // }
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~");
+        return;
+    }
 
     string uId = Request["UserId"];
 
@@ -36,7 +34,7 @@
         else
         {
             <div class="alert alert-danger" role="alert">
-                <label>Fail. Please check data.</label>
+                <label>Failed. Please check data.</label>
             </div>
         }
     }

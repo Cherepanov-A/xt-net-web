@@ -4,8 +4,8 @@
     Page.Title = "Show Users";
     Layout = "~/_Layout.cshtml";
     List<User> users = LogicProvider.DsplUsrs();
-
 }
+    @RenderPage("~/_HeaderPartial.cshtml");
 <table class="table">
     <thead>
         <tr>

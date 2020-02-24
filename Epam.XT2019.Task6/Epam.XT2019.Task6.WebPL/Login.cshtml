@@ -14,28 +14,30 @@
         }
         <div class="alert alert-danger">Bad authentication</div>
     }
-    <div class="container">
+    <div class="container-fluid">
         <div class="row align-items-end" style="height: 150px">
-            <div class="col-sm-2"></div>
-            <div class="col">
+            </div>
+        <div class="row">
+            @*<div class="col-sm-2" > </div>*@
+            <div @*class="col-sm-offset-2"*@>
                 <h4 class="text-center text-primary ">Welcome to Users & Awards</h4>
             </div>
-            <div class="col-sm-2"></div>
+            @*<div class="col-sm-2"></div>*@
         </div>
         <div class="row align-items-center mt-2">
-            <div class="col-sm-2"></div>
-            <div class="col">
+            <div class="col-sm-3 col-xs-3 col-md-3"></div>
+            <div class="col-sm-6 col-xs-6 col-md-6">
                 <form  method="post">
                     <input type="hidden" name="ReturnUrl" value="@returnUrl" />
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" style="width: 100%">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 100px" id="basic-addon1">Username</span>
+                            <span class="input-group-text"  id="basic-addon1">Username</span>
                         </div>
                         <input type="text" class="form-control" name="Username" value="@login" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" style="width: 100%">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" style="width: 100px" id="basic-addon1">Password</span>
+                            <span class="input-group-text"  id="basic-addon1">Password</span>
                         </div>
                         <input type="password" class="form-control" name="Password" aria-label="Password" aria-describedby="basic-addon1">
                     </div>
@@ -43,7 +45,7 @@
                 </form>
                 <p class="mt-2">Or you can <a href="~/signup">Sign up</a></p>
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-3 col-xs-3 col-md-3"></div>
         </div>
     </div>
 }
