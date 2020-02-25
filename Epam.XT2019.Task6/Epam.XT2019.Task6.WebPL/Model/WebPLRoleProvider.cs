@@ -10,7 +10,7 @@ namespace Epam.XT2019.Task6.WebPL.Model
     {
         public override string[] GetRolesForUser(string username)
         {
-            if (username.StartsWith("admin")) return new[] { "Admins", "Users" };
+            if (LogicProvider.IsAdmn(username)) return new[] { "Admins", "Users" };
             else return new[] {"Users"};            
         }
 

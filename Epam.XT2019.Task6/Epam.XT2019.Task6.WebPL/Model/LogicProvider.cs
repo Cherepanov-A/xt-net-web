@@ -23,9 +23,11 @@ namespace Epam.XT2019.Task6.WebPL.Model
             }
             return false;
         }
+
         public static List<User> DsplUsrs() => uLogic.DisplayUsers();
         public static bool CrtAwd(string name) => awLogic.CreateAward(name);
         public static List<Award> DsplAwds() => awLogic.DisplayAwards();
+        public static List<Award> DsplUsAwds(int id) => awLogic.DisplayUserAwards(id);
         public static bool DltAwd(string id)
         {
             if (int.TryParse(id, out int numId))
@@ -34,10 +36,11 @@ namespace Epam.XT2019.Task6.WebPL.Model
             }
             return false;           
         }
-        public static bool Rwrd(int userId, int awardId) => awLogic.Reward(userId, awardId);
-        public static List<Award> DsplUsAwds(int id) => awLogic.DisplayUserAwards(id);
 
-        public static bool CrtWUsr(string name, string password) => wuLogic.CreateUser(name, password);
+        public static bool Rwrd(int userId, int awardId) => awLogic.Reward(userId, awardId);
+        
+
+        public static int CrtWUsr(string name, string password) => wuLogic.CreateUser(name, password);
         public static bool DltWUsr(string id)
         {
             if (int.TryParse(id, out int numId))
@@ -51,5 +54,14 @@ namespace Epam.XT2019.Task6.WebPL.Model
         {
             return wuLogic.CanLogin(name, password);
         }
+        public static int TglAdmn(int id)
+        {
+            return wuLogic.ToggleAdmin(id);
+        }
+        public static bool IsAdmn(string name)
+        {
+            return wuLogic.IsAdmin(name);
+        }
+
     }
 }

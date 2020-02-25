@@ -9,10 +9,11 @@ namespace Epam.XT2019.Task6.LogicContracts
 {
     public interface IWebUserLogic
     {
-        bool CreateUser(string name, string password);
+        int CreateUser(string name, string password);
         bool DeleteUser(int Id);
         List<WebUser> DisplayUsers();
-        bool ToggleAdmin(string wname);
+        int ToggleAdmin(int Id);
         bool CanLogin(string name, string password);
+        bool IsAdmin(string name);
     }
 }

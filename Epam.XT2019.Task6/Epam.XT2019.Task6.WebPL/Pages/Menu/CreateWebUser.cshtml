@@ -18,18 +18,30 @@
 
     if (IsPost)
     {
-        if (LogicProvider.CrtWUsr(uName, pass))
+        if (LogicProvider.CrtWUsr(uName, pass) == 1)
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>
             </div>
             Response.Redirect("~/Login");
         }
+        if (LogicProvider.CrtWUsr(uName, pass) == 0)
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>User already exists.</label>
+            </div>
+        }
         else
         {
             <div class="alert alert-danger" role="alert">
-                <label>Fail. Please check data.</label>
+                <label>Somthing goes wrong.</label>
             </div>
         }
+
+
+
+
+
+
     }
 }

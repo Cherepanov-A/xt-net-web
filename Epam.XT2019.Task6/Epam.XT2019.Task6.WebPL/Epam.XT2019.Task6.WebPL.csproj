@@ -134,6 +134,7 @@
     <Content Include="Logout.cshtml" />
     <Content Include="Pages\Menu\_MenuLayout2.cshtml" />
     <Content Include="Pages\Menu\CreateWebUser.cshtml" />
+    <Content Include="Pages\Menu\ToggleAdmin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

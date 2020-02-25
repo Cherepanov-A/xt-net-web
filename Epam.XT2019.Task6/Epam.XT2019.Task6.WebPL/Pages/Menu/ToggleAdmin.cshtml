@@ -1,0 +1,50 @@
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.Entities
+@{
+    Page.Title = "Toggle Admin";
+    Page.Lbl1 = "UserId";
+    Page.Visibility2 = "invisible";
+    Page.Visibility3 = "invisible";
+    Page.Btn = "Toggle Admin";
+    Page.Action = "ToggleAdmin.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    int isAdmin = -1;
+    if (int.TryParse(Request["UserId"], out int id))
+    {
+        isAdmin = LogicProvider.TglAdmn(id);
+    }
+    else
+    {
+        <div>
+            <p>
+                Bad Id
+            </p>
+        </div>
+    }
+    if (isAdmin == 1)
+    {
+        <div>
+            <p>
+                User with Id = @id is admin
+            </p>
+        </div>
+    }
+    if (isAdmin == 0)
+    {
+        <div>
+            <p>
+                User whis Id = @id is not admin
+            </p>
+        </div>
+    }
+    if (isAdmin == -1)
+    {
+        <div>
+            <p>
+                User is not exists
+            </p>
+        </div>
+    }
+
+
+}

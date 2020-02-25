@@ -26,22 +26,25 @@ namespace Epam.XT2019.Task6.BLL
             return _wuserDao.CanLogin(name, bytePassword);
         }
 
-        public bool CreateUser(string name, string password)
+        public int CreateUser(string name, string password)
         {
             try
             {
                 var bytePassword = shaM.ComputeHash(Encoding.UTF8.GetBytes(password));
                 WebUser wuser = new WebUser();
                 wuser.Name = name;
-                wuser.Password = bytePassword;                
+                wuser.Password = bytePassword;
                 wuser.Role = 0;
-                _wuserDao.SaveToFile(wuser);
-                return true;
+                if (_wuserDao.SaveToFile(wuser))
+                {
+                    return 1;
+                }
+                return 0;
             }
             catch (Exception e)
             {
                 logIt(e.Message);
-                return false;
+                return -1;
             }
         }
 
@@ -73,9 +76,14 @@ namespace Epam.XT2019.Task6.BLL
             return wusers;
         }
 
-        public bool ToggleAdmin(string wname)
+        public bool IsAdmin(string name)
         {
-            return _wuserDao.ToggleAdmin(wname);
+            return _wuserDao.IsAdmin(name);
+        }
+
+        public int ToggleAdmin(int id)
+        {
+            return _wuserDao.ToggleAdmin(id);
         }
         private void logIt(string message)
         {

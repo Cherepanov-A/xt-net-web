@@ -17,7 +17,7 @@ namespace Epam.XT2019.Task6.DbDAL
 
         public bool CanLogin(string name, byte[] password)
         {
-            
+
             byte[] realPassword;
             using (var con = new SqlConnection(conStr))
             {
@@ -26,8 +26,8 @@ namespace Epam.XT2019.Task6.DbDAL
                 cmd.Parameters.AddWithValue("@name", name);
                 con.Open();
                 realPassword = (byte[])cmd.ExecuteScalar();
-            }            
-            
+            }
+
             return realPassword.SequenceEqual(password);
 
         }
@@ -66,8 +66,38 @@ namespace Epam.XT2019.Task6.DbDAL
             return webUsers;
         }
 
-        public void SaveToFile(WebUser webUser)
+        public bool IsAdmin(string name)
         {
+            int existRole = -2;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT Role FROM dbo.WebUsers WHERE UserName=@name";
+                cmd.Parameters.AddWithValue("@name", name);
+                con.Open();
+                existRole = (int)cmd.ExecuteScalar();
+            }
+            if (existRole == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool SaveToFile(WebUser webUser)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT id FROM dbo.WebUsers WHERE UserName=@Name";
+                cmd.Parameters.AddWithValue("@Name", webUser.Name);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                { 
+                    return false;
+                }
+            }
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
@@ -78,20 +108,35 @@ namespace Epam.XT2019.Task6.DbDAL
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
+            return true;
         }
 
-        public bool ToggleAdmin(string wname)
+        public int ToggleAdmin(int id)
         {
+            int existRole = -1;
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE dbo.WebUsers SET Role=@role WHERE UserName=@wname";
-                cmd.Parameters.AddWithValue("@wname", wname);               
-                cmd.Parameters.Add(new SqlParameter("@role", DbType.Int32) { Value = 1 });
+                cmd.CommandText = "SELECT Role FROM dbo.WebUsers WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                existRole = (int)cmd.ExecuteScalar();
+            }
+            if (!(existRole == 0 || existRole == 1))
+            {
+                return -1;
+            }
+            int newRole = Math.Abs(existRole - 1);
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE dbo.WebUsers SET Role=@role WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.Add(new SqlParameter("@role", DbType.Int32) { Value = newRole });
                 con.Open();
                 int result = cmd.ExecuteNonQuery();
-                return result > 0;
             }
+            return newRole;
         }
     }
 }

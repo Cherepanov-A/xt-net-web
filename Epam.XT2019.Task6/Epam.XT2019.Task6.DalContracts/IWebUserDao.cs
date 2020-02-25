@@ -9,10 +9,11 @@ namespace Epam.XT2019.Task6.DalContracts
 {
     public interface IWebUserDao
     {
-        void SaveToFile(WebUser webUser);
+        bool SaveToFile(WebUser webUser);
         void DeleteUser(int id);
         List<WebUser> GetAll();
-        bool ToggleAdmin(string wname);
+        int ToggleAdmin(int id);
         bool CanLogin(string name, byte[] password);
+        bool IsAdmin(string name);
     }
 }

@@ -97,8 +97,7 @@ namespace Epam.XT2019.Task6.BLL
                         userAwards.Add(allAwards[j]);
                     }
                 }
-            }
-            
+            }            
             return userAwards;
         }
     }
