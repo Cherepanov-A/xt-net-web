@@ -1,0 +1,55 @@
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.LogicContracts;
+@using Epam.XT2019.Task6.Ioc;
+@{
+
+    Page.Title = "Save Image";
+    Page.Lbl1 = "Image";
+    Page.Visibility2 = "invisible";
+    Page.Visibility3 = "invisible";
+    Page.Type1 = "file";
+
+    Page.Btn = "Save";
+    Page.Action = "SaveImage.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    {
+        Response.Redirect("~/index");
+        return;
+    }
+
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/index");
+        return;
+    }
+
+
+    if (IsPost)
+    {
+        
+            var file = Request.Files["Image"];
+            if (file != null && file.ContentLength > 0)
+            {
+                byte[] data = new byte[file.ContentLength];
+                int len = file.InputStream.Read(data, 0, file.ContentLength);
+                WebImage imgdata = new WebImage(data);
+                imgdata.Resize(300, 700, true, true);
+                data = imgdata.GetBytes();
+                if (LogicProvider.SaveImage(file.FileName, file.ContentType, data))
+                {
+                <div class="alert alert-primary" role="alert">
+                    <label>Success</label>
+                </div>
+                    return;
+                }
+            }
+            else
+            {
+            <div class="alert alert-danger" role="alert">
+                <label>Fail. Please check data.</label>
+            </div>
+                
+            }
+        }
+    }

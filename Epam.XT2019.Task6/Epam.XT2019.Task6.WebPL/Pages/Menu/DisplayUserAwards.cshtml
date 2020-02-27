@@ -23,37 +23,37 @@
 
     string uId = Request["UserId"];
     List<Award> awards = new List<Award>();
-    if (int.TryParse(uId, out int id))
-    {
-        awards = LogicProvider.DsplUsAwds(id);
-    }
-    else
-    {
-        <div class="alert alert-danger" role="alert">
-            <label>Failed. Please check data.</label>
-        </div>
-    }
 
     if (IsPost)
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><h5>Id</h5></th>
-                    <th><h5>Name</h5></th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    for (int i = 0; i < awards.Count; i++)
-                    {
-                        <tr>
-                            <td><h5>@awards[i].Id</h5></td>
-                            <td><h5>@awards[i].Name</h5></td>
-                        </tr>
+        if (int.TryParse(uId, out int id))
+        {
+            awards = LogicProvider.DsplUsAwds(id);
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><h5>Id</h5></th>
+                        <th><h5>Name</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        for (int i = 0; i < awards.Count; i++)
+                        {
+                            <tr>
+                                <td><h5>@awards[i].Id</h5></td>
+                                <td><h5>@awards[i].Name</h5></td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed. Please check data.</label>
+            </div>
+        }
     }
 }

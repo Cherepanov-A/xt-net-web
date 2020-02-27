@@ -34,10 +34,10 @@ namespace Epam.XT2019.Task6.BLL
         public bool Reward(int userId, int awardId)
         {
             try
-            {                
+            {
                 var link = new Link();
                 link.UsId = userId;
-                link.AwId = awardId;                
+                link.AwId = awardId;
                 _awardDao.SaveLink(link);
                 return true;
             }
@@ -49,7 +49,7 @@ namespace Epam.XT2019.Task6.BLL
         }
 
         public bool DeleteAward(int awardId)
-        {            
+        {
             try
             {
                 _awardDao.DeleteAward(awardId);
@@ -66,8 +66,8 @@ namespace Epam.XT2019.Task6.BLL
         {
             try
             {
-                Award award = new Award();                
-                award.Name = name;                
+                Award award = new Award();
+                award.Name = name;
                 _awardDao.SaveAward(award);
                 return true;
             }
@@ -85,19 +85,31 @@ namespace Epam.XT2019.Task6.BLL
         public List<Award> DisplayUserAwards(int userId)
         {
             List<Link> lnk = _awardDao.GetLink();
-            var awsIds = lnk.Where(link => link.UsId == userId).ToList<Link>();
+            var userLinks = lnk.Where(link => link.UsId == userId).ToList<Link>();
+            var userAwIds = new List<int>();
+            for (int i = 0; i < userLinks.Count; i++)
+            {
+                userAwIds.Add(userLinks[i].AwId);
+            }
             var allAwards = _awardDao.GetAwards();
             var userAwards = new List<Award>();
-            for (int i = 0; i < awsIds.Count; i++)
+            for (int i = 0; i < userAwIds.Count; i++)
             {
                 for (int j = 0; j < allAwards.Count; j++)
                 {
-                    if (awsIds[i].AwId == awsIds[j].AwId)
+                    if (userAwIds[i] == allAwards[j].Id)
                     {
-                        userAwards.Add(allAwards[j]);
+                        if (userAwards.Contains(allAwards[j]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            userAwards.Add(allAwards[j]);
+                        }
                     }
                 }
-            }            
+            }
             return userAwards;
         }
     }

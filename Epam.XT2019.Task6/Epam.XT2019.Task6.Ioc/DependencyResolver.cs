@@ -29,6 +29,10 @@ namespace Epam.XT2019.Task6.Ioc
         public static IWebUserDao WUDao => _wuDao;
         private static IWebUserLogic _wuLogic;
         public static IWebUserLogic WULogic => _wuLogic;
+        private static IImageDao _imDao;
+        public static IImageDao ImDao => _imDao;
+        private static IImageLogic _imLogic;
+        public static IImageLogic ImLogic => _imLogic;
         static DependencyResolver()
         {
             CfgDto config = new CfgDto();
@@ -48,6 +52,8 @@ namespace Epam.XT2019.Task6.Ioc
                 config.AwardLogic = "default";
                 config.WebUserDao = "default";
                 config.WebUserLogic = "default";
+                config.ImageDao = "default";
+                config.ImageDao = "default";
                 xCfg.Serialize(openCfgStream, config);
                 openCfgStream.Close();
             }
@@ -91,6 +97,18 @@ namespace Epam.XT2019.Task6.Ioc
             {
                 default:
                     _wuLogic = _wuLogic ?? (_wuLogic = new WebUserLogic(_wuDao));
+                    break;
+            }
+            switch (config.ImageDao)
+            {
+                default:
+                    _imDao = _imDao ?? (_imDao = new DbDAL.ImageDao());
+                    break;
+            }
+            switch (config.ImageLogic)
+            {
+                default:
+                    _imLogic = _imLogic ?? (_imLogic = new ImageLogic(_imDao));
                     break;
             }
         }

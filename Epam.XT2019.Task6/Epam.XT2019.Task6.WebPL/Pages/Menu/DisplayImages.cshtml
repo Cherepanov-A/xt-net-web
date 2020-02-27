@@ -1,0 +1,35 @@
+﻿@using Epam.XT2019.Task6.WebPL.Model
+@using Epam.XT2019.Task6.Entities
+@{
+    Page.Title = "Show Images";
+    Layout = "~/_Layout.cshtml";
+
+    List<Image> images = LogicProvider.DsplImgs();
+
+}
+@RenderPage("~/_HeaderPartial.cshtml");
+<table class="table">
+    <thead>
+        <tr>
+            <th><h5>Id</h5></th>
+            <th><h5>Name</h5></th>
+            <th><h5>Image</h5></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            for (int i = 0; i < images.Count; i++)
+            {
+                <tr>
+                    <td><h5>@images[i].Id</h5></td>
+                    <td><h5>@images[i].Name</h5></td>
+                    <td>
+                        @{
+                            Response.WriteBinary(images[i].Data, images[i].ContentType);
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

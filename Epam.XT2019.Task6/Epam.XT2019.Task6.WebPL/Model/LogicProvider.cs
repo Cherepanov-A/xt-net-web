@@ -13,7 +13,7 @@ namespace Epam.XT2019.Task6.WebPL.Model
         static IUserLogic uLogic = DependencyResolver.ULogic;
         static IAwardLogic awLogic = DependencyResolver.ALogic;
         static IWebUserLogic wuLogic = DependencyResolver.WULogic;
-
+        static IImageLogic imLogic = DependencyResolver.ImLogic;
         public static bool CrtUsr(string name, string dateOfBirth) => uLogic.CreateUser(name, dateOfBirth);
         public static bool DltUsr(string id)
         {
@@ -62,6 +62,18 @@ namespace Epam.XT2019.Task6.WebPL.Model
         {
             return wuLogic.IsAdmin(name);
         }
-
+        public static bool SaveImage(string name, string contentType, byte[] data)
+        {
+            return imLogic.SaveImage(name, contentType, data);
+        }
+        public static bool DltImg(string id)
+        {
+            if (int.TryParse(id, out int numId))
+            {
+                return imLogic.DeleteImage(numId);
+            }
+            return false;
+        }
+        public static List<Image> DsplImgs() => imLogic.DisplayImages();
     }
 }
