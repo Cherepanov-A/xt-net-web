@@ -1,5 +1,4 @@
-﻿@using Epam.XT2019.Task6.WebPL.Model
-
+﻿@using Epam.XT2019.Task6.Ioc;
 @{
     Page.Visibility2 = "invisible";
     Page.Visibility3 = "invisible";
@@ -13,19 +12,22 @@
         Response.Redirect("~");
         return;
     }
-
     if (!User.Identity.IsAuthenticated)
     {
         Response.Redirect("~");
         return;
     }
-
     string awId = Request["AwardId"];
-
-
     if (IsPost)
     {
-        if (LogicProvider.DltAwd(awId))
+        if (!int.TryParse(awId, out int numAwId))
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed. Please check data.</label>
+            </div>
+            return;
+        }
+        if (DependencyResolver.ALogic.DeleteAward(numAwId))
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>

@@ -1,14 +1,12 @@
-﻿@using Epam.XT2019.Task6.WebPL
-@using Epam.XT2019.Task6.WebPL.Model
+﻿@using Epam.XT2019.Task6.Ioc
 @{
         string login = Request["Username"];
         string password = Request["password"];
         string returnUrl = Request["ReturnUrl"];
         Page.Title = "Login";
-
         if (IsPost)
         {
-            bool success = LogicProvider.CanLogin(login, password);
+            bool success = DependencyResolver.WULogic.CanLogin(login, password);
             if (success)
             {
                 FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
@@ -20,12 +18,10 @@
     <div class="container-fluid">
         <div class="row align-items-end" style="height: 150px">
         </div>
-        <div class="row">
-            @*<div class="col-sm-2" > </div>*@
-            <div @*class="col-sm-offset-2"*@>
+        <div class="row">           
+            <div >
                 <h4 class="text-center text-primary ">Welcome to Users & Awards</h4>
-            </div>
-            @*<div class="col-sm-2"></div>*@
+            </div>            
         </div>
         <div class="row align-items-center mt-2">
             <div class="col-sm-3 col-xs-3 col-md-3"></div>

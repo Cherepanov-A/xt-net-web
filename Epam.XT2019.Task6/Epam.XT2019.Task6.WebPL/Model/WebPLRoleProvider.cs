@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Epam.XT2019.Task6.Ioc;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -10,7 +10,7 @@ namespace Epam.XT2019.Task6.WebPL.Model
     {
         public override string[] GetRolesForUser(string username)
         {
-            if (LogicProvider.IsAdmn(username)) return new[] { "Admins", "Users" };
+            if (DependencyResolver.WULogic.IsAdmin(username)) return new[] { "Admins", "Users" };
             else return new[] {"Users"};            
         }
 

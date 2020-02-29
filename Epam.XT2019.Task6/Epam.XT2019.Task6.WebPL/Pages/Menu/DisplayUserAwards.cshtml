@@ -1,6 +1,5 @@
-﻿@using Epam.XT2019.Task6.WebPL.Model
-@using Epam.XT2019.Task6.Entities
-
+﻿@using Epam.XT2019.Task6.Entities
+@using Epam.XT2019.Task6.Ioc;
 @{
     Page.Visibility2 = "invisible";
     Page.Visibility3 = "invisible";
@@ -14,21 +13,18 @@
         Response.Redirect("~");
         return;
     }
-
     if (!User.Identity.IsAuthenticated)
     {
         Response.Redirect("~");
         return;
     }
-
     string uId = Request["UserId"];
     List<Award> awards = new List<Award>();
-
     if (IsPost)
     {
         if (int.TryParse(uId, out int id))
         {
-            awards = LogicProvider.DsplUsAwds(id);
+            awards = DependencyResolver.ALogic.DisplayUserAwards(id);
             <table class="table">
                 <thead>
                     <tr>

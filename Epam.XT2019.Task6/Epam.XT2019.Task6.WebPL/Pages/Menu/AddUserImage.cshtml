@@ -1,11 +1,12 @@
-﻿@using Epam.XT2019.Task6.Ioc;
+﻿@using Epam.XT2019.Task6.Entities
+@using Epam.XT2019.Task6.Ioc
 @{
-    Page.Visibility2 = "invisible";
     Page.Visibility3 = "invisible";
-    Page.Title = "Delete Image";
-    Page.Lbl1 = "ImageId";
-    Page.Btn = "Delete";
-    Page.Action = "DeleteImage.cshtml";
+    Page.Title = "Add Image to User";
+    Page.Lbl1 = "UserId";
+    Page.Lbl2 = "ImageId";
+    Page.Btn = "Add";
+    Page.Action = "AddUserImage.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
     if (!User.IsInRole("Admins") && !User.IsInRole("User"))
     {
@@ -17,18 +18,13 @@
         Response.Redirect("~");
         return;
     }
-
-    string imId = Request["ImageId"];
+    string uId = Request["UserId"];
+    string imgId = Request["ImageId"];
+    int.TryParse(uId, out int uNumId);
+    int.TryParse(imgId, out int imgNumId);
     if (IsPost)
     {
-        if (!int.TryParse(imId, out int numImId))
-        {
-            <div class="alert alert-danger" role="alert">
-                <label>Failed. Please check data.</label>
-            </div>
-            return;
-        }
-        if (DependencyResolver.ImLogic.DeleteImage(numImId))
+        if (DependencyResolver.ImLogic.SetUserImage(uNumId, imgNumId))
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>
@@ -37,9 +33,8 @@
         else
         {
             <div class="alert alert-danger" role="alert">
-                <label>Failed. Please check data.</label>
+                <label>Failed.Please check data.</label>
             </div>
         }
-
     }
 }

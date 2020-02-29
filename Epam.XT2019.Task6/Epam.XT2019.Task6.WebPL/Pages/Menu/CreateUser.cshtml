@@ -1,8 +1,5 @@
-﻿@using Epam.XT2019.Task6.WebPL.Model
-@using Epam.XT2019.Task6.LogicContracts;
-@using Epam.XT2019.Task6.Ioc;
+﻿@using Epam.XT2019.Task6.Ioc;
 @{
-
     Page.Title = "Registration";
     Page.Lbl1 = "UserName";
     Page.Visibility3 = "invisible";
@@ -10,25 +7,11 @@
     Page.Btn = "Create";
     Page.Action = "CreateUser.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
-
-    //if (!User.IsInRole("Admins") && !User.IsInRole("User"))
-    //{
-    //    Response.Redirect("~");
-    //    return;
-    //}
-
-    //if (!User.Identity.IsAuthenticated)
-    //{
-    //    Response.Redirect("~");
-    //    return;
-    //}
     string uName = Request["Username"];
-
     string dateOfBirth = Request["DateOfBirth"];
-
     if (IsPost)
     {
-        if (LogicProvider.CrtUsr(uName, dateOfBirth))
+        if (DependencyResolver.ULogic.CreateUser(uName, dateOfBirth))
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>

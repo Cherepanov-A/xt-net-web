@@ -1,13 +1,9 @@
-﻿@using Epam.XT2019.Task6.WebPL.Model
-@using Epam.XT2019.Task6.LogicContracts;
-@using Epam.XT2019.Task6.Ioc;
+﻿@using Epam.XT2019.Task6.Ioc;
 @{
-
     Page.Title = "Create Award";
     Page.Lbl1 = "AwardName";
     Page.Visibility2 = "invisible";
     Page.Visibility3 = "invisible";
-
     Page.Btn = "Create";
     Page.Action = "CreateAward.cshtml";
     Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
@@ -16,18 +12,15 @@
         Response.Redirect("~/index");
         return;
     }
-
     if (!User.Identity.IsAuthenticated)
     {
         Response.Redirect("~/index");
         return;
     }
     string awName = Request["AwardName"];
-
-
     if (IsPost)
     {
-        if (LogicProvider.CrtAwd(awName))
+        if (DependencyResolver.ALogic.CreateAward(awName))
         {
             <div class="alert alert-primary" role="alert">
                 <label>Success</label>
