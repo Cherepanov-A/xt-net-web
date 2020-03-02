@@ -135,6 +135,11 @@
     <Content Include="Pages\Menu\_MenuLayout2.cshtml" />
     <Content Include="Pages\Menu\CreateWebUser.cshtml" />
     <Content Include="Pages\Menu\ToggleAdmin.cshtml" />
+    <Content Include="Pages\Menu\SaveImage.cshtml" />
+    <Content Include="Pages\Menu\DeleteImage.cshtml" />
+    <Content Include="Pages\Menu\DisplayImages.cshtml" />
+    <Content Include="Pages\Image.cshtml" />
+    <Content Include="Pages\Menu\AddUserImage.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -219,7 +224,6 @@
     <Content Include="_HeaderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\LogicProvider.cs" />
     <Compile Include="Model\WebPLRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

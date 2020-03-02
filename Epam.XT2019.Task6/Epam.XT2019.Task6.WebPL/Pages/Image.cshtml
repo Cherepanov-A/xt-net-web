@@ -1,0 +1,22 @@
+﻿@using Epam.XT2019.Task6.Ioc
+@using Epam.XT2019.Task6.Entities
+@{
+    List<Image> images = DependencyResolver.ImLogic.DisplayImages();
+    int id = int.Parse(Request["id"]);
+    Image image = null;
+    foreach (var img in images)
+    {
+        if (img.Id==id)
+        {
+            image = img;
+        }
+    }
+    if (image!=null)
+    {
+        Response.WriteBinary(image.Data, image.ContentType);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}

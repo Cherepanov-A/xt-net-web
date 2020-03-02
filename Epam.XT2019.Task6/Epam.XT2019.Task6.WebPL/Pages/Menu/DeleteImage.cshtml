@@ -1,0 +1,45 @@
+﻿@using Epam.XT2019.Task6.Ioc;
+@{
+    Page.Visibility2 = "invisible";
+    Page.Visibility3 = "invisible";
+    Page.Title = "Delete Image";
+    Page.Lbl1 = "ImageId";
+    Page.Btn = "Delete";
+    Page.Action = "DeleteImage.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    {
+        Response.Redirect("~");
+        return;
+    }
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~");
+        return;
+    }
+
+    string imId = Request["ImageId"];
+    if (IsPost)
+    {
+        if (!int.TryParse(imId, out int numImId))
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed. Please check data.</label>
+            </div>
+            return;
+        }
+        if (DependencyResolver.ImLogic.DeleteImage(numImId))
+        {
+            <div class="alert alert-primary" role="alert">
+                <label>Success</label>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed. Please check data.</label>
+            </div>
+        }
+
+    }
+}

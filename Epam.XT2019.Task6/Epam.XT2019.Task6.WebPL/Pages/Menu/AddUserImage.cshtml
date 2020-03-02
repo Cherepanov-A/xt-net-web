@@ -1,0 +1,40 @@
+﻿@using Epam.XT2019.Task6.Entities
+@using Epam.XT2019.Task6.Ioc
+@{
+    Page.Visibility3 = "invisible";
+    Page.Title = "Add Image to User";
+    Page.Lbl1 = "UserId";
+    Page.Lbl2 = "ImageId";
+    Page.Btn = "Add";
+    Page.Action = "AddUserImage.cshtml";
+    Layout = "~/Pages/Menu/_MenuLayout1.cshtml";
+    if (!User.IsInRole("Admins") && !User.IsInRole("User"))
+    {
+        Response.Redirect("~");
+        return;
+    }
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~");
+        return;
+    }
+    string uId = Request["UserId"];
+    string imgId = Request["ImageId"];
+    int.TryParse(uId, out int uNumId);
+    int.TryParse(imgId, out int imgNumId);
+    if (IsPost)
+    {
+        if (DependencyResolver.ImLogic.SetUserImage(uNumId, imgNumId))
+        {
+            <div class="alert alert-primary" role="alert">
+                <label>Success</label>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <label>Failed.Please check data.</label>
+            </div>
+        }
+    }
+}

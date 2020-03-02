@@ -11,5 +11,7 @@ namespace Epam.XT2019.Task6.Ioc
         public string AwardLogic { get; set; }
         public string WebUserDao { get; set; }
         public string WebUserLogic { get; set; }
+        public string ImageDao { get; set; }
+        public string ImageLogic { get; set; }
     }
 }

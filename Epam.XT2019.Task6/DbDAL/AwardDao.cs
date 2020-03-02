@@ -90,12 +90,7 @@ namespace Epam.XT2019.Task6.DbDAL
                 cmd.Parameters.AddWithValue("@userId", link.UsId);
                 cmd.Parameters.AddWithValue("@AwardId", link.AwId);
                 con.Open();
-                cmd.ExecuteNonQuery();
-                //SqlDataReader reader = cmd.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    link.UsId = (int)reader["userId"];
-                //}
+                cmd.ExecuteNonQuery();                
             }
         }
     }

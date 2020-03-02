@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Award.cs" />
-    <Compile Include="Images.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
