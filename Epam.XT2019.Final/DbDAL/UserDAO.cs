@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbDAL
 {
@@ -15,14 +12,50 @@ namespace DbDAL
     {
         private static readonly string conStr = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
 
-        public bool BuyPhoto(int id)
+        public bool BuyPhoto(int userId, int photoId)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "INSERT INTO dbo.UserPhotos(UserId, PhotoId) VALUES(@userId, @photoId)"; /*Check db name*/
+                cmd.Parameters.AddWithValue("@userId", userId);                
+                cmd.Parameters.AddWithValue("@photoId", photoId);                
+                con.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            return result > 0;
         }
-
-        public bool ChargeAcc(double sum)
+        public double CheckAcc(int id)
         {
-            throw new NotImplementedException();
+            double result = -1;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT id FROM dbo.Users WHERE Id=@id";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    result = (double)reader["Accaunt"];
+                }
+            }
+            return result;
+        }
+        public bool ChargeAcc(double sum, int id)
+        {
+            int result = 0;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE dbo.Users SET Accaunt=@acc WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.Add(new SqlParameter("@acc", DbType.Double) { Value = sum });
+                con.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            return result > 0;
         }
         public bool CheckUserExists(int id)
         {
@@ -42,7 +75,7 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO dbo.WebUsers(UserName, Hash, Role) VALUES(@userName, @hash, @role, @accaunt)";
+                cmd.CommandText = "INSERT INTO dbo.Users(UserName, Hash, Role) VALUES(@userName, @hash, @role, @accaunt)";
                 cmd.Parameters.AddWithValue("@userName", user.Name);
                 cmd.Parameters.Add("@hash", SqlDbType.VarBinary).Value = user.Password;
                 cmd.Parameters.AddWithValue("@role", user.Role);
@@ -99,14 +132,56 @@ namespace DbDAL
             return true;
         }
 
-        public IEnumerable<User> GetUsers()
+        public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM dbo.WebUsers";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var user = new User();
+                    user.Id = (int)reader["Id"];
+                    user.Name = (string)reader["Name"];
+                    user.Password = (byte[])reader["Hash"];
+                    user.Role = (bool)reader["Role"];
+                    user.Accaunt = (double)reader["Accaunt"];
+                    users.Add(user);
+                }
+            }
+            return users;
+        }        
+
+        public bool GetRole(int id)
+        {
+            bool existRole = false;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT Role FROM dbo.WebUsers WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                existRole = (bool)cmd.ExecuteScalar();
+            }
+            return existRole;
         }
 
-        public bool ToggleAdmin(string name)
+        public bool SetRole(int id, bool role)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE dbo.WebUsers SET Role=@role WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.Add(new SqlParameter("@role", DbType.Boolean) { Value = role });
+                con.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            return result > 0;
         }
     }
 }

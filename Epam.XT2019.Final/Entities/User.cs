@@ -14,7 +14,7 @@ namespace Entities
 
         public byte[] Password { get; set; }
 
-        public int Role { get; set; }
+        public bool Role { get; set; }
 
         public double Accaunt { get; set; }
     }
