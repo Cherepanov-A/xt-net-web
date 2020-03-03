@@ -11,7 +11,7 @@ namespace DbDAL
     {
         private static readonly string conStr = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
 
-        public bool ChangePrise(double prise, int photoId)
+        public bool SetPrise(double prise, int photoId)
         {
             int result = 0;
             using (var con = new SqlConnection(conStr))
@@ -105,7 +105,7 @@ namespace DbDAL
         }
 
         public bool IncRating(int userId, int photoId)
-        {      
+        {
             int rating = -1;
             using (var con = new SqlConnection(conStr))
             {
@@ -126,7 +126,7 @@ namespace DbDAL
             {
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "UPDATE dbo.Photos SET Rating=@rating WHERE id = @photoId";
-                cmd.Parameters.AddWithValue("@photoId", photoId);                
+                cmd.Parameters.AddWithValue("@photoId", photoId);
                 cmd.Parameters.Add(new SqlParameter("@role", DbType.Int32) { Value = newRating });
                 con.Open();
                 result = cmd.ExecuteNonQuery();
@@ -153,6 +153,24 @@ namespace DbDAL
                 id = (int)(decimal)cmd.ExecuteScalar();
             }
             return id > -1;
+        }
+
+        public double GetPrise(int photoId)
+        {
+            double prise = 0;
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT Prise FROM dbo.Photos WHERE Id = @photoId";
+                cmd.Parameters.AddWithValue("@photoId", photoId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    prise = (double)reader["Prise"];
+                }
+            }
+            return prise;
         }
     }
 }

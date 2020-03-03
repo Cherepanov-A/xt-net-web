@@ -14,8 +14,9 @@ namespace DAOContracts
         Thumbnail GetThumb(int id);
         bool DeletePhoto(int id);
         bool IncRating(int userId, int photoId);
-        bool ChangePrise(double prise, int photoId);
-         List<int> GetLikes(int photoId);
+        bool SetPrise(double prise, int photoId);
+        double GetPrise(int photoId);
+        List<int> GetLikes(int photoId);
     }
 }
  

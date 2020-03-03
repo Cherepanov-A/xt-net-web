@@ -43,7 +43,7 @@ namespace DbDAL
             }
             return result;
         }
-        public bool ChargeAcc(double sum, int id)
+        public bool EditAcc(double sum, int id)
         {
             int result = 0;
             using (var con = new SqlConnection(conStr))
@@ -132,27 +132,26 @@ namespace DbDAL
             return true;
         }
 
-        public List<User> GetUsers()
+        public User GetUser(string name)
         {
-            var users = new List<User>();
+            var user = new User();
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM dbo.WebUsers";
+                cmd.CommandText = "SELECT * FROM dbo.Users WHERE Name = @name";
+                cmd.Parameters.AddWithValue("@name", name);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var user = new User();
+                if (reader.Read())
+                {                    
                     user.Id = (int)reader["Id"];
                     user.Name = (string)reader["Name"];
                     user.Password = (byte[])reader["Hash"];
                     user.Role = (bool)reader["Role"];
-                    user.Accaunt = (double)reader["Accaunt"];
-                    users.Add(user);
+                    user.Accaunt = (double)reader["Accaunt"];                    
                 }
             }
-            return users;
+            return user;
         }        
 
         public bool GetRole(int id)
@@ -161,7 +160,7 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT Role FROM dbo.WebUsers WHERE id = @id";
+                cmd.CommandText = "SELECT Role FROM dbo.Users WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
                 existRole = (bool)cmd.ExecuteScalar();

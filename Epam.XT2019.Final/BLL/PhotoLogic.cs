@@ -1,10 +1,7 @@
 ﻿using BLLContracts;
 using DAOContracts;
+using Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -15,13 +12,92 @@ namespace BLL
         {
             _photoDao = photoDao;
         }
-        public static bool IncRating(int userId, int photoId)
+        public static int IncRating(int userId, int photoId)
         {
-            if (_photoDao.GetLikes(photoId).Contains(userId))
+            int result = 0;
+            try
             {
-                return false;
+                if (_photoDao.GetLikes(photoId).Contains(userId))
+                {
+                    return 0;
+                }
+                if (_photoDao.IncRating(userId, photoId))
+                {
+                    result = 1;
+                }               
             }
-            return _photoDao.IncRating(userId, photoId);
+            catch (Exception e)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(e.Message);
+                result = -1;
+            }
+            return result;
+        }
+        public static int DeletePhoto(int id)
+        {
+            int result = 0;
+            try
+            {
+                if (_photoDao.DeletePhoto(id))
+                {
+                 result = 1;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(e.Message);
+                result = -1;
+            }
+            return result;
+        }
+
+        public static Thumbnail GetThumbnail(int id)
+        {
+            Thumbnail thumb = new Thumbnail();
+            try
+            {
+                thumb = _photoDao.GetThumb(id);
+            }
+            catch (Exception e)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(e.Message);                
+            }
+            return thumb;
+        }
+        public static Photo GetPhoto(int id)
+        {
+            Photo photo = new Photo();
+            try
+            {
+                photo = _photoDao.GetPhoto(id);
+            }
+            catch (Exception e)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(e.Message);
+            }
+            return photo;
+        }
+        public static int ChangePrise(double prise, int photoId)
+        {
+            int result = 0;
+            try
+            {
+                if (_photoDao.ChangePrise(prise, photoId))
+                {
+                    result = 1;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(e.Message);
+                result = -1;
+            }
+            return result;
         }
     }
 }

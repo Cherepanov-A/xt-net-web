@@ -9,9 +9,9 @@ namespace DAOContracts
         bool DeleteUser(string name);
         bool GetRole(int id);
         bool SetRole(int id, bool role);
-        List<User> GetUsers();
+        User GetUser(string name);
         bool BuyPhoto(int userId, int photoId);
-        bool ChargeAcc(double sum, int id);
+        bool EditAcc(double sum, int id);
         double CheckAcc(int id);
         bool CheckUserExists(int id);
     }
