@@ -86,6 +86,7 @@ namespace DbDAL
             }
             return thumb;
         }
+
         public List<int> GetLikes(int photoId)
         {
             List<int> uIds = new List<int>();

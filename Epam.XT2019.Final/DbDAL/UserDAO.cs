@@ -1,7 +1,5 @@
 ﻿using DAOContracts;
 using Entities;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,7 +16,7 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO dbo.UserPhotos(UserId, PhotoId) VALUES(@userId, @photoId)"; /*Check db name*/
+                cmd.CommandText = "INSERT INTO dbo.Purchased(UserId, PhotoId) VALUES(@userId, @photoId)"; /*Check db name*/
                 cmd.Parameters.AddWithValue("@userId", userId);                
                 cmd.Parameters.AddWithValue("@photoId", photoId);                
                 con.Open();
@@ -26,6 +24,7 @@ namespace DbDAL
             }
             return result > 0;
         }
+
         public double CheckAcc(int id)
         {
             double result = -1;
@@ -43,6 +42,7 @@ namespace DbDAL
             }
             return result;
         }
+
         public bool EditAcc(double sum, int id)
         {
             int result = 0;
@@ -57,18 +57,20 @@ namespace DbDAL
             }
             return result > 0;
         }
-        public bool CheckUserExists(int id)
+
+        public bool CheckUserExists(string name)
         {
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT id FROM dbo.Users WHERE Id=@id";
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = "SELECT id FROM dbo.Users WHERE Name=@name";
+                cmd.Parameters.AddWithValue("@name", name);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader.Read();
             }            
         }
+
         public bool SaveUser(User user)
         {
             int result = 0;
@@ -86,25 +88,8 @@ namespace DbDAL
             return result>0;
         }
 
-        public bool DeleteUser(string name)
-        {
-            int id = -1;
-            using (var con = new SqlConnection(conStr))
-            {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT Id FROM dbo.Users WHERE Name = @name";
-                cmd.Parameters.AddWithValue("@name", name);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    id = (int)reader["Id"];                   
-                }
-            }
-            if (id<0)
-            {
-                return false;
-            }
+        public bool DeleteUser(int id)
+        {            
             int result = 0;
             using (var con = new SqlConnection(conStr))
             {

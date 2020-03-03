@@ -12,8 +12,9 @@ namespace BLL
         {
             _photoDao = photoDao;
         }
-        public static int IncRating(int userId, int photoId)
+        public int IncRating(int userId, int photoId)
         {
+            Logger.InitLogger();
             int result = 0;
             try
             {
@@ -24,37 +25,40 @@ namespace BLL
                 if (_photoDao.IncRating(userId, photoId))
                 {
                     result = 1;
-                }               
-            }
-            catch (Exception e)
-            {
-                Logger.InitLogger();
-                Logger.Log.Error(e.Message);
-                result = -1;
-            }
-            return result;
-        }
-        public static int DeletePhoto(int id)
-        {
-            int result = 0;
-            try
-            {
-                if (_photoDao.DeletePhoto(id))
-                {
-                 result = 1;
+                    Logger.Log.Info($"Photo id = {photoId} was liked by user id = {userId}");
                 }
             }
             catch (Exception e)
             {
-                Logger.InitLogger();
                 Logger.Log.Error(e.Message);
                 result = -1;
             }
             return result;
         }
 
-        public static Thumbnail GetThumbnail(int id)
+        public int DeletePhoto(int id)
         {
+            Logger.InitLogger();
+            int result = 0;
+            try
+            {
+                if (_photoDao.DeletePhoto(id))
+                {
+                    result = 1;
+                    Logger.Log.Info($"Photo id = {id} was deleted");
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+                result = -1;
+            }
+            return result;
+        }
+
+        public Thumbnail GetThumbnail(int id)
+        {
+            Logger.InitLogger();
             Thumbnail thumb = new Thumbnail();
             try
             {
@@ -62,13 +66,14 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(e.Message);                
+                Logger.Log.Error(e.Message);
             }
             return thumb;
         }
-        public static Photo GetPhoto(int id)
+
+        public Photo GetPhoto(int id)
         {
+            Logger.InitLogger();
             Photo photo = new Photo();
             try
             {
@@ -76,24 +81,25 @@ namespace BLL
             }
             catch (Exception e)
             {
-                Logger.InitLogger();
                 Logger.Log.Error(e.Message);
             }
             return photo;
         }
-        public static int ChangePrise(double prise, int photoId)
+
+        public int ChangePrise(double prise, int photoId)
         {
+            Logger.InitLogger();
             int result = 0;
             try
             {
-                if (_photoDao.ChangePrise(prise, photoId))
+                if (_photoDao.SetPrise(prise, photoId))
                 {
                     result = 1;
+                    Logger.Log.Info($"Photo id = {photoId} new prise = {prise}");
                 }
             }
             catch (Exception e)
             {
-                Logger.InitLogger();
                 Logger.Log.Error(e.Message);
                 result = -1;
             }

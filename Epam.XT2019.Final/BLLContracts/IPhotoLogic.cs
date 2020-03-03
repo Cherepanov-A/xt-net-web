@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entities;
 
 namespace BLLContracts
 {
     public interface IPhotoLogic
     {
+        int ChangePrise(double prise, int photoId);
+        int DeletePhoto(int id);
+        Photo GetPhoto(int id);
+        Thumbnail GetThumbnail(int id);
+        int IncRating(int userId, int photoId);
     }
 }
