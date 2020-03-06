@@ -2,12 +2,14 @@
 using DAOContracts;
 using Entities;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BLL
 {
     public class UserLogic : IUserLogic
     {
-        //private SHA512 shaM = new SHA512Managed();
+        private SHA512 shaM = new SHA512Managed();
         private static IUserDAO _userDao;
         public UserLogic(IUserDAO userDao)
         {
@@ -59,7 +61,7 @@ namespace BLL
             return result;
         }
 
-        public int Register(string userName, byte[] password)
+        public int Register(string userName, string password)
         {
             if (_userDao.CheckUserExists(userName))
             {
@@ -68,8 +70,9 @@ namespace BLL
             Logger.InitLogger();
             int result = 0;
             User user = new User();
+            var bytePassword = shaM.ComputeHash(Encoding.UTF8.GetBytes(password));
             user.Name = userName;
-            user.Password = password;
+            user.Password = bytePassword;
             user.Role = false;
             user.Accaunt = 0;
             try
@@ -128,14 +131,15 @@ namespace BLL
             return result;
         }
 
-        public bool CanLogin(string name, byte[] password)
+        public bool CanLogin(string name, string password)
         {
             bool result = false;
             Logger.InitLogger();
             User user = _userDao.GetUser(name);
+            var bytePassword = shaM.ComputeHash(Encoding.UTF8.GetBytes(password));
             try
             {
-                if ((user != null) && (password == user.Password))
+                if ((user != null) && (bytePassword == user.Password))
                 {
                     result = true;
                 }

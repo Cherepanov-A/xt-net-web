@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace IoC
 {
-    public class DependencyResolver
+    public static class DependencyResolver
     {
         private static string _path = Path.Combine(Directory.GetCurrentDirectory(), "cfg");
         private static IUserDAO _uDao;

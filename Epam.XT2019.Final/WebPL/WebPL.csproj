@@ -146,6 +146,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Pages\_FooterPartial.cshtml" />
     <Content Include="Pages\Login.cshtml" />
+    <Content Include="Pages\Registration.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -260,6 +261,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLLContracts\BLLContracts.csproj">
+      <Project>{37e994e5-6fb5-4539-b332-1ba89aeb079a}</Project>
+      <Name>BLLContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IoC\IoC.csproj">
+      <Project>{a0c3e224-ec2c-499c-9543-8dc36894ebfc}</Project>
+      <Name>IoC</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

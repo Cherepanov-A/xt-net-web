@@ -1,19 +1,23 @@
 ﻿@using IoC
 @using BLLContracts
-@{ 
-    Page.Title = "Login";
-    if (IsPost&&IsAjax)
+@{
+    Page.Title = "Registration";
+    if (IsPost && IsAjax)
     {
         string name = Request["name"];
         string password = Request["password"];
-
-        if (DependencyResolver.ULogic.CanLogin(name, password))
+        int result = DependencyResolver.ULogic.Register(name, password);
+        if (result==1)
         {
-            FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
-            Response.Write("success");
+            Response.Write("Success");
             return;
         }
-        Response.Write("Failed");
+        if (result==0)
+        {
+            Response.Write("User already exists");
+            return;
+        }
+        Response.SetStatus(HttpStatusCode.BadRequest);
     }
 }
 
@@ -33,7 +37,7 @@
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
                     </div>
                     <button type="submit" class="btn btn-primary tm-button-rounded tm-button-orange tm-button-no-border tm-button-normal">Sign In</button>
-                </form>                
+                </form>
             </div>
         </div>
     </section>
@@ -64,10 +68,10 @@
                 data: { name: name, password: password },
                 type: 'post'
             })
-                .done(function (data) {
+                .done(function (data) {                    
                     alert(`${data}`);
                 });
         });
     });
 </script>
-    
+
