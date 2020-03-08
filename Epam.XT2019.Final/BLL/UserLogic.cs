@@ -2,6 +2,7 @@
 using DAOContracts;
 using Entities;
 using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,19 +16,20 @@ namespace BLL
         {
             _userDao = userDao;
         }
-        
-        public int BuyPhoto(string userName, int photoId, double prise)
+
+        public int BuyPhoto(string userName, int photoId, double prise, string creator)
         {
             Logger.InitLogger();
             int result = -1;
-            User user = _userDao.GetUser(userName);            
+            User user = _userDao.GetUser(userName);
+            User photoCreator = _userDao.GetUser(creator);
             if (user.Accaunt < prise)
             {
                 result = 0;
             }
             try
             {
-                if (_userDao.BuyPhoto(user.Id, photoId) && _userDao.EditAcc(-prise, user.Id))
+                if (_userDao.BuyPhoto(user.Id, photoId) && _userDao.EditAcc((user.Accaunt - prise), user.Id) && _userDao.EditAcc((photoCreator.Accaunt + prise), photoCreator.Id));
                 {
                     result = 1;
                     Logger.Log.Info($"User {userName} buyed a photo id = {photoId}");
@@ -37,20 +39,27 @@ namespace BLL
             {
                 Logger.Log.Error(e.Message);
             }
-
             return result;
         }
 
-        public int ChargeAcc(double sum, int id)
+        public double CheckAcc(string name)
         {
+            User user = _userDao.GetUser(name);
+            return user.Accaunt;
+        }
+
+        public int ChargeAcc(double addition, string name)
+        {
+            User user = _userDao.GetUser(name);
+            double sum = user.Accaunt + addition;
             Logger.InitLogger();
             int result = 0;
             try
             {
-                if (_userDao.EditAcc(sum, id))
+                if (_userDao.EditAcc(sum, user.Id))
                 {
                     result = 1;
-                    Logger.Log.Info($"User id = {id}. Accaunt charged");
+                    Logger.Log.Info($"User id = {user.Id}. Accaunt charged");
                 }
             }
             catch (Exception e)
@@ -89,6 +98,12 @@ namespace BLL
                 result = -1;
             }
             return result;
+        }
+
+        public bool IsAdmin(string name)
+        {
+            var user = _userDao.GetUser(name);
+            return _userDao.GetRole(user.Id);
         }
 
         public int SetRole(int id, bool admin)
@@ -139,10 +154,7 @@ namespace BLL
             var bytePassword = shaM.ComputeHash(Encoding.UTF8.GetBytes(password));
             try
             {
-                if ((user != null) && (bytePassword == user.Password))
-                {
-                    result = true;
-                }
+                result = bytePassword.SequenceEqual(user.Password);
             }
             catch (Exception e)
             {
@@ -150,6 +162,20 @@ namespace BLL
                 Logger.Log.Error(e.Message);
             }
             return result;
+        }
+        public User GetUser(string name)
+        {
+            User user = new User();
+            Logger.InitLogger();
+            try
+            {
+                user = _userDao.GetUser(name);
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return user;
         }
     }
 }

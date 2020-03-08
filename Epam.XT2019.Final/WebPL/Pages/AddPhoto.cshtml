@@ -1,0 +1,30 @@
+﻿@using IoC
+@{
+    Layout = null;
+    if (IsPost)
+    {
+        var file = Request.Files["img"];
+        if (file != null && file.ContentLength > 0)
+        {
+            byte[] data = new byte[file.ContentLength];
+            int len = file.InputStream.Read(data, 0, file.ContentLength);
+            WebImage tmbData = new WebImage(data);
+            WebImage imgData = new WebImage(data);
+            imgData.Resize(1920, 1080, true, true);
+            tmbData.Resize(700, 300, true, true);
+            var iData = imgData.GetBytes();
+            var tData = tmbData.GetBytes();
+            string creator = User.Identity.Name;
+            int result = DependencyResolver.PLogic.AddPhoto(file.FileName, file.ContentType, iData, tData, creator);
+            if (result == 1)
+            {
+                Response.Redirect("~/Pages/Profile");
+            }
+        }
+        else
+        {
+           Response.Redirect("~/Pages/Profile");
+        }
+    }
+}
+

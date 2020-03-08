@@ -15,5 +15,6 @@ namespace Entities
         public double Prise { get; set; }
         public int Rating { get; set; }
         public string ContentType { get; set; }
+        public string Creator { get; set; }
     }
 }

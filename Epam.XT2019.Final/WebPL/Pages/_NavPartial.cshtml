@@ -1,34 +1,39 @@
 ﻿
-    <div class="tm-body">
-        <div class="tm-sidebar sticky">
-            <section id="welcome" class="tm-content-box tm-banner margin-b-15">
-                <div class="tm-banner-inner">
-                    <i class="fa fa-film fa-4x margin-b-40"></i>
-                    <h1 class="tm-banner-title">PhStock</h1>
-                    <p class="tm-banner-subtitle">best photos</p>
-                </div>
-            </section>
-            <nav class="tm-main-nav">
-                <ul class="tm-main-nav-ul">
-                    <li class="tm-nav-item">
-                        <a href="index.html" class="tm-nav-item-link tm-button active">Gallery</a>
-                    </li>
-                    <li class="tm-nav-item">
-                        <a href="~/Pages/Login.cshtml" class="tm-nav-item-link tm-button">Sign In</a>
-                    </li>
-                    <li class="tm-nav-item">
-                        <a href="~/Pages/Registration.cshtml" class="tm-nav-item-link tm-button">Sign Up</a>
-                    </li>
-                    <li class="tm-nav-item">
-                        <a href="about.html" class="tm-nav-item-link tm-button">Profile</a>
-                    </li>
-                    <li class="tm-nav-item">
-                        <a href="contact.html" class="tm-nav-item-link tm-button">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+<div class="tm-body">
+    <div class="tm-sidebar sticky">
+        <section id="welcome" class="tm-content-box tm-banner margin-b-15">
+            <div class="tm-banner-inner">
+                <i class="fa fa-film fa-4x margin-b-40"></i>
+                <h1 class="tm-banner-title">PhStock</h1>
+                <p class="tm-banner-subtitle">best photos</p>
+            </div>
+        </section>
+        <nav class="tm-main-nav">
+            <ul class="tm-main-nav-ul">
+                <li class="tm-nav-item">
+                    <a href="~/index.cshtml" class="tm-nav-item-link tm-button active">Gallery</a>
+                </li>
+                <li class="tm-nav-item">
+                    <a href="~/Pages/Login.cshtml" class="tm-nav-item-link tm-button">Sign In</a>
+                </li>
+                <li class="tm-nav-item">
+                    <a href="~/Pages/Registration.cshtml" class="tm-nav-item-link tm-button">Sign Up</a>
+                </li>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="tm-nav-item">
+                            <a href="~/Pages/Profile.cshtml" class="tm-nav-item-link tm-button">Profile</a>
+                        </li>
+                    }
+                }
+                <li class="tm-nav-item">
+                    <a href="contact.html" class="tm-nav-item-link tm-button">Contact</a>
+                </li>
+            </ul>
+        </nav>
     </div>
+</div>
 
 
 

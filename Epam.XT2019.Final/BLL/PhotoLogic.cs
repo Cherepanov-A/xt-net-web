@@ -2,6 +2,7 @@
 using DAOContracts;
 using Entities;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -104,6 +105,66 @@ namespace BLL
                 result = -1;
             }
             return result;
+        }
+        public int AddPhoto(string name, string contentType, byte[] iData, byte[] tData, string creator)
+        {
+            Logger.InitLogger();
+            int result = -1;
+            try
+            {
+                Photo photo = new Photo();
+                photo.Name = name;
+                photo.ContentType = contentType;
+                photo.FullData = iData;
+                photo.ThumbData = tData;
+                photo.Prise = 1;
+                photo.Rating = 0;
+                photo.Creator = creator;
+                if (_photoDao.SavePhoto(photo))
+                {
+                    result = 1;
+                }
+                else
+                {
+                    result = 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+                return -1;
+            }
+            return result;
+        }
+
+        public List<Thumbnail> GetThumbnails()
+        {
+            Logger.InitLogger();
+            List<Thumbnail> photos = new List<Thumbnail>();
+            try
+            {
+                photos = _photoDao.GetThumbnails();
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return photos;
+        }
+
+        public List<Photo> GetPhotos()
+        {
+            Logger.InitLogger();
+            List<Photo> photos = new List<Photo>();
+            try
+            {
+                photos = _photoDao.GetPhotos();
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return photos;
         }
     }
 }

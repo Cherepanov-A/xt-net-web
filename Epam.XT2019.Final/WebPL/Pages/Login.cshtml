@@ -1,19 +1,20 @@
 ﻿@using IoC
 @using BLLContracts
-@{ 
+@{
     Page.Title = "Login";
-    if (IsPost&&IsAjax)
+    if (IsPost && IsAjax)
     {
         string name = Request["name"];
         string password = Request["password"];
-
         if (DependencyResolver.ULogic.CanLogin(name, password))
         {
             FormsAuthentication.SetAuthCookie(name, createPersistentCookie: true);
             Response.Write("success");
+            Response.End();
             return;
         }
         Response.Write("Failed");
+        Response.End();
     }
 }
 
@@ -33,12 +34,12 @@
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
                     </div>
                     <button type="submit" class="btn btn-primary tm-button-rounded tm-button-orange tm-button-no-border tm-button-normal">Sign In</button>
-                </form>                
+                </form>
             </div>
         </div>
     </section>
 </div>
-<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -66,8 +67,10 @@
             })
                 .done(function (data) {
                     alert(`${data}`);
+                    location.reload();
+
                 });
         });
     });
 </script>
-    
+

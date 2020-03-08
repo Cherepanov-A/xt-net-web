@@ -9,15 +9,15 @@ namespace IoC
 {
     public static class DependencyResolver
     {
-        private static string _path = Path.Combine(Directory.GetCurrentDirectory(), "cfg");
+        private static string _path = Path.Combine(Directory.GetCurrentDirectory(), "stCfg");
         private static IUserDAO _uDao;
         public static IUserDAO UDao => _uDao;
         private static IUserLogic _uLogic;
         public static IUserLogic ULogic => _uLogic;
-        private static IPhotoDAO _aDao;
-        public static IPhotoDAO ADao => _aDao;
-        private static IPhotoLogic _aLogic;
-        public static IPhotoLogic ALogic => _aLogic;        
+        private static IPhotoDAO _pDao;
+        public static IPhotoDAO PDao => _pDao;
+        private static IPhotoLogic _pLogic;
+        public static IPhotoLogic PLogic => _pLogic;        
         static DependencyResolver()
         {
             CfgDto config = new CfgDto();
@@ -53,13 +53,13 @@ namespace IoC
             switch (config.PhotoDAO)
             {               
                 default:
-                    _aDao = _aDao ?? (_aDao = new PhotoDAO());
+                    _pDao = _pDao ?? (_pDao = new PhotoDAO());
                     break;
             }
             switch (config.PhotoLogic)
             {
                 default:
-                    _aLogic = _aLogic ?? (_aLogic = new PhotoLogic(_aDao));
+                    _pLogic = _pLogic ?? (_pLogic = new PhotoLogic(_pDao));
                     break;
             }            
         }

@@ -77,8 +77,8 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO dbo.Users(UserName, Hash, Role) VALUES(@userName, @hash, @role, @accaunt)";
-                cmd.Parameters.AddWithValue("@userName", user.Name);
+                cmd.CommandText = "INSERT INTO dbo.Users(Name, Hash, Role, Accaunt) VALUES(@name, @hash, @role, @accaunt)";
+                cmd.Parameters.AddWithValue("@name", user.Name);
                 cmd.Parameters.Add("@hash", SqlDbType.VarBinary).Value = user.Password;
                 cmd.Parameters.AddWithValue("@role", user.Role);
                 cmd.Parameters.AddWithValue("@accaunt", user.Accaunt);

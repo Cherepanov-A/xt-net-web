@@ -1,0 +1,34 @@
+﻿@using IoC
+@{
+    Layout = null;
+
+    if (IsPost)
+    {
+        if (!User.Identity.IsAuthenticated)
+        {
+            Response.Write("Please sign in.");
+             Response.End();
+            return;
+        }
+        var photoId = Request["photoId"];
+        var userName = Request["userName"];
+        int numPhotoId = int.Parse(photoId);
+        var photo = DependencyResolver.PLogic.GetPhoto(numPhotoId);
+        
+
+        int result = DependencyResolver.ULogic.BuyPhoto(userName, numPhotoId, photo.Prise, photo.Creator);
+        if (result == 1)
+        {
+            Response.Write("Success");
+            Response.End();
+            return;
+        }
+        if (result == 0)
+        {
+            Response.Write("Failed");
+            Response.End();
+            return;
+        }
+        Response.SetStatus(HttpStatusCode.InternalServerError);
+    }
+}

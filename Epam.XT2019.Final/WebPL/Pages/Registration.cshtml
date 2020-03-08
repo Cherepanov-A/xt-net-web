@@ -7,17 +7,21 @@
         string name = Request["name"];
         string password = Request["password"];
         int result = DependencyResolver.ULogic.Register(name, password);
-        if (result==1)
+        if (result == 1)
         {
             Response.Write("Success");
+            Response.End();
             return;
         }
-        if (result==0)
+        if (result == 0)
         {
             Response.Write("User already exists");
+            Response.End();
             return;
         }
-        Response.SetStatus(HttpStatusCode.BadRequest);
+        Response.Write("-1");
+        Response.End();
+        return;
     }
 }
 
@@ -42,7 +46,7 @@
         </div>
     </section>
 </div>
-<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -64,11 +68,11 @@
                 $('#password').after('<span class="error">Password must be atleast 6 characters long</span>');
             }
             $.ajax({
-                url: '/Pages/Login',
+                url: '/Pages/Registration',
                 data: { name: name, password: password },
                 type: 'post'
             })
-                .done(function (data) {                    
+                .done(function (data) {
                     alert(`${data}`);
                 });
         });

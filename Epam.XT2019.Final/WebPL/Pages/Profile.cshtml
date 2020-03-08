@@ -1,0 +1,128 @@
+﻿@using IoC
+@{
+    Page.Title = "Profile";
+    if (IsPost && IsAjax)
+    {
+        string sum = Request["sum"];
+        int result = -1;
+        if (double.TryParse(sum, out double dSum))
+        {
+            result = DependencyResolver.ULogic.ChargeAcc(dSum, User.Identity.Name);
+        }
+        if (result == 1)
+        {
+            Response.Write("success");
+            Response.End();
+            return;
+        }
+        if (result == 0)
+        {
+            Response.Write("Failed");
+            Response.End();
+            return;
+        }
+        Response.SetStatus(HttpStatusCode.InternalServerError);
+    }
+
+}
+<div class="tm-main-content">
+
+    <div class="row mb-5">
+        <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+            <div class="p-5">
+                <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">User</h2>
+                <h2 class="mb-4">
+                    @User.Identity.Name
+                </h2>
+                <a href="~/Pages/Logout.cshtml" class="btn btn-primary tm-button-rounded tm-button-pink tm-button-no-border tm-button-normal tm-button-timeline">Sign Out</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mb-5">
+        <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+            <div class="p-5">
+                <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">My Accaunt</h2>
+                <p class="mb-4">
+                    @DependencyResolver.ULogic.CheckAcc(User.Identity.Name) dollars
+                </p>
+                <form action="~/Pages/Profile.cshtml" method="post" class="acc-form" id="acc-form">
+                    <div class="form-group">
+                        <input type="number" id="sum" name="sum" class="form-control" placeholder="Sum" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary tm-button-rounded tm-button-green tm-button-no-border tm-button-normal tm-button-timeline">Charge</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-5">
+        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+
+            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                <div class="p-5">
+                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">My Photos</h2>
+                    <p class="mb-4"></p>
+                    <form action="~/Pages/AddPhoto.cshtml" method="post" class="img-form" id="img-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" id="img" name="img" class="form-control" placeholder="Image" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary tm-button-rounded tm-button-red tm-button-no-border tm-button-normal tm-button-timeline">Add</button>
+                    </form>
+
+                    <a href="#" class="btn btn-primary tm-button-rounded tm-button-red tm-button-no-border tm-button-normal tm-button-timeline">Show</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+            <div class="tm-media-img-container">
+                <div class="text-center pt-31 pb-31 tm-timeline-date tm-bg-gray">18 October 2017</div>
+                <img class="d-flex img-fluid" src="Images/610x610-04.jpg" alt="Generic placeholder image">
+            </div>
+
+            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                <div class="p-5">
+                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Donec quis fermentum nulla</h2>
+                    <p class="mb-4">Vivamus efficitur lorem ac velit vulputate, sed consectetur leo fermentum. Fusce non lacinia eros. Suspendisse pharetra nisi fermentum bibendum condimentum. Nam sit amet consectetur dui. Ut malesuada commodo enim, nec varius diam ultricies finibus. Curabitur molestie dui vel metus iaculis suscipit.</p>
+                    <a href="#" class="btn btn-primary tm-button-rounded tm-button-gray tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- row -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#acc-form').submit(function (e) {
+            e.preventDefault();
+            var sum = $('#sum').val();
+
+            $(".error").remove();
+            if (sum.length < 1) {
+                $('#sum').after('<span class="error">This field is required.</span>');
+            } else {
+                var regEx = /[1-9]{1}\d{1,2}$/;
+                var validName = regEx.exec(name);
+                if (!validName) {
+                    $('#sum').after('<span class="error">Enter a valid sum</span>');
+                }
+            }
+            $.ajax({
+                url: '/Pages/Profile',
+                data: { sum: sum },
+                type: 'post'
+            })
+                .done(function (data) {
+                    alert(`${data}`);
+                    location.reload();
+                });
+        });
+    });
+   
+</script>

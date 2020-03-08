@@ -1,20 +1,50 @@
-﻿<div class="tm-main-content tm-gallery-container">
-    <div class="grid">
-        <div class="grid-item"><img src="images/gallery-img-23-01.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-01.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-12-01.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-02.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-12-02.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-23-02.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-03.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-23-03.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-04.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-05.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-12-03.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-12-04.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-06.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-23-04.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-11-07.jpg" alt="Image"></div>
-        <div class="grid-item"><img src="images/gallery-img-23-05.jpg" alt="Image"></div>
+﻿@using IoC
+@using Entities
+<div class="tm-main-content tm-gallery-container">
+    <div class="grid mb-5">
+        @{
+            //List<Thumbnail> photos = DependencyResolver.PLogic.GetThumbnails();
+            List<Photo> photos = DependencyResolver.PLogic.GetPhotos();
+            for (int i = 0; i < photos.Count; i++)
+            {
+                <div class="grid-item">
+                    <div>
+                        <a href="~/Pages/GetPhoto.cshtml?num=@i" class=""><img src="~/Pages/GetThumb?num=@i" alt="@photos[i].Name" /></a>
+                    </div>
+                    <div>
+                        <button class="btn btn-info mb-0" id="@User.Identity.Name "name="@photos[i].Id">Buy</button>
+                        <p class="mb-0">Prise: @photos[i].Prise$</p>
+                        <p class="mt-0">Rating: @photos[i].Rating</p>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        var $grid = $('.grid').masonry({
+            isFitWidth: true,
+        });
+        $grid.imagesLoaded().progress(function () {
+            $grid.masonry('layout');
+        });
+        $('.tm-current-year').text(new Date().getFullYear());
+    });
+</script>
+<script>
+    $('.btn').on('click', function () {
+        var userName = this.id;
+        var photoId = this.name;
+        $.ajax({
+            url: '/Pages/BuyPhoto',
+            data: { photoId: photoId, userName: userName },
+            type: 'post'
+        })
+            .done(function (data) {
+                alert(`${data}`);
+            });
+    })
+</script>
+
+

@@ -1,0 +1,16 @@
+﻿@using IoC
+@using Entities
+@{
+    Layout = null;
+    List<Photo> photos = DependencyResolver.PLogic.GetPhotos();
+    int num = int.Parse(Request["num"]);
+    Photo tmb = photos[num];
+    if (tmb != null)
+    {
+        Response.WriteBinary(tmb.FullData, tmb.ContentType);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}

@@ -1,0 +1,17 @@
+﻿@using IoC
+@using Entities
+@{
+    Layout = null;
+    List<Thumbnail> photos = DependencyResolver.PLogic.GetThumbnails();   
+    int num = int.Parse(Request["num"]);
+    Thumbnail tmb = photos[num];    
+    if (tmb!=null)
+    {
+        Response.WriteBinary(tmb.ThumbData, tmb.ContentType);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+       
+    }
+}

@@ -4,11 +4,13 @@
     <title>@Page.Title</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400">
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />    
     <link href="~/Content/tooplate-style.css" rel="stylesheet" />
-
+   
 </head>
 <body>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
     <div class="container-fluid">
         @RenderPage("~/Pages/_NavPartial.cshtml")
 
@@ -16,39 +18,12 @@
 
         @RenderPage("~/Pages/_FooterPartial.cshtml")
     </div>
-    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+   
     <script src="~/Scripts/imagesloaded.pkgd.min.js"></script>
     <script src="~/Scripts/masonry.pkgd.min.js"></script>
-    <script>
-
-        $(document).ready(function () {
-
-            // init Masonry
-            // https://codepen.io/craigwheeler/pen/MYjBga
-            var $grid = $('.grid').masonry({
-
-                // set itemSelector so .grid-sizer is not used in layout
-                // itemSelector: '.grid-item',
-                // use element for option
-                //columnWidth: '.grid-sizer',
-                //percentPosition: true
-
-                //itemSelector: '.grid-item',
-                isFitWidth: true,
-                //columnWidth: 1
-            });
-            // layout Masonry after each image loads
-            $grid.imagesLoaded().progress(function () {
-                $grid.masonry('layout');
-            });
-
-            // Update the current year in copyright
-            $('.tm-current-year').text(new Date().getFullYear());
-        });
-
-    </script>
-
-
+   
+    <script src="~/Scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+   
 </body>
 </html>

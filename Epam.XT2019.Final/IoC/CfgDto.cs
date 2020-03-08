@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace IoC
 {
     [Serializable]
-    internal class CfgDto
+    public class CfgDto
     {
-        internal string UserDAO { get; set; }
-        internal string UserLogic { get; set; }
-        internal string PhotoDAO { get; set; }
-        internal string PhotoLogic { get; set; }       
+        public string UserDAO { get; set; }
+        public string UserLogic { get; set; }
+        public string PhotoDAO { get; set; }
+        public string PhotoLogic { get; set; }       
     }
 }

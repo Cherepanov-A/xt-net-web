@@ -59,6 +59,7 @@ namespace DbDAL
                     photo.Prise = (double)reader["Prise"];
                     photo.Rating = (int)reader["Rating"];
                     photo.ContentType = (string)reader["ContentType"];
+                    photo.Creator = (string)reader["Creator"];
                 }
             }
             return photo;
@@ -141,8 +142,8 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO dbo.Photos (Name, FullData, ThumbData, Prise, Rating, ContentType) " +
-                                  "VALUES (@name, @fullData, @thumbData, @Prise, @Rating, @ContentType);" +
+                cmd.CommandText = "INSERT INTO dbo.Photos (Name, FullData, ThumbData, Prise, Rating, ContentType, Creator) " +
+                                  "VALUES (@name, @fullData, @thumbData, @prise, @rating, @contentType, @creator);" +
                                   "SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.AddWithValue("@name", photo.Name);
                 cmd.Parameters.AddWithValue("@fullData", photo.FullData);
@@ -150,6 +151,7 @@ namespace DbDAL
                 cmd.Parameters.AddWithValue("@prise", photo.Prise);
                 cmd.Parameters.AddWithValue("@rating", photo.Rating);
                 cmd.Parameters.AddWithValue("@contentType", photo.ContentType);
+                cmd.Parameters.AddWithValue("@creator", photo.Creator);
                 con.Open();
                 id = (int)(decimal)cmd.ExecuteScalar();
             }
@@ -172,6 +174,55 @@ namespace DbDAL
                 }
             }
             return prise;
+        }
+
+        public List<Thumbnail> GetThumbnails()
+        {
+            var photos = new List<Thumbnail>();
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT Id, Name, ThumbData, ContentType, Prise, Rating FROM dbo.Photos";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var thumbnail = new Thumbnail();
+                    thumbnail.Id = (int)reader["Id"];
+                    thumbnail.Name = (string)reader["Name"];
+                    thumbnail.ThumbData = (byte[])reader["ThumbData"];
+                    thumbnail.ContentType = (string)reader["ContentType"];
+                    thumbnail.Prise = (double)reader["Prise"];
+                    thumbnail.Rating = (int)reader["Rating"];
+                    photos.Add(thumbnail);
+                }
+            }
+            return photos;
+        }
+        public List<Photo> GetPhotos()
+        {
+            var photos = new List<Photo>();
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM dbo.Photos";
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var photo = new Photo();
+                    photo.Id = (int)reader["Id"];
+                    photo.Name = (string)reader["Name"];
+                    photo.ThumbData = (byte[])reader["ThumbData"];
+                    photo.ContentType = (string)reader["ContentType"];
+                    photo.Prise = (double)reader["Prise"];
+                    photo.Rating = (int)reader["Rating"];
+                    photo.FullData = (byte[])reader["FullData"];
+                    photo.Creator = (string)reader["Creator"];
+                    photos.Add(photo);
+                }
+            }
+            return photos;
         }
     }
 }

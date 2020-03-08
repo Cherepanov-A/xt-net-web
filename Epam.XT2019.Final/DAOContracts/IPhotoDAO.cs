@@ -13,6 +13,8 @@ namespace DAOContracts
         bool SetPrise(double prise, int photoId);
         double GetPrise(int photoId);
         List<int> GetLikes(int photoId);
+        List<Thumbnail> GetThumbnails();
+        List<Photo> GetPhotos();
     }
 }
  

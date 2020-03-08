@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "Scripts/",
+      "destination": "Scripts/Scripts/",
+      "files": [
+        "jquery.poptrox.min.js",
+        "skel.min.js",
+        "util.js",
+        "main.js"
+      ]
+    }
+  ]
+}
