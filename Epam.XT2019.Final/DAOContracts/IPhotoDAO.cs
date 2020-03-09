@@ -15,6 +15,8 @@ namespace DAOContracts
         List<int> GetLikes(int photoId);
         List<Thumbnail> GetThumbnails();
         List<Photo> GetPhotos();
+        List<Photo> ShowOwnPhotos(string userName);
+        List<Photo> ShowPurchasedPhotos(int userId);
     }
 }
  

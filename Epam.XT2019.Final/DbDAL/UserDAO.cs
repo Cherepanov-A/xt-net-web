@@ -18,8 +18,8 @@ namespace DbDAL
             {
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "INSERT INTO dbo.Purchased(UserId, PhotoId) VALUES(@userId, @photoId)"; /*Check db name*/
-                cmd.Parameters.AddWithValue("@userId", userId);                
-                cmd.Parameters.AddWithValue("@photoId", photoId);                
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@photoId", photoId);
                 con.Open();
                 result = cmd.ExecuteNonQuery();
             }
@@ -69,7 +69,7 @@ namespace DbDAL
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader.Read();
-            }            
+            }
         }
 
         public bool SaveUser(User user)
@@ -86,11 +86,11 @@ namespace DbDAL
                 con.Open();
                 result = cmd.ExecuteNonQuery();
             }
-            return result>0;
+            return result > 0;
         }
 
         public bool DeleteUser(int id)
-        {            
+        {
             int result = 0;
             using (var con = new SqlConnection(conStr))
             {
@@ -109,7 +109,7 @@ namespace DbDAL
                     cmd.Parameters.AddWithValue("@id", id);
                     con.Open();
                     cmd.ExecuteNonQuery();
-                }                
+                }
             }
             else
             {
@@ -129,16 +129,16 @@ namespace DbDAL
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
-                {                    
+                {
                     user.Id = (int)reader["Id"];
                     user.Name = (string)reader["Name"];
                     user.Password = (byte[])reader["Hash"];
                     user.Role = (bool)reader["Role"];
-                    user.Accaunt = (double)reader["Accaunt"];                    
+                    user.Accaunt = (double)reader["Accaunt"];
                 }
             }
             return user;
-        }        
+        }
 
         public bool GetRole(int id)
         {
@@ -175,7 +175,7 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM dbo.Users";                
+                cmd.CommandText = "SELECT * FROM dbo.Users";
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -191,5 +191,8 @@ namespace DbDAL
             }
             return users;
         }
+
+       
     }
+
 }

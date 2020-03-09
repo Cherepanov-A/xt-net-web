@@ -224,5 +224,74 @@ namespace DbDAL
             }
             return photos;
         }
+        public List<Photo> ShowOwnPhotos(string userName)
+        {
+            List<Photo> ownPhotos = new List<Photo>();
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM dbo.Photos WHERE Creator = @userName";
+                cmd.Parameters.AddWithValue("@userName", userName);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Photo photo = new Photo();
+                    photo.Id = (int)reader["Id"];
+                    photo.Name = (string)reader["Name"];
+                    photo.FullData = (byte[])reader["FullData"];
+                    photo.ThumbData = (byte[])reader["ThumbData"];
+                    photo.Prise = (double)reader["Prise"];
+                    photo.Rating = (int)reader["Rating"];
+                    photo.ContentType = (string)reader["ContentType"];
+                    photo.Creator = (string)reader["Creator"];
+                    ownPhotos.Add(photo);
+                }
+            }
+            return ownPhotos;
+        }
+        public List<Photo> ShowPurchasedPhotos(int userId)
+        {
+            List<int> photoIds = new List<int>();
+            List<Photo> purPhotos = new List<Photo>();
+
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT PhotoId FROM dbo.Purchased WHERE UserId = @userId";
+                cmd.Parameters.AddWithValue("@userId", userId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    photoIds.Add((int)reader["PhotoId"]);
+                }
+            }
+            for (int i = 0; i < photoIds.Count; i++)
+            {
+                Photo photo = new Photo();
+                using (var con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM dbo.Photos WHERE Id = @photoId";
+                    cmd.Parameters.AddWithValue("@photoId", photoIds[i]);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        photo.Id = (int)reader["Id"];
+                        photo.Name = (string)reader["Name"];
+                        photo.FullData = (byte[])reader["FullData"];
+                        photo.ThumbData = (byte[])reader["ThumbData"];
+                        photo.Prise = (double)reader["Prise"];
+                        photo.Rating = (int)reader["Rating"];
+                        photo.ContentType = (string)reader["ContentType"];
+                        photo.Creator = (string)reader["Creator"];
+                        purPhotos.Add(photo);
+                    }
+                }
+            }
+            return purPhotos;
+        }
     }
 }

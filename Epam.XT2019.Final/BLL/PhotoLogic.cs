@@ -166,5 +166,33 @@ namespace BLL
             }
             return photos;
         }
+        public List<Photo> ShowOwnPhotos(string userName)
+        {
+            List<Photo> ownPhotos = new List<Photo>();
+            Logger.InitLogger();
+            try
+            {
+                ownPhotos = _photoDao.ShowOwnPhotos(userName);
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return ownPhotos;
+        }
+        public List<Photo> ShowPurchasedPhotos(int id)
+        {           
+            List<Photo> purPhotos = new List<Photo>();
+            Logger.InitLogger();
+            try
+            {
+                purPhotos = _photoDao.ShowPurchasedPhotos(id);
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return purPhotos;
+        }
     }
 }

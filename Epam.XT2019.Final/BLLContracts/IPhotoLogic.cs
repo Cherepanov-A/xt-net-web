@@ -13,5 +13,7 @@ namespace BLLContracts
         int AddPhoto(string name, string contentType, byte[] iData, byte[] tData, string creator);
         List<Thumbnail> GetThumbnails();
         List<Photo> GetPhotos();
+        List<Photo> ShowOwnPhotos(string userName);
+        List<Photo> ShowPurchasedPhotos(int userId);
     }
 }

@@ -15,5 +15,6 @@ namespace BLLContracts
         double CheckAcc(string name);
         User GetUser(string name);
         List<User> GetUsers();
+        
     }
 }

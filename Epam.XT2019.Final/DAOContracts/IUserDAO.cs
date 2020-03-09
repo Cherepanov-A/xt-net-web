@@ -15,5 +15,6 @@ namespace DAOContracts
         double CheckAcc(int id);
         bool CheckUserExists(string name);
         List<User> GetUsers();
+        
     }
 }
