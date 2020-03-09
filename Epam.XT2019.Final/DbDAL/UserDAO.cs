@@ -1,5 +1,6 @@
 ﻿using DAOContracts;
 using Entities;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -159,13 +160,36 @@ namespace DbDAL
             using (var con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE dbo.WebUsers SET Role=@role WHERE id = @id";
+                cmd.CommandText = "UPDATE dbo.Users SET Role=@role WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.Add(new SqlParameter("@role", DbType.Boolean) { Value = role });
                 con.Open();
                 result = cmd.ExecuteNonQuery();
             }
             return result > 0;
+        }
+
+        public List<User> GetUsers()
+        {
+            var users = new List<User>();
+            using (var con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM dbo.Users";                
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new User();
+                    user.Id = (int)reader["Id"];
+                    user.Name = (string)reader["Name"];
+                    user.Password = (byte[])reader["Hash"];
+                    user.Role = (bool)reader["Role"];
+                    user.Accaunt = (double)reader["Accaunt"];
+                    users.Add(user);
+                }
+            }
+            return users;
         }
     }
 }

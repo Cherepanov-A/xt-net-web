@@ -164,6 +164,9 @@
     <Content Include="libman.json" />
     <Content Include="Pages\GetPhoto.cshtml" />
     <Content Include="Pages\BuyPhoto.cshtml" />
+    <Content Include="Pages\ControlPanel.cshtml" />
+    <Content Include="Pages\SetRole.cshtml" />
+    <Content Include="Pages\DisplayUsers.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-1.6.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.1.js" />
@@ -184,8 +187,10 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Scripts\gridify-min.js" />
     <Content Include="Scripts\Scripts\gridify.js" />
+    <Content Include="Scripts\Scripts\imagesloaded.pkgd.min.js" />
     <Content Include="Scripts\Scripts\jquery.poptrox.min.js" />
     <Content Include="Scripts\Scripts\main.js" />
+    <Content Include="Scripts\Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\Scripts\skel.min.js" />
     <Content Include="Scripts\Scripts\util.js" />
     <Content Include="Scripts\src\index.js" />

@@ -1,0 +1,30 @@
+﻿@using IoC
+@using Entities
+@{
+    Page.Title = "Show Users";
+
+    List<User> users = DependencyResolver.ULogic.GetUsers();
+}
+<div class="tm-main-content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><h5>Id</h5></th>
+                <th><h5>Name</h5></th>
+                <th><h5>Role</h5></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                for (int i = 0; i < users.Count; i++)
+                {
+                    <tr>
+                        <td><h5>@users[i].Id</h5></td>
+                        <td><h5>@users[i].Name</h5></td>
+                        <td><h5>@users[i].Role</h5></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

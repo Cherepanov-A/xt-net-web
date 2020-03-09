@@ -26,6 +26,12 @@
                             <a href="~/Pages/Profile.cshtml" class="tm-nav-item-link tm-button">Profile</a>
                         </li>
                     }
+                    if (User.Identity.IsAuthenticated && User.IsInRole("Admins"))
+                    {
+                        <li class="tm-nav-item">
+                            <a href="~/Pages/ControlPanel.cshtml" class="tm-nav-item-link tm-button">Control Panel</a>
+                        </li>
+                    }
                 }
                 <li class="tm-nav-item">
                     <a href="contact.html" class="tm-nav-item-link tm-button">Contact</a>

@@ -1,0 +1,128 @@
+﻿@using IoC
+@{
+    Page.Title = "Control Panel";
+    if (IsPost && IsAjax)
+    {
+        string userId = Request["userId"];
+        int result = -1;
+        if (int.TryParse(userId, out int dUserId))
+        {
+            result = DependencyResolver.ULogic.DeleteUser(dUserId);
+        }
+        if (result == 1)
+        {
+            Response.Write("success");
+            Response.End();
+            return;
+        }
+        if (result == 0)
+        {
+            Response.Write("Failed");
+            Response.End();
+            return;
+        }
+        Response.SetStatus(HttpStatusCode.InternalServerError);
+    }
+}
+<div class="tm-main-content">
+
+    <div class="row mb-5">
+        <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+            <div class="p-5">
+                <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Delete User</h2>
+                <form action="~/Pages/ControlPanel.cshtml" method="post" class="del-form" id="del-form">
+                    <div class="form-group">
+                        <input type="text" id="userId" name="userId" class="form-control" placeholder="User Id" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary tm-button-rounded tm-button-green tm-button-no-border tm-button-normal tm-button-timeline">Delete</button>
+                </form>                
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+            <div class="p-5">
+                <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Set Role</h2>                
+                <form action="~/Pages/SetRole.cshtml" method="post" class="role-form" id="role-form">
+                    <div class="form-group">
+                        <input type="text" id="userIdRole" name="userIdRole" class="form-control" placeholder="User Id" required />
+                    </div>
+                    <div class="form-group">                       
+                        <input name="rol" type="radio" value="1" class="" required> Admin
+                        <input name="rol" type="radio" value="0" class="" required> User                        
+                    </div>
+                    <button type="submit" class="btn btn-primary tm-button-rounded tm-button-green tm-button-no-border tm-button-normal tm-button-timeline">Set</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+
+    <div class="row mb-5">
+        <div class="media tm-flexbox-ie-fix tm-width-ie-fix"> 
+            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                <div class="p-5">
+                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Display users</h2>                    
+                    <a href="~/Pages/DisplayUsers.cshtml" class="btn btn-primary tm-button-rounded tm-button-gray tm-button-no-border tm-button-normal tm-button-timeline">Display</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#del-form').submit(function (e) {
+            e.preventDefault();
+            var userId = $('#userId').val();            
+            $(".error").remove();
+            if (userId.length < 1) {
+                $('#userId').after('<span class="error">This field is required.</span>');                
+            }else {
+                var regEx = /[1-9]{1}\d{1,2}$/;
+                var validId = regEx.exec(userId);
+                if (!validId) {
+                    $('#userId').after('<span class="error">Enter a valid name</span>');
+                }
+            }            
+            $.ajax({
+                url: '/Pages/ControlPanel',
+                data: { userId: userId },
+                type: 'post'
+            })
+                .done(function (data) {
+                    alert(`${data}`);
+                    location.reload();
+                });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#role-form').submit(function (e) {
+            e.preventDefault();
+            var userIdRole = $('#userIdRole').val();
+            var role = $('input[name=rol]:checked').val();
+            $(".error").remove();
+            if (userIdRole.length < 1) {
+                $('#userIdRole').after('<span class="error">This field is required.</span>');
+                
+            }else {
+                var regEx = /[1-9]{1}\d{1,2}$/;
+               var validId = regEx.exec(userIdRole);
+                if (!validId) {
+                    $('#userIdRole').after('<span class="error">Enter a valid name</span>');
+                }
+            }            
+            $.ajax({
+                url: '/Pages/SetRole',
+                data: { userIdRole: userIdRole, role: role },
+                type: 'post'
+            })
+                .done(function (data) {
+                    alert(`${data}`);
+                    location.reload();
+                });
+        });
+    });
+</script>

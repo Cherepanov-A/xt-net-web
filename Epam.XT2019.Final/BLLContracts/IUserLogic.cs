@@ -1,5 +1,5 @@
-﻿
-using Entities;
+﻿using Entities;
+using System.Collections.Generic;
 
 namespace BLLContracts
 {
@@ -14,5 +14,6 @@ namespace BLLContracts
         bool IsAdmin(string name);
         double CheckAcc(string name);
         User GetUser(string name);
+        List<User> GetUsers();
     }
 }

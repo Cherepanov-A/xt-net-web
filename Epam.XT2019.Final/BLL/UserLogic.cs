@@ -2,6 +2,7 @@
 using DAOContracts;
 using Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -176,6 +177,21 @@ namespace BLL
                 Logger.Log.Error(e.Message);
             }
             return user;
+        }
+
+        public List<User> GetUsers()
+        {
+            List<User> users = new List<User>();
+            Logger.InitLogger();
+            try
+            {
+                users = _userDao.GetUsers();
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+            }
+            return users;
         }
     }
 }

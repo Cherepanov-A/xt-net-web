@@ -50,7 +50,8 @@
             $(".error").remove();
             if (name.length < 3) {
                 $('#name').after('<span class="error">This field is required and cant be less then 3 symbols.</span>');
-            } else {
+                
+            }else {
                 var regEx = /([A-Z]|[a-z]){1}([A-Z]|[a-z]|\d){2,}$/;
                 var validName = regEx.exec(name);
                 if (!validName) {

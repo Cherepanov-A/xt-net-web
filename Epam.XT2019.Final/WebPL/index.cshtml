@@ -1,5 +1,6 @@
 ﻿@using IoC
 @using Entities
+<script src="~/Scripts/Scripts/masonry.pkgd.min.js"></script>
 <div class="tm-main-content tm-gallery-container">
     <div class="grid mb-5">
         @{
@@ -12,7 +13,7 @@
                         <a href="~/Pages/GetPhoto.cshtml?num=@i" class=""><img src="~/Pages/GetThumb?num=@i" alt="@photos[i].Name" /></a>
                     </div>
                     <div>
-                        <button class="btn btn-info mb-0" id="@User.Identity.Name "name="@photos[i].Id">Buy</button>
+                        <button class="btn btn-info mb-0" id="@User.Identity.Name " name="@photos[i].Id">Buy</button>
                         <p class="mb-0">Prise: @photos[i].Prise$</p>
                         <p class="mt-0">Rating: @photos[i].Rating</p>
                     </div>
@@ -21,16 +22,32 @@
         }
     </div>
 </div>
+
+
 <script>
     $(document).ready(function () {
+        //pause(3000);
+        //var $grid = $('.grid').imagesLoaded(function () {
+        //    $grid.masonry({
+        //        isFitWidth: true,
+        //        // options...
+        //    });
+        //});
         var $grid = $('.grid').masonry({
             isFitWidth: true,
+            isResizable: true,
+            itemSelector: '.grid-item',
+            columnWidth: 150,
+            animationOptions: {
+                duration: 400
+            },
         });
         $grid.imagesLoaded().progress(function () {
             $grid.masonry('layout');
         });
         $('.tm-current-year').text(new Date().getFullYear());
     });
+
 </script>
 <script>
     $('.btn').on('click', function () {

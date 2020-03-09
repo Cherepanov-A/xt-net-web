@@ -6,10 +6,7 @@
       "library": "Scripts/",
       "destination": "Scripts/Scripts/",
       "files": [
-        "jquery.poptrox.min.js",
-        "skel.min.js",
-        "util.js",
-        "main.js"
+        "imagesloaded.pkgd.min.js"
       ]
     }
   ]

@@ -1,0 +1,28 @@
+﻿@using IoC
+@{
+    Layout = null;
+    if (IsPost && IsAjax)
+    {
+        string userId = Request["userIdRole"];
+        string role = Request["role"];
+        int result = -1;
+        if (int.TryParse(userId, out int dUserId) && role=="1")
+        {
+            result = DependencyResolver.ULogic.SetRole(dUserId, true);
+        }
+        if (result == 1)
+        {
+            Response.Write("success");
+            Response.End();
+            return;
+        }
+        if (result == 0)
+        {
+            Response.Write("Failed");
+            Response.End();
+            return;
+        }
+        Response.Write(HttpStatusCode.InternalServerError);
+    }
+}
+
